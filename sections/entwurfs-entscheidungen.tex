@@ -1,0 +1,209 @@
+\setauthor{Abdulrahman Al Sabagh}
+\begin{spacing}{1}
+
+    \section{React Native}
+
+    Grundsätzlich wurde React Native aus mehreren Gründen verwendet:
+    \begin{itemize}
+        \item Die Firma Solvistas beschäftigt sich sehr viel mit React Native Frontends und daher war die Verwendung davon verlangt.
+        \item Vorhande Kenntinsse in den Sprachen Javascript bzw. Typescript verwenden
+        \item Der Auftragsgeber wollte von Beginn an eine Cross-Plattformige-Lösung verwenden
+        \item Endergebnis von React Native ist eine Native App
+    \end{itemize}
+
+
+
+
+    \subsection{Was ist eine Crossplattformige Lösung}
+
+    \begin{quotation}
+        ``
+        Eine Cross-Platform App besteht aus einem einzigen Code,
+        der jeweils in die native Systemsprache von Apple, Android \& Co. kompiliert wird.
+        Dadurch erhält man eine App, die mit wenig Entwicklungsaufwand auf mehreren
+        Betriebssystemen zur Verfügung steht, sich aber dennoch wie eine native App
+        anfühlt.''
+        \cite{cross-plattform}
+
+    \end{quotation}
+
+    \subsection{Warum ist Relaxoon native und nicht hybrid}
+
+    \textbf{hybride Applikationen}: \begin{quotation}
+        ``
+        Eine hybride App kombiniert die besten Elemente von [N]ativen und Web-Apps.
+        Sie werden wie eine native App installiert, aber es ist eigentlich
+        eine Web-App innerhalb des Endgeräts.
+        Hybride Apps werden in den gängigsten Sprachen für die Web-App Entwicklung, wie z.B. HTML und CSS, programmiert. Dies bedeutet, dass sie auf verschiedenen Plattformen verwendet werden können.
+        Obwohl sie in der Sprache der Webanwendung entwickelt wurden, haben sie die gleiche Fähigkeit wie native Apps, sich an verschiedene Geräte, wie ein Tablet, Smartphone usw. anzupassen.
+        ''
+        \cite{native-vs-hybrid}
+    \end{quotation}
+    \textbf{natvie Applikationen}: \begin{quotation}
+        ``
+        Eine native App ist eine Anwendung, die entwickelt wurde,
+        um auf einer bestimmten Plattform oder einem bestimmten Endgerät zu arbeiten.
+        Aus diesem Grund können native Apps mit den auf der jeweiligen Plattform
+        installierten Betriebssystem[s]funktionen interagieren und diese nutzen.
+        ''
+
+        \cite{native-vs-hybrid}
+
+    \end{quotation}
+
+    Grundsätzlich sind native Applikationen  viel schneller und barrierefreier als hybride Applikationen
+    \cite{native-vs-hybrid}
+
+
+    \subsection{Warum wurde eine crossplattformige Lösung verwendet}
+    Der Client von Relaxoon besteht aus einer einfachen Applikation, die keine Business Logik
+    und auch keine Performance kritische Funktionalitäten hat.
+    Daher ist die Verwendung einer crossplattformigen Lösung sehr vorteilhaft,
+    da alle Plattformen von einem Codebase gepflegt werden können.
+
+    \subsection{andere Alternativen für React Native}
+    \begin{itemize}
+        \item Kotlin Mutliplatform
+        \item Flutter
+        \item Xamarin
+    \end{itemize}
+
+
+
+
+    \subsection{React Native vs. Kotlin Multiplatform}
+    Kotlin Mutliplattform bietet bessere Performance als React Native und hat auch eine modulare Integration.
+    \newline
+    \textbf{modulare Integration}: \begin{quotation}
+        ``
+        Probably the biggest benefit in favor of Kotlin Multiplatform is that it’s
+        an SDK and not a framework. This means that teams with existing apps can
+        simply add a module or migrate a small part to assess its viability without
+        a huge commitment. This really helps Kotlin address the biggest deterrent
+        when moving to a new codebase.
+        ''
+        \cite{kotlin-multiplatform-vs-react-native}
+    \end{quotation}
+    Allerdings ist das Problem davon, dass Kotlin Multiplatform noch immer im Beta ist und daher ist es nicht stabil.
+    Außerdem  ist die Community von dieser Alternative nicht so groß wie die Community von React Native.
+    Gute Kenntnisse in Swift \textbf{U}ser \textbf{I}nterface (UI) und Android \textbf{S}oftware \textbf{D}evelopment \textbf{K}it (SDK) werden für die Verwendung von Kotlin Multiplatform auch verlangt.
+    \cite{kotlin-multiplatform-vs-react-native}
+    \subsection{React Native vs. Flutter}
+
+    Flutter an sich ist viel schneller als React Native.
+    Außerdem unterstüzt Flutter die Betriebssysteme  Windows, Linux und Macos zusätzlich zu Web, Android und IOS.
+    \cite{flutter-vs-react-native}
+    \newline
+    Das Problem bei Flutter ist, dass man gute Kenntinsse in der Programmiersprache "Dart" haben muss. \cite{flutter-vs-react-native}
+    Für die Entwicklung von React Native sind gute Kenntinsse in den Programmiersprachen Javascript und Typescript,
+    die wir bereits gelernt haben,
+    gebraucht.
+    Außerdem ist die Unterstützung von Macos, Linux und Windows für uns gar nicht relevant.
+
+
+
+
+    \subsection{React Native vs. Xamarin}
+    Xamarin ist eine C\# Framework, die für die Entwicklung von nativen crossplattformigen Lösungen zuständig ist.
+    Die Performance von Xamarin ist viel besser als die Performance von React Native. \cite{xamarin-vs-react-native}
+
+    Die Entwickler haben sich aus den Gründen, die bei Flutter bereites erwähnt wurden, für React Native entschieden.
+    Außerdem gibt es beim Xamarin kein "hot reloading" und daher muss das
+    Program bei jeder kleinen Änderung neugestartet werden.\cite{xamarin-vs-react-native}
+
+
+
+
+
+
+
+    \section{Strapi}
+
+    \subsection{Was ist ein CMS}
+
+    \begin{quotation}
+        ``Ein Content-Management-System (CMS) ist eine Softwareanwendung,
+        die es Benutzern ermöglicht, digitale Inhalte zu erstellen, zu bearbeiten, gemeinsam zu editieren,
+        zu veröffentlichen und zu speichern. Content-Management-Systeme werden typischerweise für Enterprise
+        Content Management (ECM) und Web Content Management (WCM) eingesetzt.''
+        \cite{cms}
+    \end{quotation}
+
+
+
+    \subsection{Warum wurde ein CMS verwendet}
+    Der Auftragsgeber wollte die Applikation so schnell wie möglich veröffentlichen,
+    da die Anzahl der Apps, welche die gleichen Anwendungsfälle wie Relaxoon haben,
+    nicht so groß ist.
+    Daher ist die Verwendung eines fertigen CMSes viel schneller als
+    die Implementierung eines Backends.
+
+    \subsection{Was ist ein Headless-CMS}
+    \begin{quotation}
+
+        ``
+        Ein Headless CMS ist sowohl eine Weiterentwicklung als
+        auch eine Verknappung eines klassischen CMS. Dem System
+        werden integrale Bestandteile genommen, um es für
+        unterschiedlichste Ausgaben kompatibel zu machen.
+        Das gelingt dadurch, dass Frontend und Backend in einem
+        Headless CMS nicht mehr monolithisch miteinander verknüpft
+        sind. Das fehlende Frontend ist auch der Grund,
+        wieso derartige CMS-Systeme als
+        „kopflos“ (englisch: „headless“) bezeichnet werden.
+        '' \cite{headles-cms}
+    \end{quotation}
+
+    \subsection{Warum wurde ein Headless-CMS verwendet}
+    \begin{itemize}
+        \item Vorgabe von dem Auftragsgeber
+        \item Andere Arten von CMSes generieren statische HTML Seiten, welche für Relaxoon gar nicht gebraucht werde,
+              da Relaxoon eine Mobileapp ist
+        \item die Firma Solvistas beschäftigt sich intensiv mit Data Science. Da man auf dem CMS mittels REST zugreifen kann,
+              will Solvistas ein Datenzentrum aus diesem in der Zukunft erstellen, zusätzlich zur Verwendung von CMS für Data Science Zwecke.
+    \end{itemize}
+    \subsection{Warum Strapi und nicht Wordpress \textbf{AP}plication \textbf{I}nterface (API)}
+
+
+
+    \subsubsection{Vorteile von Wordpress API}
+
+    \begin{itemize}
+        \item Es gibt sehr viele Einstellungen und Features
+        \item Unterstüzt \textbf{S}earch \textbf{E}ngine \textbf{O}ptimization (SEO)
+        \item guter Community Support
+        \item Einfach zu verwenden
+    \end{itemize}
+    \cite{strapi-vs-wordpress}
+
+    \subsubsection{Nachteile von Wordpress API}
+    \begin{itemize}
+        \item  Limitierte Flexibilität, da viele Plugins und Addons kostenpflichtig sind.
+              die kostenlose Verwendung von einigen Addons und Plugins ist limitiert.
+        \item Ist nicht geeignet für eine Software mit großer Skalierung
+        \item Wordpress wird von vielen Menschen verwendet und deshalb ist es für die Hacker nicht unrelevant
+        \item Die Benutzeroberfläche davon ist nicht gut designt und deshalb ist die Verwendung davon meistens sehr verwirrend und unangenehm zu bedienen
+    \end{itemize}
+    \cite{strapi-vs-wordpress}
+
+    \subsubsection{Vorteile von Strapi}
+
+    Im Gegensatz zu Wordpress, kann man mit Strapi beliebig viele Plugins und Addons
+    verwenden. Außerdem gibt es eine eingebaute Authentifizierung bzw. Autorisierungsfunktion
+    zusätzlich zur Unterstützung von 20 unterschiedlichen Sprachen und REST
+    bzw. Graphql APIS.
+    \cite{strapi-vs-wordpress}
+
+    \subsubsection{Nachteile von Strapi}
+    Ein Grundwissen in der Programmierung ist erforderlich, wenn man sich für Strapi
+    entscheidet. Außerdem ist es nicht so weit verbreitet wie Wordpress und somit ist die Anzahl
+    der 3rd-party-Libraries, die man in Strapi einbetten kann, nicht so groß.
+    \cite{strapi-vs-wordpress}
+
+    \subsubsection{Ergebnis}
+    Alle erwähnten Pros und Contras zeigen, dass  die \textbf{U}ser E\textbf{X}perience (UX)
+    und die Skalierbarkeit von Strapi viel besser als Wordpress ist.
+    Außerdem ist Strapi viel schneller als Wordpress,
+    da Strapi in "Node js" geschrieben ist und Wordpress in "PHP"
+    \cite{strapi-vs-wordpress}
+\end{spacing}

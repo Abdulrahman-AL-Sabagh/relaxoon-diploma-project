@@ -1,0 +1,8 @@
+{
+    "name": "makeglossaries",
+    "command": "makeglossaries",
+    "args": [
+        "%DOCFILE%"
+    ],
+    "env": {}
+}

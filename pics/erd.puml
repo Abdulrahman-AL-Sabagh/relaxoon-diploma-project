@@ -1,0 +1,88 @@
+@startuml
+
+entity User {
+
+Id: bigint <<generated>>
+username: varchar(255)
+email: varchar(255)
+password: varchar(255)
+
+}
+entity Tag {
+Id: bigint <<generated>>
+name: varchar(255)
+
+}
+
+
+entity Article {
+
+Id: bigint <<generated>>
+title: varchar(255)
+bg_media: varchar(255)
+content: text
+
+}
+
+entity TutorialPage {
+Id: bigint <<generated>>
+image: bytea
+title: varchar(255)
+}
+
+entity Media {
+Id: bigint <<generated>>
+title: varchar(255)
+file: bytea
+description: text
+favoriteId: bigint <<FK>>
+}
+
+entity Favorite {
+id: bigint <<generated>>
+userId: bigint <<FK>>
+
+
+}
+
+entity MediaTag {
+  mediaId: bigint <<FK>>
+  tagId: bigint <<Fk>>
+}
+
+entity ArticleTag {
+  articleId: bigint <<FK>>
+  tagId: bigint <<FK>>
+}
+
+
+entity Category {
+
+Id: bigint <<generated>>
+bg_color: varchar(255)
+name: varchar(255)
+bg_image: varchar(255)
+
+}
+
+
+entity Content_Category {
+categoryId: bigint <<FK>>
+articleId: bigint <<FK>>
+mediaId: bigint <<FK>>
+
+
+}
+
+User "1" -- "*" Favorite : "userId:Id"
+Favorite "1" -- "*" Media : "favoriteId:Id"
+Favorite "1" -- "*" Article : "favoriteId:Id"
+Media "1" -- "*" Content_Category : "mediaId:Id"
+Article "1" -- "*" Content_Category: "articleId:Id"
+Content_Category "1" -- "*" Category : "categoryId:Id"
+
+(Media,Tag) .. MediaTag: "mediaId:Id, tagId:Id"
+(Article,Tag) .. ArticleTag: "articleId:Id, tagId:Id"
+
+
+@enduml

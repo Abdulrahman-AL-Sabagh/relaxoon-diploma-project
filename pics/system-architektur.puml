@@ -1,0 +1,11 @@
+@startuml
+
+node Android
+node IOS
+node StrapiServer
+node Postgresql
+
+Android -- StrapiServer : "Zugriff mittels "Rest""
+IOS -- StrapiServer : "Zugriff mittels "Rest""
+StrapiServer -- Postgresql : "Zugriff mittels postgresql driver"
+@enduml

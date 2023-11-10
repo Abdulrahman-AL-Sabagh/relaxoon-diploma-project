@@ -1,0 +1,211 @@
+\setauthor{Abdulrahman Al Sabagh}
+\begin{spacing}{1}
+
+
+    \section{Probleme mit localhost und https}\label{sec:probleme-mit-localhost-und-https}
+
+    Im Projekt wurde  die \textbf{U}niform \textbf{R}esource
+    \textbf{L}ocater (URL) für den (API)-Server in einem ".env" File gespeichert.
+    Für die lokale Entwicklung wurde Strapi auf dem lokalen Host immer verwendet.
+    Bei IOS und Android ist das Holen der Daten von einer nicht sicheren Quellen
+    \textbf{A}lso \textbf{K}nown \textbf{A}s (aka) nur http Protokolle gar nicht möglich. Auf Android gibt aber einige
+    Ausnahmen für das Holen der Daten von dem lokalen Host
+    Bei Android kann man bei den generierten Build und Project Files einige Konfigurationen ändern.
+    Das ist zwar keine gute Lösung, da diese Files bei jedem Build geändert werden können.
+    Außerdem können diese generierten Files nicht in das \textbf{V}ersion \textbf{C}ontrol \textbf{S}ystem (VCS)
+    eingecheckt werden.
+    Bei Android muss man 10.0.2.2 statt localhost schreiben.\cite{androidFetch}
+    Bei IOS gibt es keine einzige Möglichkeit,
+    um Daten aus http Quellen oder aus dem localhost zu holen.
+    Als Lösung wurde in der lokalen Entwicklung eine \textbf{C}ommand \textbf{L}ine \textbf{I}nterface (CLI) namens "ngrok" verwendet,
+    welche den lokalen Port des Servers ins Internet mittels eines Tunnels weiterleitet
+    und eine https Adresse für den weitergeleiteten Server generiert.
+
+    Das Problem tauchte wiederholt in der Test-Phase auf und war für die Entwickler nicht lösbar,
+    da der Staging Server für das Backend von Relaxoon auf den Servern der Solvistas deployt ist.
+    Die Entwickler verfügen über keine Zugriffsrechte auf diesem Server.
+    Das Problem wurde mithilfe von den Netzwerkadministratoren von Solvistas gelöst.
+    Es wurde ein "Let's encrypt" Zertifikat für den Staging Server eingebaut.
+
+
+
+
+
+    \section{Inkompatible Libraries beim Build-Prozess}\label{sec:inkompatible-libraries-beim-build-prozess}
+    In der Entwicklungsphase wurden einige Libraries mittels \textbf{N}ode  \textbf{P}ackage \textbf{M}anager (npm) installiert.
+    Einige Libraries waren mit der Node Version oder mit anderen Libraries nicht kompatibel.
+    Eine Lösung wäre, das Label "--legacy-peer-deps" oder "--force" beim Befehl "npm install" anzuhängen.
+    Während der Entwicklung wurde das Label "--legacy-peer-deps" immer beim “npm install" integriert
+    und danach hat alles problemlos funktioniert.
+    Später beim Deployment von Android ist das Problem
+    bei der Generierung von Android \textbf{A}ndroid \textbf{P}ac\textbf{K}age (apk) bzw.
+    \textbf{A}ndroid \textbf{A}pp \textbf{B}undle (aab) aufgetaucht.
+    Die Apk bzw.
+    Aab wurde erfolgreich generiert, aber die App war nicht funktionsfähig.
+    Es wurde für das Finden des Problems auf Android ein Tool namens “logcat” verwendet,
+    um die Fehlermeldung zu finden.
+    Dieses Problem an sich ist in der Community sehr stark verbreitet und es gibt dafür mehrere Gründe und mehrere Lösungen.
+    Unter diesem Githublink \cite{libjsexecutor} werden unterschiedliche Gründe und mehrere
+    Lösungsmöglichkeiten für das gleiche Problem beschrieben.
+    Es wurde jede einzelne Lösungsmöglichkeit versucht und keine von diesen vorgeschlagenen Lösungen
+    funktionierte.
+    Aus Erfahrung hat man gewusst, dass der Codebase einige Libraries hat,
+    die nicht mehr gebraucht bzw.
+    verwendet werden. Beim Löschen dieser Libraries und die Wiederinstallation
+    von den Modulen mittels "npm install" tauchte diese "legacy-peer-deps" Meldung wieder auf.
+    Man dachte, dass das Problem daran liegt und es wurde  ein Tool namens "depcheck" installiert,
+    welches den Codebase scannt und den Entwickler bekannt gibt, ob eine Library im Codebase verwendet
+    wird oder nicht. \cite{depcheck}
+    Nach dem Löschen aller nicht benötigten Libraries und die Generierung der
+    apk bzw.
+    aab hat die Applikation problemlos funktioniert.
+
+
+
+    \subsection{npm install --legacy-peer-deps}\label{subsec:npm-install---legacy-peer-deps}
+    \begin{quotation}
+        ``
+        The '--legacy-peer-deps' flag is used when you encounter compatibility issues with peer dependencies
+        while installing packages.
+        Peer dependencies are required by a package but aren't automatically
+        installed alongside it.
+        In some cases, when a package has not been updated to support the latest
+        version of its peer dependency, the installation may fail due to conflicting versions.
+        Adding the '--legacy-peer-deps' flag allows npm to use an older, compatible version of
+        the peer dependency, ensuring a successful installation.''
+        \cite{installFlags}
+    \end{quotation}
+
+    \subsection{npm install --force}\label{subsec:npm-install---force}
+    \begin{quotation}
+        ``
+        The '--force'  flag is a more drastic option and should be used with caution.
+        It instructs npm to forcefully install packages, even if it encounters errors or conflicts.
+        This can be useful in situations where you want to override any version or compatibility checks
+        and forcibly install packages.
+        However, it is important to note that using '--force'
+        may lead to unexpected issues, such as breaking dependencies or introducing incompatibilities,
+        so it should be used sparingly and with a good understanding of its consequences.''
+        ~\cite{installFlags}
+    \end{quotation}
+
+
+
+    \section{Probleme mit Thumbnails}\label{sec:probleme-mit-thumbnails}
+
+
+    Unsere App soll mehrere Videos für Antistress-Meditationen anzeigen.
+    Jedes Video muss unbedingt ein Thumbnail haben.
+    Der Content-Manager könnte aber beim Erstellen des Videos vergessen,
+    ein Thumbnail für das Video zu erstellen.
+    Auf unserer Adminoberflächen können keine Thumbnails zu dem Video hinzugefügt werden,
+    da diese Aktion sehr schlechte User Experience verursachen könnte.
+    Man kann zwar eine Funktion implementieren,
+    die nach dem Hochladen eines Videos ein Thumbnail mittels \textbf{F}ast \textbf{F}orward \textbf{M}oving
+    \textbf{P}icture \textbf{E}xperts \textbf{G}roup (ffmpeg) aus dem ersten Bild des Videos erstellt.
+    Diese Möglichkeit war aber sehr aufwendig und nicht empfehlenswert, da die damalige Dokumentation von
+    Strapi nicht sehr genau war.
+    Außerdem könnte diese Alternative bei den Updates von Dependencies nicht mehr funktionsfähig sein.
+    Zum Glück haben wir eine Expo-Library gefunden, die im Frontend Thumbnails für unsere Videos erstellt.
+    Die Verwendung davon war aber nicht sehr vorteilhaft, da der Generierungsprozess sehr langsam war.
+    Als Lösung haben wir uns entschieden, ein nicht abspielbares Video auf den Screens, wo mehrere Videos vorgeschlagen werden,
+    anzuzeigen.
+    Das Video ist erst abspielbar, wenn man darauf klickt.
+    Wir haben diese Lösung mit den Konzepten "Lazy Loading" und "Suspenses" zusammen kombiniert,
+    damit Loading-Spinners statt leere Flächen für den User angezeigt werden,
+    wenn das Laden des Videos etwas länger dauert.
+
+
+
+    \subsection{Suspense}\label{subsec:suspense}
+
+    \begin{quotation}
+
+        ``<Suspense> lets you display a fallback until its children have finished
+        loading.''~\cite{suspense}
+    \end{quotation}
+
+    \subsection{Lazy Loading}\label{subsec:lazy-loading}
+
+    \begin{quotation}
+        ``lazy lets you defer loading component’s code until it is rendered for
+        the first time.''~\cite{lazyLoading}
+    \end{quotation}
+
+
+    \section{Dauer von Videos}\label{sec:dauer-von-videos}
+
+    Beim Hochladen eines Videos in Strapi,
+    wird die Dauer des Videos nur auf der Oberfläche angezeigt.
+    Diese Information ist aber in den REST-Schnittstellen der Meta-Daten von den Files nicht inkludiert.
+    Bei diesem Problem ist die Verwendung von ffmpeg auch eine Lösungsmöglichkeit.
+    Es wurde aber nicht mit ffmpeg gearbeitet (siehe das obige Problem).
+    Für die Berechnung der Dauers wurde im Frontend das "onLoad" Event,
+    welches in den Properties (props) des Videoelements ist, verwendet,
+    um die Dauer zu lesen und diese in das Format "mm:ss" umwandeln zu können.
+
+
+
+
+
+    \section{Probleme mit useEffect und React-navigation Library}\label{sec:probleme-mit-useeffect-und-react-navigation-library}
+    Für das Holen der Daten aus dem Server würde die Fetch API verwendet.
+    Diese wurde auch in einem "useEffect Hook" eingegeben, damit die Daten bei jeder Aktualisierung eines spezifischen
+    Zustandes aus dem Server geholt werden können.
+    Beim Anklicken der unterschiedlichen Navigationsbuttons wurde bemerkt,
+    dass die Daten sich gar nicht ändern.
+    Am Anfang wurde vermutet, dass das Problem ein Caching Problem sein könnte.
+    Nach einer Recherche kam man darauf, dass die Library "React-navigation" den "useEffect Hook" im Hintergrund deaktiviert.
+    Für das Holen der Daten ist die Übergabe ein sogenanntes "useCallback Hook" als Parameter in einem custom hook namens "useFocusEffect"
+    von React-navigation notwendig.\cite{issuesWithUseEffect}
+
+
+    \subsection{Hooks}\label{subsec:hooks}
+    \begin{quotation}
+        ``Hooks let you use different React features from your components.
+        You can either use the built-in Hooks or combine them to build your own.
+        This page lists all built-in Hooks in React.''
+        \cite{hooks}
+    \end{quotation}
+
+    \subsection{useEffect}\label{subsec:useeffect}
+    \begin{quotation}
+        ``useEffect is a React Hook that lets you synchronize a component
+        with an external system.''~\cite{useEffect}
+
+    \end{quotation}
+    \begin{quotation}
+        ``Some components need to synchronize with external systems.
+        For example, you might want to control a non-React component based on the React state, set up a server connection,
+        or send an analytics log when a component appears on the screen.
+        Effects let you run some code after rendering so that you can synchronize your component with some system outside of React.[...]
+        Effects let you specify side effects that are caused by rendering itself,
+        rather than by a particular event. ''
+        \cite{Synchronizing-with-effects}
+
+
+    \end{quotation}
+
+
+    \subsection{useCallback}\label{subsec:usecallback}
+    \begin{quotation}
+        ``useCallback is a React Hook that lets you cache a function definition between re-renders.''
+        \cite{useCallback}
+    \end{quotation}
+
+
+    \subsection{useFocusEffect}\label{subsec:usefocuseffect}
+    \begin{quotation}
+        ``The useFocusEffect is analogous to React's useEffect hook. The only difference is that it only runs if the screen
+        is currently focused.
+        The effect will run whenever the dependencies passed to React.useCallback change,
+        i.e. it'll run on initial render (if the screen is focused) as well as on subsequent renders if the dependencies
+        have changed. If you don't wrap your effect in React.useCallback, the effect will run every render if the screen
+        is focused.'' \cite{useFocusEffect}
+
+    \end{quotation}
+
+
+\end{spacing}
+
+
