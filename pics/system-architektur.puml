@@ -1,11 +1,31 @@
 @startuml
 
-node Android
-node IOS
-node StrapiServer
-node Postgresql
 
-Android -- StrapiServer : "Zugriff mittels "Rest""
-IOS -- StrapiServer : "Zugriff mittels "Rest""
-StrapiServer -- Postgresql : "Zugriff mittels postgresql driver"
+component Frontend {
+node Android {
+    file native_android_app
+}
+node IOS {
+    file native_ios_app
+}
+
+component ReactNative
+
+}
+
+component Backend {
+node StrapiServer {
+    port 1337
+}
+node Postgresql {
+    port 5432
+}
+}
+
+
+ReactNative -- Android: compiles to
+ReactNative -- IOS:compiles to
+Android -- 1337 : "Rest"
+IOS -- 1337 : "Zugriff mittels "Rest"
+StrapiServer -- 5432
 @enduml

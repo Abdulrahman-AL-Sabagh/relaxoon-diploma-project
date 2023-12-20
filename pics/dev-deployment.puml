@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+node IOS {
+  file native_ios_app
+}
+
+node Android {
+  file native_android_app
+}
+component Minikube {
+component Ingress {
+    port 80
+}
+component EnvironmentVariables {
+component Secret
+component ConfigMap
+}
+
+component Deployments {
+    node Backend {
+        file Strapi
+
+    }
+    node Database {
+        database PostgreSQL
+
+    }
+    node ReverseProxy {
+        file nginx
+    }
+}
+
+
+component Volume {
+component PersistenceVolumeClaim
+component PersistenceVolume
+}
+component Services {
+component BackendService {
+port 1337
+}
+component DatabaseService {
+port 5432
+}
+component NginxService
+
+}
+}
+
+
+BackendService -- DatabaseService
+NginxService -- BackendService
+
+IOS -- 80
+Android -- 80
+
+Database -- Volume
+Deployments -- EnvironmentVariables
+Deployments -- Services
+PersistenceVolumeClaim -- PersistenceVolume
+
+Ingress -- NginxService
+NginxService -- ReverseProxy
+
+
+
+
+
+@enduml

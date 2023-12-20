@@ -2,14 +2,14 @@
 
 entity User {
 
-Id: bigint <<generated>>
+Id: integer <<generated>>
 username: varchar(255)
 email: varchar(255)
 password: varchar(255)
 
 }
 entity Tag {
-Id: bigint <<generated>>
+Id: integer <<generated>>
 name: varchar(255)
 
 }
@@ -17,7 +17,7 @@ name: varchar(255)
 
 entity Article {
 
-Id: bigint <<generated>>
+Id: integer <<generated>>
 title: varchar(255)
 bg_media: varchar(255)
 content: text
@@ -25,40 +25,40 @@ content: text
 }
 
 entity TutorialPage {
-Id: bigint <<generated>>
+Id: integer <<generated>>
 image: bytea
 title: varchar(255)
 }
 
 entity Media {
-Id: bigint <<generated>>
+Id: integer <<generated>>
 title: varchar(255)
 file: bytea
 description: text
-favoriteId: bigint <<FK>>
+favoriteId: integer <<FK>>
 }
 
 entity Favorite {
-id: bigint <<generated>>
-userId: bigint <<FK>>
+id: integer <<generated>>
+userId: integer <<FK>>
 
 
 }
 
 entity MediaTag {
-  mediaId: bigint <<FK>>
-  tagId: bigint <<Fk>>
+  mediaId: integer <<FK>>
+  tagId: integer <<Fk>>
 }
 
 entity ArticleTag {
-  articleId: bigint <<FK>>
-  tagId: bigint <<FK>>
+  articleId: integer <<FK>>
+  tagId: integer <<FK>>
 }
 
 
 entity Category {
 
-Id: bigint <<generated>>
+Id: integer <<generated>>
 bg_color: varchar(255)
 name: varchar(255)
 bg_image: varchar(255)
@@ -67,11 +67,21 @@ bg_image: varchar(255)
 
 
 entity Content_Category {
-categoryId: bigint <<FK>>
-articleId: bigint <<FK>>
-mediaId: bigint <<FK>>
+categoryId: integer <<FK>>
+articleId: integer <<FK>>
+mediaId: integer <<FK>>
 
 
+}
+
+entity Help {
+id: integer <<generated>>
+helptext: text
+}
+
+entity Info {
+id: integer <<generated>>
+infotext: text
 }
 
 User "1" -- "*" Favorite : "userId:Id"
