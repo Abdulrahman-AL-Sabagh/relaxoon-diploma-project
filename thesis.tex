@@ -49,16 +49,6 @@
 \pagestyle{scrheadings}
 
 \begin{spacing}{1}
-    \chapter{Abstract}\label{chapter:introduction}
-\end{spacing}
-\input{./sections/abstract}
-
-\begin{spacing}{1}
-    \chapter{Zusammenfassung}\label{chapter:introduction}
-\end{spacing}
-\input{./sections/zusammenfassung}
-
-\begin{spacing}{1}
     \chapter{Ausgangsituation}
 \end{spacing}
 \input{./sections/ausgangsituation}
@@ -79,15 +69,22 @@
 \input{./sections/aufgabenstellung}
 
 \begin{spacing}{1}
-    \chapter{Technologien}\label{chapter:system-architecture}
+    \chapter{Marktanalyse}
+\end{spacing}
+\input{./sections/marktanalyse}
+
+
+
+\begin{spacing}{1}
+    \chapter{Technologien}\label{chapter:technologien}
 \end{spacing}
 \input{./sections/technologien.tex}
+
 
 \begin{spacing}{1}
     \chapter{Systemarchitektur}\label{chapter:system-architecture}
 \end{spacing}
 \input{./sections/systemarchitektur}
-
 
 \begin{spacing}{1}
     \chapter{Entwurfsentscheidungen}\label{chapter:Entwurfsentscheidungen}
@@ -99,7 +96,6 @@
 \end{spacing}
 \input{./sections/implementation}
 
-
 \begin{spacing}{1}
     \chapter{Ausgewählte Aspekte und Probleme}\label{chapter:probleme}
 \end{spacing}
@@ -110,7 +106,6 @@
 \end{spacing}
 \input{./sections/summary}
 
-\newpage
 \pagenumbering{Roman}
 \setcounter{page}{\value{RPages}}
 \input{glossary}
