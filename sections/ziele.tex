@@ -41,40 +41,77 @@ kann man sich an folgenden Punkten orientieren: \cite{ziele}
           gleich Bilder im Kopf vorstellen kann. Das steigert ebenso die Motivation.
 \end{itemize}
 
-\section{Projektziele}
-Das Projekt soll zeigen, dass unter Verwendung des Open-Source headless CMS 'Strapi' und des mobilen
-React-Native Frontends einfach eine App zur Wiedergabe von Mediendateien für verschiedene mobile Betriebssysteme
-erstellt werden kann. Wichtig ist dabei: 
+\section{Projektanforderungen}
 
+Beim Projektmanagement wird grundsätzlich zwischen zwei Hauptkategorien von Anforderungen unterschieden.
+
+\subsection{Funktionale Anforderungen:}
 \begin{itemize}
-    \item Die Feinabstimmung der Qualität der Inhalte
-    \item Die optimale Bereitstellung der sorgfältig ausgewählten Inhalte
-    \item Ein ansprechendes und benutzerfreundliches Design für den passenden Look and Feel der App.
-    \item Stressreduzierung, Schlafverbesserung und eine generelle Förderung der mentalen Gesundheit bei
-          Personen, die gestresst sind oder unter Leistungsdruck stehen.
+  \item Beschreiben, welche Funktionen das System bereitstellen soll und welche Aufgaben es ausführen muss.
+  \item Definieren die spezifischen Funktionen, Dienste oder Aufgaben, die das System erfüllen muss, um die Benutzeranforderungen zu erfüllen.
+  \item Konzentrieren sich auf die "Was"-Aspekte des Systems und beschreiben, welche Ergebnisse erwartet werden.
+  \item Beispiel: "Das System muss dem Benutzer ermöglichen, sich mit einem Benutzernamen und Passwort anzumelden."
 \end{itemize}
 
-HIER SIND AUCH ANFORDERUNGEN
-Zielhierarchie machen siehe Handyfoto und discord (google nfa anforderungen - diese sind funktional)
-übertragbarkeit - auf mehrere betriebssysteme
-einfache Bedienung
-(ohne Manual)
+\subsection{Nicht funktionale Anforderungen:}
+\begin{itemize}
+  \item Beschreiben Eigenschaften des Systems, die nicht unbedingt Funktionen sind, sondern Qualitätsmerkmale, die das System erfüllen muss.
+  \item Betreffen oft die "Wie"-Aspekte des Systems und definieren Qualitätsmerkmale wie Leistung, Sicherheit, Benutzerfreundlichkeit und Zuverlässigkeit.
+  \item Berücksichtigen Aspekte wie Skalierbarkeit, Wartbarkeit, Zuverlässigkeit, Leistung und Benutzerfreundlichkeit.
+  \item Beispiel: "Das System muss eine Antwortzeit von weniger als 2 Sekunden für Benutzeranfragen sicherstellen."
+\end{itemize}
 
-24/7 Verfügbarkeit
-links sind nicht funktionale Anforderungen
+Der vorherige Text wurde von einem KI-Modell generiert.\cite{chatgpt}
 
-in kurzfristig und langfristig SIND DIE EINZIGEN ZIELE auch generelle Ziele kann man anführen
-kurz- und langfristig sind auch Leistungswirkung
+Bei Relaxoon können alle Anforderungen auch in funktionale und nicht funktionale Anforderungen unterteilt werden.
+Eine nicht funktionale Anforderung wäre zum Beispiel die einfache Bedienung der App. Der User oder die Userin
+soll sich in der App problemlos zurechtfinden können, ohne dafür ein Manual zu benötigen. Dazu braucht man:
+\begin{itemize}
+      \item  Eine Erklärung am Anfang bzw. ein Tutorial, wenn man die App das erste Mal startet, um überhaupt 
+      zu wissen, wie die App funktioniert und wie sie zu verwenden ist.
+      \item Ein schlichtes und übersichtliches Registrierungsformular mit Begründung dazu, damit der User oder
+      die Userin weiß, warum er sich registrieren muss.
+      \item Eine Homepage auf der man sich leicht zurechtfindet und eine Übersicht über populäre Medien hat, die
+      bereits hochgeladen worden sind.
+      \item Eine Navigationsleiste mit der man einfach zu anderen Seiten oder Features der App weitergeleitet wird.
+      \item Ein klarer Weg, um selbst personalisierte Einstellungen treffen zu können in der App. 
+\end{itemize}
 
-projektziele 
-Zeit
-kosten
-nutzen
-Qualität
+%% übertragbarkeit - auf mehrere betriebssysteme
+%% 24/7 Verfügbarkeit
 
-Um das formulierte Ziel in gewünschter Qualität und fristgerecht zu erreichen, mussten
+\section{Projektziele}
+
+%%Zielhierarchie siehe Handyfoto
+
+Bei den Projektzielen ist es wichtig sich nicht zu große Ziele vorzunehmen und nicht nur das eine Ziel im Auge zu haben.
+Es wichtig ein großes Ziel aufzuteilen, sodass viele kurzfristige Ziele zu einem langfristigen Ziel führen können.
+Langfristige Ziele bilden dabei auch die Leistungswirkung. 
+
+Relaxoon wurde in jeweils zweiwöchigen Sprints entwickelt. Es wurden am Anfang jedes Sprints einige 
+kleine/kurzfristige Ziele definiert, die in den darauffolgenden Wochen erreicht werden sollten. Am Ende des 
+Sprints wurden dann der damalige Stand des Projektes mit den Zielen verglichen, um zu wissen, ob alle Ziele 
+erreicht wurden und welche Ziele für den nächsten Sprint vorgesehen waren.
+
+Übersicht der wichtigsten kurzfristigen Ziele pro Sprint:
+\begin{itemize}
+      \item Sprint 0: Wahl des CMS zwischen Strapi und Wordpress
+      \item Sprint 1: Strapi- sowie App-Setup fertigstellen, Beginn UI-Design der App
+      \item Sprint 2: Zugriff von Frontend auf Backend möglich
+      \item Sprint 3: Beginn Implementierung des Category-Screens
+      \item Sprint 4: Datenmodell von Relaxoon mit Strapi abgleichen
+      \item Sprint 5: Implementierung der Datenstrukur in Strapi
+      \item Sprint 6: UI-Design in der App umsetzen, Entwicklung Suchleiste
+      \item Sprint 7: Echte Daten des Backends am Frontend anzeigen
+      \item Sprint 8: Implementierung des Registrierungsformulars und das Setzen eines Favoriten 
+      \item Sprint 9: Anmeldung in der App ermöglichen, Umsetzung Light und Dark Mode
+      \item Sprint 10: Auto-Login, Tags für Medien hinzufügen
+\end{itemize}
+
+
+
+% projektziele: Zeit, kosten, nutzen, Qualität
+
+Um die formulierten Ziele in gewünschter Qualität und fristgerecht zu erreichen, mussten
 neben Schul- bzw. Lernanforderungen die Ausdauer und Priorität auf das Projekt
 gesetzt werden.
-
-%% weitere kleinere Ziele siehe YouTrack als subheading aufzählen
-%% und auch den geld aspekt erklären wie man geld machen würde...
