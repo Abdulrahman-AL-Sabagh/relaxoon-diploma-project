@@ -70,6 +70,45 @@ da die Dokumentation bzw. Intellisense von dem ORM sehr ungenau war.
 \end{spacing}
 
 
+\section{State Management}
+\begin{quotation}
+  ``
+  Der Begriff State ist in React-Applikationen überall präsent. Generell
+  bezeichnet State den Zustand einer Komponente,
+  also die dynamischen Daten, die eine Komponente den Benutzer:nnen anzeigt.
+  Eine Änderung am State führt dazu, dass die Komponente neu gerendert wird
+  und so die Datenänderung für die Benutzer:in sichtbar wird.
+  Im einfachsten Fall verwaltet jede Komponente ihren eigenen State.
+  Es gibt Fälle, in denen es jedoch erforderlich wird,
+  den State zwischen mehreren Komponenten zu teilen.
+  ''
+  \cite{state-management}
+
+  Um die Zustände der Applikation zu behandeln wurde meistens mit dem `useState Hook` von React gearbeitet.
+  Der Einsatz einer State Management Library wie zum Beispiel RXJS oder Redux war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
+
+  \subsection{useState Hook}
+  ``useState is a React Hook that lets you add a state variable to your component.'' \cite{useState}
+
+
+  \section{Dark/Light Mode}
+  Da das Team sich für die Verwendung von der UI\-Library 'Native Base' entschieden hat, war die Realisierung von diesem Feature sehr einfach.
+  Die Komponenten von 'Native Base' haben die Properties \_light und \_dark, wo man die Farbe einer Komponente je nach Modus definieren kann.
+  Native Base verwendet im Hintergrund einen useContext Hook, wo die Modi der Applikation gespeichert werden.
+  \subsection{useContext Hook}
+  \begin{quotation}
+    ``
+    useContext is a React hook that provides a way to share data (context)
+    across multiple components without explicitly passing it through props.
+    It is part of the React Context API, which is built into the React library.
+    '' \cite{useContext}
+
+  \end{quotation}
+
+
+
+
+\end{quotation}
 
 \section{Help und Info Screen}
 
@@ -79,113 +118,244 @@ Diese Inhalte wurden mit sogenannten ''Single Types'' persestiert.
 Ein ''Single Type'' ist nichts anders als eine Tabelle, die nur eine Zeile enthält.
 Bei einer Änderung des Werts von diesem ''Single Type'' wird diese eine Zeile aktualisiert.
 
+\section{Authentifizierung}
+Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut.Für den Client wurde die Logik so umgesetzt, dass der User die App erst verwenden kann, wenn er bereits authentifiziert ist.
+Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der User bereits authentifiziert ist.
+Umzu überprüfen, ob der Nutzer noch eingeloggt ist oder nicht wurde das Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob das Token valid und nicht abgelaufen ist.
+Damit der User auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn das Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reseviert
+Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
+\begin{lstlisting}[caption=protected screens]
+  import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+  import { createStackNavigator } from '@react-navigation/stack';
+  import { useColorMode } from 'native-base';
+  import * as React from 'react';
+  import { useEffect, useState } from 'react';
+  import { jwtDecode } from 'jwt-decode';
+  import CategoryScreen from './screens/CategoryScreen';
+  import HomeScreen from './screens/HomeScreen';
+  import MediaScreen from './screens/MediaScreen';
+  import SavedScreen from './screens/SavedScreen';
+  import SettingsScreen from './screens/SettingsScreen';
+  import VideoScreen from './screens/VideoScreen';
+  import WaitScreen from './screens/WaitScreen';
+  import HelpScreen from './screens/setting tabs/HelpScreen';
+  import InfoScreen from './screens/setting tabs/InfoScreen';
+  import { getToken } from './util/getUser';
+  import TabBar from './components/TabBar';
+  import TutorialScreen from './screens/intro/TutorialScreen';
+  import LoginScreen from './screens/registration/LoginScreen';
+  import RegistrationForm from './screens/registration/RegistrationForm';
+  import { colors } from './styles/ThemeColors';
+  import AsyncStorage from '@react-native-async-storage/async-storage';
+  // Screen names
+  type PageSettings = Record<string, { iconName: string; screen: React.ComponentType<any> }>;
+  const settingsForScreenName: PageSettings = {
+    Home: { iconName: 'home', screen: HomeScreen },
+    Media: { iconName: 'play', screen: CategoryScreen },
+    Saved: { iconName: 'list', screen: SavedScreen }
+  };
+  
+  const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
+  
+  function MainContainer(): JSX.Element {
+    const { colorMode } = useColorMode();
+    const [tokenExists, setTokenExists] = useState<boolean>(false);
+    useEffect(() => {
+      getToken()
+        .then((data) => {
+          console.info(typeof data);
+          if (!data) throw new Error('no token');
+          const decodedToken: { iat: number; exp: number; id: number } = jwtDecode(data);
+          const eighthoursAfterNow = new Date(new Date().getHours() + 8).getMilliseconds();
+          if (decodedToken.exp < eighthoursAfterNow) {
+            setTokenExists(false);
+            AsyncStorage.clear();
+            return;
+          }
+          setTokenExists(true);
+        })
+        .catch((e) => {
+          console.info('no token', e);
+          setTokenExists(false);
+        });
+      console.info(tokenExists);
+    }, []);
+  
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        {/*
+        <Stack.Screen name={"WaitScreen"} component={WaitScreen}/>
+  */}
+        {/*
+        {!tokenExists && <Stack.Screen name="Tutorial" component={TutorialScreen}/>}
+  */}
+        {!tokenExists && <Stack.Screen name="Login" component={LoginScreen} />}
+        {!tokenExists && <Stack.Screen name="Registration" component={RegistrationForm} />}
+        <Stack.Screen
+          name="Main"
+          options={{
+            headerShown: false
+          }}
+        >
+          {() => (
+            <Tab.Navigator
+              screenOptions={{
+                headerShown: false,
+                headerTitleStyle: {
+                  fontSize: 16,
+                  color: colorMode === 'dark' ? colors.fontDark : colors.fontLight
+                }
+              }}
+              tabBar={(props) => <TabBar color={colorMode} {...props} />}
+            >
+              {Object.entries(settingsForScreenName).map(([pageName, settings]) => (
+                <Tab.Screen key={pageName} name={pageName} component={settings.screen} />
+              ))}
+            </Tab.Navigator>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Content" component={MediaScreen} />
+        <Stack.Screen component={VideoScreen} name="Video" />
+        <Stack.Screen component={SettingsScreen} name="Settings" />
+        <Stack.Screen name="Info" component={InfoScreen} />
+        <Stack.Screen name="Help" component={HelpScreen} />
+      </Stack.Navigator>
+    );
+  }
+  
+  export default MainContainer;
+    
+\end{lstlisting}
+
+\section{Validierung}
+Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
+Für die client-seitige Validierung wurde eine Library namens 'Zod' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
+\begin{lstlisting}[caption=Validierungsschemen]
+ import { z } from 'zod';
+
+export const nameValidator = z.string().min(3);
+export const emailValidator = z.string().email();
+export const passwordValidator = z.string().min(6);
+  
+\end{lstlisting}
+
 
 \section{Deployment}
 
 \subsection{Allgemeins}
 
-Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
-Infrastruktur deployen und die Anwendungen
-als Docker-Images in den Container-Registries von denen speichern.
-Da die genannten Firmen keine Zugriffsrechte für das Team organisiert haben,
-war es für das Team schwierig, beim finalen Deployment mitzumachen. Das Team hat aber die Möglichkeit gehabt,
-beim Deployment auf dem Stagingsystem mitzuhelfen, da die Software auf einem externen Service, nämlich
-Firebase App Distribution, hochgeladen wurde.
-Der Betreuer wurde ebensfalls informiert und er verlangte ein lokales Deployment für das Backend mittels ''Minikube'' sowie ein Live-Demo für die Applikation auf einem Emulator
+Die Veröffentlichung der Applikation auf den Play Stores wurde von dem Auftraggeber nicht in die Frage gestellt.
+Das Hochladen der Android-Applikation auf Firebase App Distribution wurde aber von dem Team verlangt.
+Das Backend wurde auf den Servers der Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt
+% Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
+% Infrastruktur deployen und die Anwendungen
+% als Docker-Images in den Container-Registries von denen speichern.
+% Da die genannten Firmen keine Zugriffsrechte für das Team organisiert haben,
+% war es für das Team schwierig, beim finalen Deployment mitzumachen. Das Team hat aber die Möglichkeit gehabt,
+% beim Deployment auf dem Stagingsystem mitzuhelfen, da die Software auf einem externen Service, nämlich
+% Firebase App Distribution, hochgeladen wurde.
+% Der Betreuer wurde ebensfalls informiert und er verlangte ein lokales Deployment für das Backend mittels ''Minikube'' sowie ein Live-Demo für die Applikation auf einem Emulator
 
 
-\subsubsection{Container Registry}
+% \subsubsection{Container Registry}
 
-\begin{quotation}
-  ``
-  A container registry is a repository—or collection of repositories—used to store and access container
-  images. Container registries can support container-based application development,
-  often as part of DevOps processes.
-  Container registries can connect directly to container orchestration platforms like Docker and Kubernetes.
-  ''
-  \cite{container-registry}
-\end{quotation}
-
-
-\subsection{Deployment Diagram für das Dev System}
-
-//TODO Deployment Diagram für Dev
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{./pics/dev-deployment.png}
-  \caption{Deployment für Dev System}
-
-\end{figure}
-
-\subsection{Deployment Diagram für das Staging System}
-
-
-//TODO Deployment Diagram für Staging
-
-\section{Buildprozess für das Frontend}
-
-Damit man das Frontend deployt, muss man zuerst den nativen Android und IOS Code generieren.
-Danach sollen die Android bzw. IOS Anwendungen mit einer IDE oder mit der Kommando-Zeile gebaut werden.
-Um den nativen Code zu generieren ist folgendes einzugeben:
-\begin{lstlisting}[language=Bash,caption=generate android and ios]
-npx expo prebuild
-\end{lstlisting}
+% \begin{quotation}
+%   ``
+%   A container registry is a repository—or collection of repositories—used to store and access container
+%   images. Container registries can support container-based application development,
+%   often as part of DevOps processes.
+%   Container registries can connect directly to container orchestration platforms like Docker and Kubernetes.
+%   ''
+%   \cite{container-registry}
+% \end{quotation}
 
 
 
-\subsection{Erstellung einer .apk Datei}
-Für Android wurde die .\textbf{A}ndroid \textbf{P}ac\textbf{K}age (apk)  mit dem Einsatz von gradle Wrapper generiert.
-Foglendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
 
+\subsection{Deployment Diagram}
+\begin{center}
+  \includegraphics[width=\textwidth]{pics/dev-deployment.png}
+\end{center}
+\subsection{Deployment von dem Backend auf Minikube}
 
-
+Damit ein funktionsfähiges Deployment erstellt werden kann sind solche Komponenten zu deployen:
 \begin{itemize}
-  \item Java 11
-  \item Installation von sdkmanager
-  \item Lizenzen von sdkmanager müssen akzeptiert sein
-  \item Installation von einer Android SDK
-  \item Konfigurationen für JAVA\_HOME und ANDROID\_HOME
-  \item Installation einer CLI namens "ninja"
+  \item Strapi
+  \item Datenbank
+  \item Reverse Proxy (Nginx)
 \end{itemize}
 
-Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
+Für jede dieser genannten Bauteile des Backends sind K8S- (Kubernetes) Deployments und Services zu erstellen.
 
-\begin{lstlisting}[language=bash,caption=generate apk]
-./gradlew assembleRelease
+\subsection{K8S-Konfigurationen für die Datenbank}
+Zusätzlich zu einer Deployment- und Service-Kompoente ist für die Sicherung
+von den Credentials der Datenbank eine sogenannte
+Secret-Komponente gebraucht.
+Für die Vermeidung von Datenverlusten in Fällen
+wie Neustart eines Pods oder die Aktualisierung
+der Konfiguration von dem Pod ist
+das Anglegen einer PersistenceVolume-Komponente sehr dringend
+Damit das Deployment auf die PersistenceVolume-Komponente zugreifen kann, ist eine sogenannte PersistenceVolumeClaim-Komponente zu definieren
+
+Für die Konfiguration der Secret-, Service- und Deployment-Komponente wurde die kubectl \textbf{C}ommand \textbf{L}ine \textbf{I}nterface verwendet.
+Die PersistenceVolume-Komponente bzw. die PersistenceVolumeClaim-Kompoente wurden fertige Konfigurationen genommen
+\begin{lstlisting}[caption=K8S PVC]
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: strapi-pvc
+    namespace: default
+  spec:
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 10Mi
+      storageClassName: standard
+    
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption=K8S PV]
+  apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    finalizers:
+    - kubernetes.io/pv-protection
+    labels:
+      type: local
+    name: strapi-volume
+    resourceVersion: "33077"
+    uid: ae6d772a-0090-4074-b3ac-1edb929daf29
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 10Gi
+    hostPath:
+      path: /mnt/data
+      type: ""
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: manual
+    volumeMode: Filesystem
+  status:
+    phase: Available
+    
 \end{lstlisting}
 
 
 
-\subsection{Erstellung einer .ipa Datei}
-Für IOS hat sich das Team entschieden, die App mit der mittels Xcode zu bauen, da die andere Variante nicht so einfach ist.
-
-
-Es ist aber noch anzumerken, dass die nativen Libraries in der  Swift-Codebase eingebunden werden sollen.
-Dafür ist dieser Befehl geeignet:
-\begin{lstlisting}[language=bash, caption=bind ios libraries]
-pod install
-\end{lstlisting}
-
-
-<Coming Soon>
-
-\section{Deployment von dem Backend}
-
-
-Dabei sind folgende Systemkomponenten zu betrachten:
-
-\begin{enumerate}
-  \item Die Datenkbank
-  \item  Das Headless-CMS
-  \item Nginx Reverse-Proxy
-\end{enumerate}
-
-
-\subsection{Pushen einer Anwendung auf ein Containerregister}
-
-Für das Pushen einer Anwendung auf \textbf{G}it\textbf{H}ub \textbf{C}ontainer \textbf{R}egistery (GHCR), ist die Containerisierung der Anwendung notwendig.
-Um Strapi zu containerisieren, wurde folgendes Dockerfile geschrieben
-
+\subsection{K8S-Konfigurationen für Strapi}
+Für Strapi wird auch eine Secret-Komponente benötigt, da der Server geheime Umgebungsvariablen benötigt.
+Es gibt auch einige.
+Damit das Deployment von Strapi erstellt werden kann, muss die Anwendung zuerst containerisiert werden. Dies kann erfolgen mit der Verwendung des folgenden Dockerfiles .
 \begin{lstlisting}[caption=Strapi Dockerfile]
   # Creating multi-stage build for production
   FROM node:18-alpine as build
@@ -240,30 +410,50 @@ Um Strapi zu containerisieren, wurde folgendes Dockerfile geschrieben
     
 \end{lstlisting}
 
+Dieses Image soll dann in einem Container Registry wie zum Beispiel
+Dockerhub oder Github Container Registry hochgeladen werden,
+damit die K8S-Deployment-Komponente dieses Image im Einsatz nimmt.
 
 
 
 
-Danach soll ein Docker-Image aus diesem File generiert werden und dieses in dem folgenden Format getagt werden:
-\newline
-ghcr/\textbf{<Name des Users oder der Organisation>}/\textbf{<Name des Images>}:\textbf{<Version>}
-\newline
-Damit das Image jetzt auf GHCR gepusht werden kann, ist das Einloggen in diesem erforderlich.
-Danach kann die Anwendung auf GHCR veröffentlicht werden.
-Alle benötigten Befehle für diesen Kapitel sind im folgenden Code-Snippet zu finden:
-
-\begin{lstlisting}[language=bash,caption=Veröffentlichung eines Docker-Images auf GHCR]
-docker build -t relaxoon-strapi .
-docker tag relaxoon-strapi ghcr.io/Abdulrahman-AL-Sabagh/relaxoon-strapi:latest
-docker login ghcr.io
-cat ./token.txt | docker login --username Abdulrahman-AL-Sabagh --password-stdin
-docker push ghcr.io/Abdulrahman-AL-Sabagh/relaxoon-strapi:latest
-    
+\subsection{K8S-Secrets}
+Damit man Umgebungsvariablen in einem K8S-Cluster definieren kann gibt es zwei Möglichkeiten.
+Man kann entweder eine ConfigMap-Komponente verwenden oder eine Secret-Komponente. Es gibt auch die Möglichkeit, diese Umgebungsvariablen direkt in den Konfigurationen von der Deployment-Komponente händisch einzutragen.
+Für geheime bzw. sensible Daten werden K8S-Secrets verwendet.
+Das Anlegen der benötigten Secrets für unsere Anwendung erfolgte durch die Verwendung folgender Befehle
+\begin{lstlisting}[caption=Secrets für Strapi]
+    kubectl create secret generic strapi-server-secret \
+  --from-literal=PORT=1337 \  
+  --from-literal=APP_KEYS=secret
+  --from-literal=API_TOKEN_SALT=secret \
+  --from-literal=ADMIN_JWT_SECRET=secret \
+  --from-literal=TRANSFER_TOKEN_SALT=secret \
+  --from-literal=DATABASE_CLIENT=postgres \
+  --from-literal=DATABASE_PORT=5432 \
+  --from-literal=DATABASE_NAME=secret \
+  --from-literal=DATABASE_USERNAME=secret \
+  --from-literal=DATABASE_PASSWORD=secret \
+  --from-literal=DATABASE_SSL=false \
+  --from-literal=JWT_SECRET=secret
 \end{lstlisting}
-\cite{upload-to-ghcr}
 
 
-\subsection{Erstellung von einer Deployment-Komponente}
+\begin{lstlisting}[caption=Secrets für die Datenbank]
+kubectl create secret generic  strapi-secret \
+--from-literal=POSTGRES_USER=strapi \
+--from-literal=POSTGRES_PASSWORD=strapi \
+--from-literal=POSTGRES_DB=strapi
+\end{lstlisting}
+
+
+
+
+
+
+
+
+\subsection{Was ist eine Deployment-Komponente}
 
 Eine Deployment-Komponente dient dazu, dass ein Pod erstellt wird und die benötigten Resourcen bzw. Volumes und Zugriffsrechten
 dafür definiert werden.\cite{k8s-deployment}
@@ -313,89 +503,8 @@ kubectl expose deployments/<Name des Pods> --port=5432
 
 
 
-\subsection{Erstellung einer Persistence-Volume-Komponente}
-
-Die Sogennanten \textbf{P}ersistence-\textbf{V}olumes (PV) dienen dazu, dass keine Datenverluste entstehen, wenn ein Pod gestoppt oder gelöscht wird.
-Folgende Konfigurationen wurden die Generierung dieser Komponente verwendet
-
-\begin{lstlisting}[caption=PV.yml]
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  finalizers:
-  - kubernetes.io/pv-protection
-  labels:
-    type: local
-  name: relaxoon-pv
-  resourceVersion: "33077"
-  uid: ae6d772a-0090-4074-b3ac-1edb929daf29
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 10Gi
-  hostPath:
-    path: /mnt/data
-    type: ""
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: manual
-  volumeMode: Filesystem
-status:
-  phase: Available    
-    
-\end{lstlisting}
 
 
-\subsection{Erstellung einer Persistence-Volume-Claim-Komponente}
-
-Damit der Pod auf die Persistence-Volume-Komponente zugreifen kann, ist die Verwendung von
-sogenannten \textbf{P}ersistence-\textbf{V}olume-\textbf{C}laims (PVC) notwendig.
-
-Dafür wurden folgende Konfigurationen verwendet
-
-\begin{lstlisting}[caption=PVC.yml]
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  finalizers:
-  - kubernetes.io/pvc-protection
-  name: relaxoon-pvc
-  namespace: default
-spec:
-    accessModes:
-      - ReadWriteMany
-    resources:
-      requests:
-        storage: 10Mi
-    storageClassName: standard
-    
-\end{lstlisting}
-
-
-\subsection{Umgebungsvariablen in Kubernetes}
-Es gibt drei Methoden, um eine Umgebungsvariable in Kubernetes zu definieren.
-
-\begin{itemize}
-  \item Man definieren diese in der Deployment-Komponente
-  \item Man verwendet eine Secret-Komponente
-  \item Man verwendet eine ConfigMap-Komponente
-\end{itemize} \cite{envs-k8s}
-
-Für die Credentials von PostgreSQL und die Token der API wurde eine Secret-Komponente verwendet, da diese solche Daten entschlüsselt.
-Für die restlichen Umgebungsvariablen war eine ConfigMap nötig, da die Anzahl der restlichen Variablen nicht gering war. \cite{secrets}
-
-\subsubsection{ConfigMap}
-
-\begin{quotation}
-  ``
-  A ConfigMap is an API object used to store non-confidential
-  data in key-value pairs. Pods can consume ConfigMaps as environment variables,
-  command-line arguments, or as configuration files in a volume.
-  \cite{config-maps}
-  ''
-\end{quotation}
-//TODO Befehl für Secrets noch hinzufügen
-//TODO Config für ConfigMap noch hineingeben
 
 \subsection{Erstellung einer Ingress-Komponente}
 
@@ -409,7 +518,54 @@ ist das Anlegen einer Ingress notwendig.
 
 
 
-//TODO über Reverse-Proxy noch schreiben
+``
+In einem Computernetzwerk befindet sich ein einfacher Reverse-Proxy zwischen einer
+Gruppe von Servern und den Clients, die sie verwenden wollen.
+Als Client gilt jede Hardware oder Software, die Anfragen an einen Server senden kann. [...].
+Der Reverse-Proxy fängt alle Anfragen von den Clients an die Server ab und liefert auch
+alle Antworten und Dienste von
+en Servern wieder an die Clients zurück. Aus Sicht des Kunden sieht es so aus,
+als würde alles von einer einzigen Stelle ausgehen.
+
+''
+\cite{reverse-proxy}
+
+\subsection{Buildprozess für das Frontend}
+
+Damit man das Frontend deployt, muss man zuerst den nativen Android und IOS Code generieren.
+Danach sollen die Android bzw. IOS Anwendungen mit einer IDE oder mit der Kommando-Zeile gebaut werden.
+Um den nativen Code zu generieren ist folgendes einzugeben:
+\begin{lstlisting}[language=Bash,caption=generate android and ios]
+npx expo prebuild
+\end{lstlisting}
+
+
+
+
+
+\subsection{Erstellung einer .apk Datei}
+Für Android wurde die .\textbf{A}ndroid \textbf{P}ac\textbf{K}age (apk)  mit dem Einsatz von gradle Wrapper generiert.
+Foglendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
+
+
+
+\begin{itemize}
+  \item Java 11
+  \item Installation von sdkmanager
+  \item Lizenzen von sdkmanager müssen akzeptiert sein
+  \item Installation von einer Android SDK
+  \item Konfigurationen für JAVA\_HOME und ANDROID\_HOME
+  \item Installation einer CLI namens "ninja"
+\end{itemize}
+
+Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
+
+\begin{lstlisting}[language=bash,caption=generate apk]
+ ./gradlew assembleRelease
+ \end{lstlisting}
+
+
+
 
 
 \section{Hochladen einer Mobileapp auf Firebase App Distribution}
