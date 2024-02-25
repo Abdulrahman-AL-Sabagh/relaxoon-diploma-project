@@ -13,18 +13,18 @@
 
 \section{Medias und Articles}
 
-Grundsätzlich haben wir als Team entschieden,
-die Artikeln und die Medien in zwei speraten Tabellen zu speichern,
-da Artikeln mehrere Bilder, Videos und Audios Inhalte enthalten können.
-Diesen können dann mittels ein "Rich Text Editor" hinzugefügt werden.
-Bei "Media" handlet es sich nur um ein Medienelement,
-nähmlich ein Bild, Video oder Audio File. Es ist aber wichtig anzumerken,
-dass keine Benutzeroberfläche für die Artikeln implementiert wurde, da der Kunde
+Grundsätzlich wurde als Team entschieden,
+die Artikel und die Medien in zwei seperaten Tabellen zu speichern,
+da Artikel mehrere Bilder, Videos und Audios Inhalte enthalten können.
+Diesen können dann mittels einem ''Rich Text Editor'' hinzugefügt werden.
+Bei ''Media'' handelt es sich nur um ein Medienelement,
+nämlich ein Bild, Video oder Audio File. Es ist aber wichtig anzumerken,
+dass keine Benutzeroberfläche für die Artikel implementiert wurde, da der Kunde
 diese nicht in dem \textbf{M}inimal \textbf{V}iable \textbf{P}roduct (MVP) haben wollte.
-Für die Relaisierung des kompletten Datenmodels war aber das Einfügen der Artikel erforderlich.
+Für die Realisierung des kompletten Datenmodels war aber das Einfügen der Artikel erforderlich.
 
 \section{TutorialPage}
-Die Entität "TutorialPage" hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt des Tutorial-Slideshows,
+Die Entität ''TutorialPage'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt des Tutorial-Slideshows,
 die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
 
 \begin{figure}[H]
@@ -33,24 +33,24 @@ die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
   \caption{Screenshot aus dem UI Prototyp von Relaxoon}
 \end{figure}
 
-Mit der Persestierung der Inhalte von der Slideshow könnte die Erstellung
+Mit dem Persistieren der Inhalte von der Slideshow könnte die Erstellung
 von neuen Builds bei jeder Änderung vermieden werden.
 
 
 \section{Suche und Filterungen}
 
-Bei den Filterungen wurde der "Interactive Query Builder" verwendet,
+Bei den Filterungen wurde der ''Interactive Query Builder'' verwendet,
 um die Filterparameter der Abfragen zu generieren
 und diese dann bei den REST Abfragen anzuhängen.
-Es gibt auch eine "Query Engine", welche die gleiche Funktion wie diese
-"Interactive Query Builder" hat.
+Es gibt auch eine ''Query Engine'', welche die gleiche Funktion wie diese
+''Interactive Query Builder'' hat.
 Diese kann in dem \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) angewendet werden.
-Mit der Verwendung dieser "Interactive Query Builder" kann man die Daten,
+Mit der Verwendung dieser ''Interactive Query Builder'' kann man die Daten,
 die man von den REST-Resourcen bekommt, anpassen.
-Es gibt auch die Möglichkeit, die REST-Resource im Backend mittels dieser
-"Query Engine" anzupassen.
-Allerdings wurde diese "Query Engine" nicht verwendet,
-da die Dokumentation bzw. Intellisense von dem ORM sehr ungenau war.
+Es gibt auch die Möglichkeit, die REST-Ressource im Backend mittels dieser
+''Query Engine'' anzupassen.
+Allerdings wurde diese ''Query Engine'' nicht verwendet,
+da die Dokumentation bzw. IntelliSense von dem ORM sehr ungenau war.
 
 \begin{figure}[H]
   \centering
@@ -62,7 +62,7 @@ da die Dokumentation bzw. Intellisense von dem ORM sehr ungenau war.
 
 
 \begin{spacing}{1}
-  \textbf{API-Route mit den angehängten generierten Abfrageparameter}:
+  \textbf{API-Route mit den angehängten generierten Abfrageparametern}:
   \newline
   \textcolor{red}{/medias?\&populate[tags]=true
   \&populate[file]=true
@@ -84,16 +84,16 @@ da die Dokumentation bzw. Intellisense von dem ORM sehr ungenau war.
   ''
   \cite{state-management}
 
-  Um die Zustände der Applikation zu behandeln wurde meistens mit dem `useState Hook` von React gearbeitet.
-  Der Einsatz einer State Management Library wie zum Beispiel RXJS oder Redux war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
+  Um die Zustände der Applikation zu behandeln wurde meistens mit dem ''useState Hook'' von React gearbeitet.
+  Der Einsatz einer State Management Library wie zum Beispiel ''RXJS'' oder ''Redux'' war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
 
   \subsection{useState Hook}
   ``useState is a React Hook that lets you add a state variable to your component.'' \cite{useState}
 
 
   \section{Dark/Light Mode}
-  Da das Team sich für die Verwendung von der UI\-Library 'Native Base' entschieden hat, war die Realisierung von diesem Feature sehr einfach.
-  Die Komponenten von 'Native Base' haben die Properties \_light und \_dark, wo man die Farbe einer Komponente je nach Modus definieren kann.
+  Da das Team sich für die Verwendung von der UI-Library ''Native Base'' entschieden hat, war die Realisierung von diesem Feature sehr einfach.
+  Die Komponenten von Native Base haben die Properties \_light und \_dark, wo man die Farbe einer Komponente je nach Modus definieren kann.
   Native Base verwendet im Hintergrund einen useContext Hook, wo die Modi der Applikation gespeichert werden.
   \subsection{useContext Hook}
   \begin{quotation}
@@ -112,17 +112,17 @@ da die Dokumentation bzw. Intellisense von dem ORM sehr ungenau war.
 
 \section{Help und Info Screen}
 
-Mit der Speicherung der Inhalten von den Ansichten ''Help'' und ''Info''  ist neues Build für das Frontend nicht mehr nötig.
+Mit der Speicherung der Inhalte von den Ansichten ''Help'' und ''Info''  ist ein neues Build für das Frontend nicht mehr nötig.
 Somit kann der Content-Manager mehrere Freiheiten haben.
-Diese Inhalte wurden mit sogenannten ''Single Types'' persestiert.
+Diese Inhalte wurden mit sogenannten ''Single Types'' persistiert.
 Ein ''Single Type'' ist nichts anders als eine Tabelle, die nur eine Zeile enthält.
 Bei einer Änderung des Werts von diesem ''Single Type'' wird diese eine Zeile aktualisiert.
 
 \section{Authentifizierung}
-Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut.Für den Client wurde die Logik so umgesetzt, dass der User die App erst verwenden kann, wenn er bereits authentifiziert ist.
+Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der User die App erst verwenden kann, wenn er bereits authentifiziert ist.
 Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der User bereits authentifiziert ist.
-Umzu überprüfen, ob der Nutzer noch eingeloggt ist oder nicht wurde das Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob das Token valid und nicht abgelaufen ist.
-Damit der User auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn das Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reseviert
+Umzu überprüfen, ob der Nutzer noch eingeloggt ist oder nicht wurde der Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob der Token valid und nicht abgelaufen ist.
+Damit der User auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
 Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \begin{lstlisting}[caption=protected screens]
   import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -233,8 +233,8 @@ Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \end{lstlisting}
 
 \section{Validierung}
-Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
-Für die client-seitige Validierung wurde eine Library namens 'Zod' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
+Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine Client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
+Für die Client-seitige Validierung wurde eine Library namens ''Zod'' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
 \begin{lstlisting}[caption=Validierungsschemen]
  import { z } from 'zod';
 
@@ -249,9 +249,9 @@ export const passwordValidator = z.string().min(6);
 
 \subsection{Allgemeins}
 
-Die Veröffentlichung der Applikation auf den Play Stores wurde von dem Auftraggeber nicht in die Frage gestellt.
-Das Hochladen der Android-Applikation auf Firebase App Distribution wurde aber von dem Team verlangt.
-Das Backend wurde auf den Servers der Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt
+Die Veröffentlichung der Applikation im Play Store und im App Store wurde von dem Team nicht verlangt. 
+Das Hochladen der Android-Applikation auf Firebase App Distribution war jedoch eine essentielle Aufgabe.
+Das Backend wurde auf den Servern von den Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
 % Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
 % Infrastruktur deployen und die Anwendungen
 % als Docker-Images in den Container-Registries von denen speichern.
@@ -283,27 +283,26 @@ Das Backend wurde auf den Servers der Firmen Solvistas und Macolution deployt. F
 \end{center}
 \subsection{Deployment von dem Backend auf Minikube}
 
-Damit ein funktionsfähiges Deployment erstellt werden kann sind solche Komponenten zu deployen:
+Damit ein funktionsfähiges Deployment erstellt werden kann sind diese Komponenten zu deployen:
 \begin{itemize}
   \item Strapi
   \item Datenbank
-  \item Reverse Proxy (Nginx)
 \end{itemize}
 
-Für jede dieser genannten Bauteile des Backends sind K8S- (Kubernetes) Deployments und Services zu erstellen.
+Für jede dieser genannten Bauteile des Backends sind Kubernetes (K8S) Deployments und Kubernetes Services zu erstellen.
 
 \subsection{K8S-Konfigurationen für die Datenbank}
-Zusätzlich zu einer Deployment- und Service-Kompoente ist für die Sicherung
+Zusätzlich zu einer Deployment- und Service-Komponente ist für die Sicherung
 von den Credentials der Datenbank eine sogenannte
 Secret-Komponente gebraucht.
 Für die Vermeidung von Datenverlusten in Fällen
 wie Neustart eines Pods oder die Aktualisierung
 der Konfiguration von dem Pod ist
 das Anglegen einer PersistenceVolume-Komponente sehr dringend
-Damit das Deployment auf die PersistenceVolume-Komponente zugreifen kann, ist eine sogenannte PersistenceVolumeClaim-Komponente zu definieren
+Damit das Deployment auf die PersistenceVolume-Komponente zugreifen kann, ist eine sogenannte PersistenceVolumeClaim-Komponente zu definieren.
 
-Für die Konfiguration der Secret-, Service- und Deployment-Komponente wurde die kubectl \textbf{C}ommand \textbf{L}ine \textbf{I}nterface verwendet.
-Die PersistenceVolume-Komponente bzw. die PersistenceVolumeClaim-Kompoente wurden fertige Konfigurationen genommen
+Für die Konfiguration der Secret-, Service- und Deployment-Komponente wurde die kubectl \textbf{C}ommand \textbf{L}ine \textbf{I}nterface verwendet
+und für die PersistenceVolume-Komponente bzw. die PersistenceVolumeClaim-Kompoente wurden fertige Konfigurationen genommen.
 \begin{lstlisting}[caption=K8S PVC]
   apiVersion: v1
   kind: PersistentVolumeClaim
@@ -355,7 +354,7 @@ Die PersistenceVolume-Komponente bzw. die PersistenceVolumeClaim-Kompoente wurde
 \subsection{K8S-Konfigurationen für Strapi}
 Für Strapi wird auch eine Secret-Komponente benötigt, da der Server geheime Umgebungsvariablen benötigt.
 Es gibt auch einige.
-Damit das Deployment von Strapi erstellt werden kann, muss die Anwendung zuerst containerisiert werden. Dies kann erfolgen mit der Verwendung des folgenden Dockerfiles .
+Damit das Deployment von Strapi erstellt werden kann, muss die Anwendung zuerst in ein Docker Image umgewandelt werden. Dies kann mit der Verwendung des folgenden Dockerfiles erfolgen.
 \begin{lstlisting}[caption=Strapi Dockerfile]
   # Creating multi-stage build for production
   FROM node:18-alpine as build
@@ -412,7 +411,7 @@ Damit das Deployment von Strapi erstellt werden kann, muss die Anwendung zuerst 
 
 Dieses Image soll dann in einem Container Registry wie zum Beispiel
 Dockerhub oder Github Container Registry hochgeladen werden,
-damit die K8S-Deployment-Komponente dieses Image im Einsatz nimmt.
+damit die K8S-Deployment-Komponente dieses Image in Einsatz nimmt.
 
 
 
@@ -421,7 +420,7 @@ damit die K8S-Deployment-Komponente dieses Image im Einsatz nimmt.
 Damit man Umgebungsvariablen in einem K8S-Cluster definieren kann gibt es zwei Möglichkeiten.
 Man kann entweder eine ConfigMap-Komponente verwenden oder eine Secret-Komponente. Es gibt auch die Möglichkeit, diese Umgebungsvariablen direkt in den Konfigurationen von der Deployment-Komponente händisch einzutragen.
 Für geheime bzw. sensible Daten werden K8S-Secrets verwendet.
-Das Anlegen der benötigten Secrets für unsere Anwendung erfolgte durch die Verwendung folgender Befehle
+Das Anlegen der benötigten Secrets für unsere Anwendung erfolgte durch die Verwendung folgender Befehle:
 \begin{lstlisting}[caption=Secrets für Strapi]
     kubectl create secret generic strapi-server-secret \
   --from-literal=PORT=1337 \  
@@ -459,7 +458,7 @@ Eine Deployment-Komponente dient dazu, dass ein Pod erstellt wird und die benöt
 dafür definiert werden.\cite{k8s-deployment}
 
 Für das Anlegen einer Deployment-Komponente muss man zuerst die Anwendung containerisieren.
-Für weit verbreitete Software wie z.B.: PostgreSQL gibt es bereites viele vorhandene Images auf unterschiedliche Container-Registries
+Für weit verbreitete Software wie z.B.: PostgreSQL gibt es bereits viele vorhandene Images auf unterschiedliche Container-Registries.
 
 Folgende Befehle wurden verwendet, um die Deployment-Komponenten für Strapi und PostgreSQL zu erstellen:
 
@@ -479,7 +478,7 @@ kubectl create deployment relaxoon-strapi --image=ghcr.io/Abdulrahman-AL-Sabagh/
   Netzwerkressourcen und einer Spezifikation für die Ausführung der Container.
   Die Ressourcen eines Pods befinden sich immer auf dem gleichen (virtuellen) Server,
   werden gemeinsam geplant und in einem gemeinsamen Kontext ausgeführt.
-  Ein Pod modelliert einen anwendungsspezifischen "logischen Server": Er enthält eine oder mehrere
+  Ein Pod modelliert einen anwendungsspezifischen ''logischen Server'': Er enthält eine oder mehrere
   containerisierte Anwendungen, die relativ stark voneinander abhängen.
   ''
   \cite{pod}
@@ -493,7 +492,7 @@ kubectl create deployment relaxoon-strapi --image=ghcr.io/Abdulrahman-AL-Sabagh/
 \subsection{Erstellung einer Service-Komponente}
 
 Mit dem Einsatz eines Services in Kubernetes können Pods,
-die sich im gleichen Cluster befinden,miteinander kommunizieren. \cite{k8s-service}
+die sich im gleichen Cluster befinden, miteinander kommunizieren. \cite{k8s-service}
 
 Für das Anlegen einer Service-Komponente kann man diesen Befehl nutzen:
 
@@ -534,7 +533,7 @@ als würde alles von einer einzigen Stelle ausgehen.
 
 Damit man das Frontend deployt, muss man zuerst den nativen Android und IOS Code generieren.
 Danach sollen die Android bzw. IOS Anwendungen mit einer IDE oder mit der Kommando-Zeile gebaut werden.
-Um den nativen Code zu generieren ist folgendes einzugeben:
+Um den nativen Code zu generieren ist Folgendes einzugeben:
 \begin{lstlisting}[language=Bash,caption=generate android and ios]
 npx expo prebuild
 \end{lstlisting}
@@ -545,7 +544,7 @@ npx expo prebuild
 
 \subsection{Erstellung einer .apk Datei}
 Für Android wurde die .\textbf{A}ndroid \textbf{P}ac\textbf{K}age (apk)  mit dem Einsatz von gradle Wrapper generiert.
-Foglendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
+Folendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
 
 
 
@@ -555,7 +554,7 @@ Foglendes muss installiert und richtig konfiguriert werden, damit  eine .apk Dat
   \item Lizenzen von sdkmanager müssen akzeptiert sein
   \item Installation von einer Android SDK
   \item Konfigurationen für JAVA\_HOME und ANDROID\_HOME
-  \item Installation einer CLI namens "ninja"
+  \item Installation einer CLI namens ''ninja''
 \end{itemize}
 
 Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
@@ -600,7 +599,7 @@ Nachdem Anlegen eines Accuonts bei Firebase sind folgende und die Erstellung ein
 
 \begin{figure}
   \includegraphics[width=\textwidth]{./pics/firebase4.png}
-  \caption{App upload}
+  \caption{App Upload}
   Die App kann mit diesem ''Browse Fenster'' oder mit ''Drag and Drop'' hochgeladen werden
 
 \end{figure}
@@ -608,8 +607,12 @@ Nachdem Anlegen eines Accuonts bei Firebase sind folgende und die Erstellung ein
 
 
 \begin{figure}
-  Das Produkt kann dann an anderen TestUsers verteilt werden, indem man die Email-Adressen dieser Testers beim Release eingibt.
   \includegraphics[width=\textwidth]{./pics/firebase5.png}
-  \caption{releases}
+  \caption{Releases}
+  
+  Das Produkt kann dann an andere Testuser verteilt werden, indem man die Email-Adressen dieser 
+  Tester beim Release eingibt.
 \end{figure}
+
+
 

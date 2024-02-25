@@ -5,16 +5,16 @@
 
     Grundsätzlich wurde React Native aus mehreren Gründen verwendet:
     \begin{itemize}
-        \item React Native ist das Standardframework für cross-plattform-Lösungen bei der Firma Solvistas.
+        \item React Native ist das Standardframework für Cross-Platform-Lösungen bei der Firma Solvistas.
         \item Vorhandene Kenntnisse in den Sprachen Javascript bzw. Typescript
-        \item Auftraggber forderte eine cross-plattform-Lösung für das Frontend, um IOS- Android- Betriebssysteme abzudecken
+        \item Der Auftraggber forderte eine Cross-Platform-Lösung für das Frontend, um IOS- Android- Betriebssysteme abzudecken
         \item Endergebnis von React Native ist eine native App
     \end{itemize}
 
 
 
 
-    \subsection{Was ist eine cross-plattform-Lösung}
+    \subsection{Was ist eine Cross-Platform-Lösung}
 
     \begin{quotation}
         ``
@@ -28,10 +28,10 @@
     \end{quotation}
 
 
-    \subsection{Warum wurde eine cross-plattform-Lösung angefordert}
+    \subsection{Warum wurde eine Cross-Platform-Lösung angefordert}
     Der Client von Relaxoon besteht aus einer einfachen Applikation, die keine Business Logik
     und auch keine Performance kritische Funktionalitäten hat.
-    Daher ist die Verwendung einer cross-plattform-Lösung sehr vorteilhaft,
+    Daher ist die Verwendung einer Cross-Platform-Lösung sehr vorteilhaft,
     da alle Plattformen von einem Codebase gepflegt werden können.
 
 
@@ -80,7 +80,7 @@
         ''
         \cite{kotlin-multiplatform-vs-react-native}
     \end{quotation}
-    Allerdings ist das Problem davon, dass KMP noch immer im Beta ist und daher ist diese nicht stabil.
+    Allerdings ist das Problem davon, dass KMP noch immer in der Beta-Version ist und daher ist diese nicht stabil.
     Außerdem  ist die Community von dieser Alternative nicht so groß wie die Community von React Native.
     Gute Kenntnisse in Swift \textbf{U}ser \textbf{I}nterface (UI) und Android \textbf{S}oftware \textbf{D}evelopment \textbf{K}it (SDK) werden für die Verwendung von Kotlin Multiplatform auch verlangt.
     Grund dafür ist, dass KMP keine Bilbiotheken für UI-Elementen wie React Native oder Flutter bereitstellt, sondern die Syntax der OS-Technologie verwendet.
@@ -88,19 +88,17 @@
     \subsubsection{Flutter}
 
     Flutter an sich ist viel schneller als React Native.
-    Außerdem unterstüzt Flutter die Betriebssysteme  Windows, Linux und Macos zusätzlich zu Web, Android und IOS.
+    Außerdem unterstüzt Flutter die Betriebssysteme  Windows, Linux und macOS zusätzlich zu Web, Android und IOS.
     \cite{flutter-vs-react-native}
     \newline
     Das Problem bei Flutter ist, dass man gute Kenntnisse in der Programmiersprache ''Dart'' haben muss. \cite{flutter-vs-react-native}
-    Für die Entwicklung von React Native sind gute Kenntnisse in den Programmiersprachen Javascript und Typescript,
-    die wir bereits gelernt haben,
-    gebraucht.
-    Außerdem ist die Unterstützung von Macos, Linux und Windows für uns gar nicht relevant.
+    Für die Entwicklung von React Native sind gute Kenntnisse in den Programmiersprachen Javascript und Typescript von Vorteil.
+    Außerdem ist die Unterstützung von macOS, Linux und Windows nicht relevant für eine mobile App.
 
 
     \subsubsection{Xamarin}
 
-    Xamarin ist eine C\# Framework, die für die Entwicklung von nativen cross-plattform-Lösungen zuständig ist.
+    Xamarin ist eine C\# Framework, die für die Entwicklung von nativen Cross-Platform-Lösungen zuständig ist.
     Die Performance von Xamarin ist viel besser als die Performance von React Native. \cite{xamarin-vs-react-native}
 
     Die Entwickler haben sich aus den Gründen, die bei Flutter bereites erwähnt wurden, für React Native entschieden.
@@ -114,7 +112,7 @@
         \hline
         Kriterien                      & React Native & Xamarin & Flutter & KMP  \\
         \hline
-        Vorhandene Kenntinsse max.50\% & 50\%         & 0\%     & 0\%     & 10\% \\
+        Vorhandene Kenntnisse max. 50\% & 50\%         & 0\%     & 0\%     & 10\% \\
         \hline
         Barrierfreiheit max. 30\%      & 15\%         & 5\%     & 30\%    & 20\% \\
         \hline
@@ -167,13 +165,14 @@
 
     \subsection{Warum wurde ein Headless-CMS verwendet}
     \begin{itemize}
-        \item Vorgabe von dem Auftragsgeber
+        \item Vorgabe des Auftraggbers
         \item Andere Arten von CMSes generieren statische HTML Seiten, welche für Relaxoon gar nicht gebraucht werden,
-              da Relaxoon eine Mobileapp ist
-        \item die Firma Solvistas beschäftigt sich intensiv mit Data Science. Da man auf dem CMS mittels REST zugreifen kann,
-              will Solvistas ein Datenzentrum aus diesem in der Zukunft erstellen, zusätzlich zur Verwendung von CMS für Data Science Zwecke.
+              da Relaxoon eine mobile App ist.
+        \item Die Firma Solvistas beschäftigt sich intensiv mit Data Science. Da man auf das CMS mittels REST zugreifen kann,
+              will Solvistas in der Zukunft ein Datenzentrum aus diesem erstellen. 
+              Zusätzlich wird das CMS für Data Science Zwecke verwendet.
     \end{itemize}
-    \subsection{Warum Strapi und nicht Wordpress \textbf{AP}plication \textbf{I}nterface (API)}
+    \subsection{Warum Strapi und nicht Wordpress \textbf{Ap}plication \textbf{I}nterface (API)}
 
 
 
@@ -182,8 +181,8 @@
     \begin{itemize}
         \item Es gibt sehr viele Einstellungen und Features
         \item Unterstüzt \textbf{S}earch \textbf{E}ngine \textbf{O}ptimization (SEO)
-        \item guter Community Support
-        \item Einfach zu verwenden
+        \item Ein guter Community Support
+        \item Es ist einfach zu verwenden
     \end{itemize}
     \cite{strapi-vs-wordpress}
 
@@ -191,9 +190,9 @@
     \begin{itemize}
         \item  Limitierte Flexibilität, da viele Plugins und Addons kostenpflichtig sind.
               die kostenlose Verwendung von einigen Addons und Plugins ist limitiert.
-        \item Ist nicht geeignet für eine Software mit großer Skalierung
-        \item Wordpress wird von vielen Menschen verwendet und deshalb ist es für die Hacker nicht unrelevant
-        \item Die Benutzeroberfläche davon ist nicht gut designt und deshalb ist die Verwendung davon meistens sehr verwirrend und unangenehm zu bedienen
+        \item Es ist nicht geeignet für eine Software mit großer Skalierung.
+        \item Wordpress wird von vielen Menschen verwendet und deshalb ist es für die Hacker nicht unrelevant.
+        \item Die Benutzeroberfläche davon ist nicht gut designt und deshalb ist die Verwendung davon meistens sehr verwirrend und unangenehm zu bedienen.
     \end{itemize}
     \cite{strapi-vs-wordpress}
 
@@ -202,20 +201,20 @@
     Im Gegensatz zu Wordpress, kann man mit Strapi beliebig viele Plugins und Addons
     verwenden. Außerdem gibt es eine eingebaute Authentifizierung bzw. Autorisierungsfunktion
     zusätzlich zur Unterstützung von 20 unterschiedlichen Sprachen und REST
-    bzw. Graphql APIS.
+    bzw. Graphql APIs.
     \cite{strapi-vs-wordpress}
 
     \subsubsection{Nachteile von Strapi}
     Ein Grundwissen in der Programmierung ist erforderlich, wenn man sich für Strapi
     entscheidet. Außerdem ist es nicht so weit verbreitet wie Wordpress und somit ist die Anzahl
-    der 3rd-party-Libraries, die man in Strapi einbetten kann, nicht so groß.
+    der 3rd-Party-Libraries, die man in Strapi einbetten kann, nicht so groß.
     \cite{strapi-vs-wordpress}
 
     \subsubsection{Ergebnis}
-    Alle erwähnten Pros und Contras zeigen, dass  die \textbf{U}ser E\textbf{X}perience (UX)
+    Alle erwähnten Pros und Kontras zeigen, dass  die \textbf{U}ser E\textbf{X}perience (UX)
     und die Skalierbarkeit von Strapi viel besser als Wordpress ist.
     Außerdem ist Strapi viel schneller als Wordpress,
-    da Strapi in "Node js" geschrieben ist und Wordpress in "PHP"
+    da Strapi in Node.js geschrieben ist und Wordpress in PHP.
     \cite{strapi-vs-wordpress}
 
     \subsection{Nutzwertanalyse für das Headless-CMS}
@@ -226,7 +225,7 @@
         \hline
         Security max.30\%           & 30\%   & 15\%          \\
         \hline
-        Anpassbar max. 30\%         & 30\%   & 15\%          \\
+        Flexibilität max. 30\%         & 30\%   & 15\%          \\
         \hline
         Community Support max. 30\% & 10\%   & 25\%          \\
         \hline
@@ -242,7 +241,7 @@
 \section{Component Library}
 Der Standardweg, um UI-Elementen in React Native zu stylen, is JSS. Diese ist eine Technologie, wo man \textbf{C}ascading \textbf{S}tyle \textbf{S}heet (CSS)
 in Form von Javascript Objekten schreibt. Das Problem bei dieser Technologie liegt dabei,
-dass viele CSS Attribute und Funktionen nicht dabei inkludiert sind. Es gibt auch außerdem spezifische OS-Einstellungen für Barrierfreiheit wie zum Beispiel die Einstellungen für Screenreaders,
+dass viele CSS Attribute und Funktionen nicht dabei inkludiert sind. Es gibt auch außerdem spezifische OS-Einstellungen für Barrierfreiheit wie zum Beispiel die Einstellungen für Screenreader,
 die man bei der Entwicklung immer wieder vergessen kann.
 Aus diesen Gründen hat sich das Team für die Verwendung von 'Native Base' entschieden.
 
