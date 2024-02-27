@@ -97,14 +97,19 @@
 \input{./sections/implementation}
 
 \begin{spacing}{1}
-    \chapter{Ausgewählte Aspekte und Probleme}\label{chapter:probleme}
+    \chapter{Ausgewählte Aspekte und Probleme}\label{chapter:aspekte-probleme}
 \end{spacing}
-\input{./sections/probleme}
+\input{./sections/aspekte-probleme}
 
 \begin{spacing}{1}
     \chapter{Resümee}
 \end{spacing}
 \input{./sections/summary}
+
+\begin{spacing}{1}
+    \chapter{Anhang}
+\end{spacing}
+\input{./sections/appendix}
 
 \pagenumbering{Roman}
 \setcounter{page}{\value{RPages}}
@@ -121,8 +126,7 @@
 \listoftables
 \lstlistoflistings
 \appendix
-\addchap{Anhang}
-\input{./sections/appendix}
+% \addchap{Anhang}
 \newpage
 \pagenumbering{Roman}
 \end{document}
