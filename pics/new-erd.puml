@@ -1,0 +1,24 @@
+@startuml
+entity User {}
+entity Favorite {}
+entity Media {}
+entity Tag {}
+entity Category {}
+entity ContentCategory {}
+entity Article {}
+entity BinaryMedia {}
+entity TutorialPage {}
+entity Info {}
+entity Help {}
+entity Tag  {}
+entity MediaTag {}
+
+User "1" -- "*" Favorite
+Favorite "*" --  "1" Media
+Media"0..*" -- "1" Article
+Media "0..*" -- "1" BinaryMedia
+Media "1" -- "*" ContentCategory
+ContentCategory "*" --  "1" Category
+Tag "1" -- "*" MediaTag
+Media "1" -- "*" MediaTag
+@enduml

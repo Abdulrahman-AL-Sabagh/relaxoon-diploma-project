@@ -156,7 +156,7 @@
     dass die Daten sich gar nicht ändern.
     Am Anfang wurde vermutet, dass das Problem ein Caching Problem sein könnte.
     Später wurde herausgefunden, dass die Library ''React-navigation'' den ''useEffect Hook'' im Hintergrund deaktiviert.
-    Für das Holen der Daten ist die Übergabe eines sogenannten 
+    Für das Holen der Daten ist die Übergabe eines sogenannten
     ''useCallback Hooks'' als Parameter in einem custom hook namens ''useFocusEffect''
     von React-navigation notwendig.\cite{issuesWithUseEffect}
 
@@ -206,26 +206,48 @@
 
     \end{quotation}
 
+    \section{Probleme mit Dependency Updates}
+
+    Im Laufe der Implementierungsphase wurden einige Dependencies wie React Native oder Strapi ein oder zweimal upgedatet. Bei einige Libraries haben die Updates problemlos funktioniert. Bei anderen wie zum Beispiel ''Expo Cli'' war es so, dass das Program nach dem Update nicht mehr lauffähig war. Daher hat man sehr viele Einstellungen in dem Program ändern müssen, damit das Program funktionieren kann.
+    Bei der Library ''JWT-Decode'', welche wir für die Dekodierung von dem JWT verwendet haben, hat der Code am Beginn problemlos funktioniert. Nach einem Update kam es dazu, dass die Library den Token gar nicht deocdieren konnte.
+    Nach einer langen Recherche kam man darauf, dass man ab der vierten Version eine Library namens ''base-64'' installieren soll.
+    Danach soll diese importiert werden und als ein Singleton in dem Projekt definiert werden.
+    \begin{lstlisting}[caption=base-64 als Singleton]
+    import { decode } from 'base-64';
+    global.atob = decode;
+    \end{lstlisting}
+    \begin{quotation}
+        \cite{jwt-decode-bug}
+
+    \end{quotation}
+    Ein anderes Beispiel, wo das gleiche Problem wieder auftauchte, war bei der Aktualisierung von der Library ''Native base''. Es wurde herausgestellt,
+    dass die vor dem Update verwendete Version von Native Base ist die letzte, die vom Hersteller unterstützt wird.
 
     \section{Relaxoon Plakat}\label{sec:plakat}
     \setauthor{Moritz Eder}
 
     Im Zuge des Projektes wurde mithilfe von Adobe Illustrator ein Plakat zur Repräsentation der mobilen App
-    entwickelt. 
+    entwickelt.
+
+    \section{Probleme mit dem Datenmodell}
+    Nach der Realisierung wurde herausgestellt, dass das ERD doch um einiges verbessert werden kann. In dem folgenden Bild ist das neue Design von dem verbesserten ERD zu finden.
+
+    Die Vorteile dieser Verbesserungen liegen dabei, dass man alle Arten von Medien nur mit einer einzigen SQL-Query abfragen kann. Außerdem ist die Komplexität um einiges reduziert, da nicht jede Medienart eine Beziehung zu den Tags und Kategorien hat.
+    Vorher waren zwei Queries nötig, um alle Arten der Medien abzufragen.
 
     \subsection{Umsetzungsschritte}
 
     \begin{enumerate}
         \item Ein Farbverlauf wurde bestimmt, der sich von der hellblauen Farbe \#64C5DF (Hexadezimalschreibweise)
-        bis zu einem dunkleren Blau \#3A62AC streckt. Der Farbverlauf dient als eine Grundlage des Plakates.
+              bis zu einem dunkleren Blau \#3A62AC streckt. Der Farbverlauf dient als eine Grundlage des Plakates.
         \item Abgerundete Dreiecke sowie die abstrakte Form, welche am Rand des Plakats entlang geht,
-         wurden in Kombination mit dem Farbverlauf erzeugt und platziert.
+              wurden in Kombination mit dem Farbverlauf erzeugt und platziert.
         \item Die Logos von Relaxoon, der HTL Leonding, den Firmen Solvistas und Macolution, dem CMS Strapi und der Programmiersprache React Native wurden hinzugefügt.
         \item Der Diplomarbeitsbetreuer und die Projektpartner wurden namentlich erwähnt.
         \item Das Grundlayout eines Smartphones wurde erstellt und mit einem Entwurf des Tutorials der App versehen.
         \item Fotos und Namen der App-Entwickler wurden eingefügt.
         \item Mit einem kurzen Beschreibungstext wurde das Plakat fertiggestellt.
-      \end{enumerate}
+    \end{enumerate}
 
 
     \begin{figure}[H]
@@ -236,6 +258,6 @@
 
 
 \end{spacing}
-\setauthor{Moritz Eder}    
+\setauthor{Moritz Eder}
 
 
