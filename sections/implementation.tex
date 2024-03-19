@@ -10,6 +10,12 @@
   \end{figure}
 \end{spacing}
 
+\section{Wie werden Files gespeichert?}
+Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für die folgenden Informationen gefunden. Daher untersuchten die Entwickler das Datenmodell von  Strapi.
+Man sieht oben in dem ERD,
+dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen von den Files wie zum Beispiel Größe, Name und Auflösung in einer Tabelle namens ''files''.
+Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird der Name des Models gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das Id von dem Element, welches einen Zugriff auf die Datei benötigt wird auch in dieser Tabelle gespeichert. Das Id wird mit den dazugehörigen Elementen allerdings nciht referenziert.
+Der Client kann dann die Files erst erhalten, wenn er das Parameter ''populate=file'' bei dem REST-Request daran hängt. Strapi manipuliert dann die Ergebnisse, sodass die gefragten Daten z.B.: Medias und die zugehörige Dateien eines Mediaelements im Responsebody zurückgeschickt werden können.
 
 \section{Medias und Articles}
 
@@ -24,6 +30,7 @@ diese nicht in dem \textbf{M}inimal \textbf{V}iable \textbf{P}roduct (MVP) haben
 Für die Realisierung des kompletten Datenmodels war aber das Einfügen der Artikel erforderlich.
 
 \section{TutorialPage}
+\label{Tutorial-Page}
 Die Entität ''TutorialPage'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt des Tutorial-Slideshows,
 die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
 
@@ -33,32 +40,64 @@ die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
   \caption{Screenshot aus dem UI Prototyp von Relaxoon}
 \end{figure}
 
-Mit dem Persistieren der Inhalte von der Slideshow könnte die Erstellung
-von neuen Builds bei jeder Änderung vermieden werden.
-
+Das Team hat sich entschlossen, die Daten von dem Slideshow in einer Tabelle zu speichern.
+Eine alternative Lösungsmöglichkeit besteht darin, die Daten des Slideshows in der Applikation hard zu codieren.
+Das Team hat sich für die Persestierung der Daten entschieden, damit das Einpflegen der Inhalte nicht über die Applikation erfoglt.
+Wenn das Team sich für die alternative Lösungsvariante entschieden hätte, müsste bei jeder kleinen Änderung ein neuer Android- bzw. iOS-Build erstellt werden.
 
 \section{Suche und Filterungen}
 
 Bei den Filterungen wurde der ''Interactive Query Builder'' verwendet,
 um die Filterparameter der Abfragen zu generieren
-und diese dann bei den REST Abfragen anzuhängen.
-Es gibt auch eine ''Query Engine'', welche die gleiche Funktion wie diese
-''Interactive Query Builder'' hat.
-Diese kann in dem \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) angewendet werden.
-Mit der Verwendung dieser ''Interactive Query Builder'' kann man die Daten,
-die man von den REST-Resourcen bekommt, anpassen.
-Es gibt auch die Möglichkeit, die REST-Ressource im Backend mittels dieser
-''Query Engine'' anzupassen.
-Allerdings wurde diese ''Query Engine'' nicht verwendet,
-da die Dokumentation bzw. IntelliSense von dem ORM sehr ungenau war.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[ width=1\textwidth]{./pics/query-builder.png}
-  \caption{Beispiel für den Interactive Query Builder}
-\end{figure}
+und diese dann bei den REST Abfragen anzuhängen (Siehe \ref{subsec:rest} für mehrere Details).
+Es gibt auch die Möglichkeit, die REST-Ressource im Backend mittels der
+''Query Engine API'' oder mit dem Einstaz von der ''Entity Service API'' anzupassen.
+Allerdings wurden die Rückgabedaten von der Endpoint gar nicht umgestellt,
+da die Dokumentation bzw. Intellisense von der ''Query Engine API'' bzw. ''Entity Service API'' sehr ungenau waren.
 
 
+\begin{lstlisting}[caption=Code von Interactive Query Builder]
+  const queryParamFilter = qs.stringify(
+    {
+      filters: {
+        $or: [
+          {
+            description: {
+              $containsi: text
+            }
+          },
+          {
+            title: {
+              $containsi: text
+            }
+          },
+          {
+            categories: {
+              name: {
+                $containsi: text
+              }
+            }
+          },
+          {
+            tags: {
+              name: {
+                $containsi: text
+              }
+            }
+          }
+        ]
+      }
+    },
+    { encodeValuesOnly: true }
+  );
+  
+\end{lstlisting}
+In dem obigen Codesnippet befindet sich der Code für die Suchleiste.
+Es wird am Anfang entweder nach der Kategorie, nach dem Tag,
+nach der Beschreibung oder nach dem Titel eines Videos gefiltert.
+Wenn ein oder mehrere Treffer für diese Parameter gefunden werden,
+werden sie im Responsebody zurückgegeben.
+Die Groß und Kleinschreibung wird dabei gar nicht beachtet.
 
 
 \begin{spacing}{1}
@@ -68,6 +107,14 @@ da die Dokumentation bzw. IntelliSense von dem ORM sehr ungenau war.
   \&populate[file]=true
   \&populate[favorite][populate]=\newline users\_permissions\_user}
 \end{spacing}
+
+Damit man sicherstellt, ob die generierten Parameter richtig sind, wurde folgende Ansicht von Postman verwendet:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{./pics/postman.png}
+  \caption{Ansicht von Postman}
+
+\end{figure}
 
 
 \section{State Management}
@@ -97,8 +144,7 @@ da die Dokumentation bzw. IntelliSense von dem ORM sehr ungenau war.
   Native Base verwendet im Hintergrund einen useContext Hook, wo die Modi der Applikation gespeichert werden.
   \subsection{useContext Hook}
   \begin{quotation}
-    ``
-    useContext is a React hook that provides a way to share data (context)
+    ''useContext is a React hook that provides a way to share data (context)
     across multiple components without explicitly passing it through props.
     It is part of the React Context API, which is built into the React library.
     '' \cite{useContext}
@@ -112,11 +158,8 @@ da die Dokumentation bzw. IntelliSense von dem ORM sehr ungenau war.
 
 \section{Help und Info Screen}
 
-Mit der Speicherung der Inhalte von den Ansichten ''Help'' und ''Info''  ist ein neues Build für das Frontend nicht mehr nötig.
-Somit kann der Content-Manager mehrere Freiheiten haben.
-Diese Inhalte wurden mit sogenannten ''Single Types'' persistiert.
-Ein ''Single Type'' ist nichts anders als eine Tabelle, die nur eine Zeile enthält.
-Bei einer Änderung des Werts von diesem ''Single Type'' wird diese eine Zeile aktualisiert.
+Für die gleichen Gründe, welche in dem Unterkapitel \ref{Tutorial-Page} genannt wurden, wurden die Daten dieser zwei Ansichten in einem Single Type (Siehe  \ref{single-types}) gespeichert.
+
 
 \section{Authentifizierung}
 Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der User die App erst verwenden kann, wenn er bereits authentifiziert ist.
@@ -125,28 +168,7 @@ Umzu überprüfen, ob der Nutzer noch eingeloggt ist oder nicht wurde der Token 
 Damit der User auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
 Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \begin{lstlisting}[caption=protected screens]
-  import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-  import { createStackNavigator } from '@react-navigation/stack';
-  import { useColorMode } from 'native-base';
-  import * as React from 'react';
-  import { useEffect, useState } from 'react';
-  import { jwtDecode } from 'jwt-decode';
-  import CategoryScreen from './screens/CategoryScreen';
-  import HomeScreen from './screens/HomeScreen';
-  import MediaScreen from './screens/MediaScreen';
-  import SavedScreen from './screens/SavedScreen';
-  import SettingsScreen from './screens/SettingsScreen';
-  import VideoScreen from './screens/VideoScreen';
-  import WaitScreen from './screens/WaitScreen';
-  import HelpScreen from './screens/setting tabs/HelpScreen';
-  import InfoScreen from './screens/setting tabs/InfoScreen';
-  import { getToken } from './util/getUser';
-  import TabBar from './components/TabBar';
-  import TutorialScreen from './screens/intro/TutorialScreen';
-  import LoginScreen from './screens/registration/LoginScreen';
-  import RegistrationForm from './screens/registration/RegistrationForm';
-  import { colors } from './styles/ThemeColors';
-  import AsyncStorage from '@react-native-async-storage/async-storage';
+ 
   // Screen names
   type PageSettings = Record<string, { iconName: string; screen: React.ComponentType<any> }>;
   const settingsForScreenName: PageSettings = {
@@ -249,7 +271,7 @@ export const passwordValidator = z.string().min(6);
 
 \subsection{Allgemeins}
 
-Die Veröffentlichung der Applikation im Play Store und im App Store wurde von dem Team nicht verlangt. 
+Die Veröffentlichung der Applikation im Play Store und im App Store wurde von dem Team nicht verlangt.
 Das Hochladen der Android-Applikation auf Firebase App Distribution war jedoch eine essentielle Aufgabe.
 Das Backend wurde auf den Servern von den Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
 % Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
@@ -259,7 +281,7 @@ Das Backend wurde auf den Servern von den Firmen Solvistas und Macolution deploy
 % war es für das Team schwierig, beim finalen Deployment mitzumachen. Das Team hat aber die Möglichkeit gehabt,
 % beim Deployment auf dem Stagingsystem mitzuhelfen, da die Software auf einem externen Service, nämlich
 % Firebase App Distribution, hochgeladen wurde.
-% Der Betreuer wurde ebensfalls informiert und er verlangte ein lokales Deployment für das Backend mittels ''Minikube'' sowie ein Live-Demo für die Applikation auf einem Emulator
+% Der Betreuer wurde ebenfalls informiert und er verlangte ein lokales Deployment für das Backend mittels ''Minikube'' sowie ein Live-Demo für die Applikation auf einem Emulator
 
 
 % \subsubsection{Container Registry}
@@ -509,25 +531,44 @@ kubectl expose deployments/<Name des Pods> --port=5432
 
 Damit der Emulator, der sich außerhalb des lokalen Clusters von Minikube befindet,
 mit dem deployten Backend kommunizieren kann,
-ist das Anlegen einer Ingress notwendig.
+ist das Anlegen einer Ingress notwendig. Ein Ingress Controller ist mehr oder weniger mit einem Reverse Proxy zu vergleichen.
+Die Konfigurationen für den Ingress-Controller sind in dem folgenden Code-Snippet zu finden:
 
-//TODO Config für die Ingress-Komponente noch hingeben
+\begin{lstlisting}[caption=ingress-contrller]
+  # see https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: relaxoon-ingress
 
-//TODO Dieses Kapitel noch fertigschreiben
+spec:
+  rules:
+    - host: hello-world.info
+      http:
+        paths:
+          - path: /relaxoon
+            pathType: Prefix
+            backend:
+              service:
+                name: relaxoon-strapi
+                port:
+                  number: 80
+  
+\end{lstlisting}
 
 
 
+
+\subsubsection{Was ist eine Ingress-Komponente}
 ``
-In einem Computernetzwerk befindet sich ein einfacher Reverse-Proxy zwischen einer
-Gruppe von Servern und den Clients, die sie verwenden wollen.
-Als Client gilt jede Hardware oder Software, die Anfragen an einen Server senden kann. [...].
-Der Reverse-Proxy fängt alle Anfragen von den Clients an die Server ab und liefert auch
-alle Antworten und Dienste von
-en Servern wieder an die Clients zurück. Aus Sicht des Kunden sieht es so aus,
-als würde alles von einer einzigen Stelle ausgehen.
+An ingress controller acts as a reverse proxy and load balancer.
+It implements a Kubernetes Ingress.
+The ingress controller adds a layer of abstraction to traffic routing,
+accepting traffic from outside the Kubernetes platform and load balancing
+it to Pods running inside the platform.
 
 ''
-\cite{reverse-proxy}
+\cite{ingress}
 
 \subsection{Buildprozess für das Frontend}
 
@@ -571,47 +612,46 @@ Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
 
 Nachdem Anlegen eines Accuonts bei Firebase sind folgende und die Erstellung eines Projektes Schritte zu machen:
 
-
-\begin{figure}
-  Damit die benötigten Firebase Services für die Applikationen aktiviert werden, muss man zuerst die benötigten Konfigurationen eingeben.
+Damit die benötigten Firebase Services für die Applikationen aktiviert werden, muss man zuerst die benötigten Konfigurationen eingeben.
+\begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase1.png}
   \caption{create android config}
 \end{figure}
 
 
+Folgende Daten müssen eingegeben werden, damit die Firebase Services für die Android Applikation eingeschaltet werden können.
 
-\begin{figure}
-  Folgende Daten müssen eingegeben werden, damit die Firebase Services für die Android Applikation eingeschaltet werden können.
+\begin{figure}[H]
 
   \includegraphics[width=\textwidth]{./pics/firebase2.png}
   \caption{Android Config}
-  Die restlichen Punkte sind für das Projekt Relaxoon irrelevant,
-  da die Firebase-SDK in der vorleigende Arbeit nicht eingesetzt wird.
 \end{figure}
 
+Die restlichen Punkte sind für das Projekt Relaxoon irrelevant,
+da die Firebase-SDK in der vorleigende Arbeit nicht eingesetzt wird.
 
 
-\begin{figure}
-  Danach soll man  auf die App Distribution gehen und dann auf ''Get Started'' klicken
+Danach soll man  auf die App Distribution gehen und dann auf ''Get Started'' klicken
+\begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase3.png}
   \caption{App Distribution}
 \end{figure}
 
-\begin{figure}
+Die App kann mit diesem ''Browser Fenster'' oder mit ''Drag and Drop'' hochgeladen werden.
+\begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase4.png}
   \caption{App Upload}
-  Die App kann mit diesem ''Browse Fenster'' oder mit ''Drag and Drop'' hochgeladen werden
 
 \end{figure}
 
 
-
-\begin{figure}
+Das Produkt kann dann an andere Testuser verteilt werden, indem man die Email-Adressen dieser
+Tester beim Release eingibt.
+\begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase5.png}
   \caption{Releases}
-  
-  Das Produkt kann dann an andere Testuser verteilt werden, indem man die Email-Adressen dieser 
-  Tester beim Release eingibt.
+
+
 \end{figure}
 
 

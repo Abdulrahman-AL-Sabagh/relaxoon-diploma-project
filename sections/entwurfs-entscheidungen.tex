@@ -110,15 +110,15 @@
     \subsection{Nutzwertanalyse für das Frontend-Framework}
     \begin{tabular}{|p{5cm} | p{2cm} | p{2cm} | p{2cm} | p{2cm} | }
         \hline
-        Kriterien                      & React Native & Xamarin & Flutter & KMP  \\
+        Kriterien                       & React Native & Xamarin & Flutter & KMP  \\
         \hline
         Vorhandene Kenntnisse max. 50\% & 50\%         & 0\%     & 0\%     & 10\% \\
         \hline
-        Barrierfreiheit max. 30\%      & 15\%         & 5\%     & 30\%    & 20\% \\
+        Barrierfreiheit max. 30\%       & 15\%         & 5\%     & 30\%    & 20\% \\
         \hline
-        Performance max. 20\%          & 5\%          & 20\%    & 15\%    & 10\% \\
+        Performance max. 20\%           & 5\%          & 20\%    & 15\%    & 10\% \\
         \hline
-        Summe                          & 70\%         & 25\%    & 45\%    & 40\% \\
+        Summe                           & 70\%         & 25\%    & 45\%    & 40\% \\
         \hline
     \end{tabular}
 
@@ -161,6 +161,9 @@
         wieso derartige CMS-Systeme als
         „kopflos“ (englisch: „headless“) bezeichnet werden.
         '' \cite{headles-cms}
+
+        Grundsätzlich ist Storyblok ein seit weitverbreitetes Headless-CMS. Dieses bietet nicht nur eine REST-API, sondern auch ein Plugin, wo man die Ansicht des Benutzers editieren kann.
+        Das Team hat sich für Strapi entschieden, da Storyblok nicht gratis ist. Außerdem ist Storyblok kaum editierbar, da man die Responsebodies von der API nicht einstellen kann. \cite[]{storyblok-bad}
     \end{quotation}
 
     \subsection{Warum wurde ein Headless-CMS verwendet}
@@ -169,9 +172,17 @@
         \item Andere Arten von CMSes generieren statische HTML Seiten, welche für Relaxoon gar nicht gebraucht werden,
               da Relaxoon eine mobile App ist.
         \item Die Firma Solvistas beschäftigt sich intensiv mit Data Science. Da man auf das CMS mittels REST zugreifen kann,
-              will Solvistas in der Zukunft ein Datenzentrum aus diesem erstellen. 
+              will Solvistas in der Zukunft ein Datenzentrum aus diesem erstellen.
               Zusätzlich wird das CMS für Data Science Zwecke verwendet.
     \end{itemize}
+
+    \subsection{Warum Strapi und nicht Storyblok}
+    \subsubsection{Was ist Storyblok}
+    ''Storyblok ist ein Headless-CMS und die erste Wahl für ein modernes,
+    responsives und flexibles Content-Management-System.
+    Dieses CMS ermöglicht ein schnelles und einfaches reagieren auf stetig wachsende Anforderungen.
+    Ausserdem können Inhalte leicht an unterschiedliche Endgeräte angepasst werden.''
+    \cite{storyblok}
     \subsection{Warum Strapi und nicht Wordpress \textbf{Ap}plication \textbf{I}nterface (API)}
 
 
@@ -225,7 +236,7 @@
         \hline
         Security max.30\%           & 30\%   & 15\%          \\
         \hline
-        Flexibilität max. 30\%         & 30\%   & 15\%          \\
+        Flexibilität max. 30\%      & 30\%   & 15\%          \\
         \hline
         Community Support max. 30\% & 10\%   & 25\%          \\
         \hline
@@ -237,6 +248,39 @@
 
 
 \end{spacing}
+
+\section{Headless-CMS vs. ein selbst geschriebener Server}
+
+\subsection{Vorteile von einem Headless-CMS}
+Man ist mit einem Headless-CMS viel schneller als wie bei einem selbst geschriebenen Server,
+da alle CRUD Operationen auf der Datenbank und auf der API Ebene automatisch generiert werden. Man braucht auch ein minimales technisches Wissen, um das Ganze zu bedienen.
+Der Umstieg auf einer anderen Datenbank wie zum Beispiel von PostgreSQL auf Mongo oder umgekehrt
+oder auch auf eine andere Networking Technologie wie REST und Graphql
+ist nichts anders als eine kleine Änderung in den Konfigurationen von einem Headless CMS.
+Bei einem REST-Server ist dieser Umstieg meistens sehr anstrengend und könnte dazu führen,
+dass man den kompleten Codebase ändern soll, da man den Code nicht sauber strukturiert hat.
+Außerdem gibt es bei einem Headless-CMS eine fertige implementierte JWT Authentifizierung
+zusätzlich zu den fertigen Authroisierungsschnittstellen,
+File Upload und die Optimierung der hochgeladeten Bilder.
+Diese Art von CMS verfügt auch über eine Oberfläche,
+wo die Inhalte sehr einfach eingespielt werden können.
+
+\subsection{Nachteile von einem Headless-CMS}
+
+Die Wartbarkeit davon ist sehr schwierig und speziell bei einem Update. Dabei muss man auch vieles ändern bzw. umkonfigurieren.
+Es ist auch meistens nicht zu leicht, das System zu erweitern und man kann nicht jede einzelne Funktionalität in dem System anpassen.
+
+\subsection{Vorteile von einem selbst geschriebenen Server}
+Man kann das System beliebig erweitern und die Wartbarkeit von diesem ist viel leichter, wenn man die richtige Technologie verwendet.
+
+\subsection{Nachteile von einem selbst geschriebenen Server}
+Man muss sich in mindestens einer Programmiersprache und eine Datenbank gut auskennen,
+um eine vernünftige API zu schreiben.
+Außerdem ist eine Erfahrung in Strukturierung einer API bzw. ein großer Codebase notwendig.
+Daher sind gute Kenntnisse bei dem Thema Design Patterns, unterschiedliche Programmierparadigmen und unterschiedliche Guidlines wie z.B.: The Clean Architecture oder The Solid Principles sehr wichtig. Man muss sich auch an gewissen Scurm und Projektmanagement Regeln sowie REST-Guidlines oder Guidlines der verwendeten Programmiersprache auch halten.
+
+
+Man kann nach diesem Vergleich sagen, dass man sich für einen REST-Server entscheiden soll, nur wenn das Projekt für mehrere Jahren existieren wurde. Man soll sich auch für diesen entscheiden, wenn die ''Business Logic'' bei einem höhnen Komplexitätslevel liegt.
 
 \section{Component Library}
 Der Standardweg, um UI-Elementen in React Native zu stylen, is JSS. Diese ist eine Technologie, wo man \textbf{C}ascading \textbf{S}tyle \textbf{S}heet (CSS)

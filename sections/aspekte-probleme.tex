@@ -19,14 +19,19 @@
     um Daten aus HTTP-Quellen oder aus dem localhost zu holen.
     Als Lösung wurde in der lokalen Entwicklung eine \textbf{C}ommand \textbf{L}ine \textbf{I}nterface (CLI) namens "ngrok" verwendet,
     welche den lokalen Port des Servers in das Internet mittels eines Tunnels weiterleitet
-    und eine HTTPS-Adresse für den weitergeleiteten Server generiert.
+    und eine HTTPS-Adresse für den weitergeleiteten Server generiert. Somit schaut die Verbindung zwischen Client und Server wie folgendes aus:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{./pics/https-dev}
+        \caption{ngrok}
+    \end{figure}
 
-    Das Problem tauchte wiederholt in der Testphase auf und war für die Entwickler nicht lösbar,
-    da der Staging Server für das Backend von Relaxoon auf den Servern der Solvistas deployed ist.
-    Die Entwickler verfügen über keine Zugriffsrechte auf diesem Server.
-    Das Problem wurde mithilfe von den Netzwerkadministratoren von Solvistas gelöst.
-    Es wurde ein ''Let's-encrypt-Zertifikat'' für den Staging Server eingebaut.
-
+    Das Problem tauchte wiederholt in der Testphase auf. Als Lösung hat sich das Team dieses mal ein Zertifkat besorgt. Nach dem Einbauen dieses Zertifkates hat sich die Verbindung zwischen Client und Server um einiges verändert. Diese schaut in dem produktiven System wie folgendes aus:
+    \begin{figure}[H]
+        \centering
+        \includegraphics*[width=\textwidth]{./pics/https.png}
+        \caption{HTTPS in prod}
+    \end{figure}
 
 
 
@@ -231,6 +236,11 @@
 
     \section{Probleme mit dem Datenmodell}
     Nach der Realisierung wurde herausgestellt, dass das ERD doch um einiges verbessert werden kann. In dem folgenden Bild ist das neue Design von dem verbesserten ERD zu finden.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{./pics/new-erd}
+        \caption{new erd}
+    \end{figure}
 
     Die Vorteile dieser Verbesserungen liegen dabei, dass man alle Arten von Medien nur mit einer einzigen SQL-Query abfragen kann. Außerdem ist die Komplexität um einiges reduziert, da nicht jede Medienart eine Beziehung zu den Tags und Kategorien hat.
     Vorher waren zwei Queries nötig, um alle Arten der Medien abzufragen.

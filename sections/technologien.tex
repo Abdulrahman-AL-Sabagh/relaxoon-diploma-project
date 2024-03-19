@@ -15,19 +15,20 @@ sehr einfach erstellbar.
 Für die Entwickler werden folgende Funktionalitäten:
 
 \begin{itemize}
-    \item Fertige REST-Schnittstellen
-    \item Qraphql Schnittstellen
-    \item Eine Benutzeroberfläche, wo die Struktur und das Datenmodell einer Datenbank definieren kann
-    \item Eine eingebaute JWT Authentifizierung
-    \item File Upload
-    \item Query Engine API
-    \item Entity Service API
-    \item Internationalisierungsplugin
-    \item Plugin Store, wo man sehr viele hilfreiche Plugins wie zum Beispiel OpenAPI installieren kann
-    \item Authorisierung und Rollenmanagement
+  \item Fertige REST-Schnittstellen
+  \item Qraphql Schnittstellen
+  \item Eine Benutzeroberfläche, wo die Struktur und das Datenmodell einer Datenbank definieren kann
+  \item Eine eingebaute JWT Authentifizierung
+  \item File Upload
+  \item Query Engine API
+  \item Entity Service API
+  \item Internationalisierungsplugin
+  \item Plugin Store, wo man sehr viele hilfreiche Plugins wie zum Beispiel OpenAPI installieren kann
+  \item Authorisierung und Rollenmanagement
 \end{itemize}
 
 \subsection{REST-Schnittstellen}
+\label{subsec:rest}
 Für jedes Model werden die benötigten GET, POST, PUT und DELETE REST-Schnittstellen per default erstellt.
 Jede Enpoint unterstützt auch eine Menge von unterschiedlichen Parametern, welche den Aufbau von dem Responsebody steuern können wie zum Beispiel.: filters, populate  und fields.
 \cite{rest-query-parameters}
@@ -35,9 +36,9 @@ Jede Enpoint unterstützt auch eine Menge von unterschiedlichen Parametern, welc
 
 Mit der Verwendung dieser Oberfläche kann man folgende Elemente erstellen:
 \begin{itemize}
-    \item Collection Types
-    \item Single Types
-    \item Components
+  \item Collection Types
+  \item Single Types
+  \item Components
 \end{itemize}
 
 \subsubsection{Collection Types}
@@ -53,10 +54,10 @@ Stattdessen werden die spezielle Typen in einer anderen Tabelle gespeichert, wel
 Folgende Datentypen  werden von Strapi zur Verfügung gestellt:
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./pics/datatypes}
-    \caption{Datentypen}
-    \label{datatypes}
+  \centering
+  \includegraphics[width=\textwidth]{./pics/datatypes}
+  \caption{Datentypen}
+  \label{datatypes}
 \end{figure}
 
 Die Relationen zu anderen 'Collection Types' werden von Strapi als ein Datentyp interpretiert.
@@ -65,23 +66,25 @@ Bei den 'Many to Many' Beziehungen ist die Erstellung von einem zusätzlichen Co
 Die Assoziationstabellen werden von Strapi im Hintergrund erstellt.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./pics/relations}
-    \caption{Relationen}
-    \label{relations}
+  \centering
+  \includegraphics[width=\textwidth]{./pics/relations}
+  \caption{Relationen}
+  \label{relations}
 \end{figure}
 
 
-Zusätzlich zu der Erstellung von Spalten, haben Collection Types auch eine eingebaute Validierung, die man aktivieren kann.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./pics/validation.png}
-    \caption{validation}
-    \label{validation}
+\begin{figure}
+
+  Zusätzlich zu der Erstellung von Spalten, haben Collection Types auch eine eingebaute Validierung, die man aktivieren kann.
+  \centering
+  \includegraphics[width=\textwidth]{./pics/validation.png}
+  \caption{validation}
+  \label{validation}
 
 \end{figure}
 
 \subsubsection{Single Types}
+\label{single-types}
 'Single types are content-types that can only manage one entry'
 \cite{collection-types}
 
@@ -125,8 +128,8 @@ Es gibt auch andere Standardeinstellungen für File Uplaod wie zum Beispiel die 
 
 Für den Content-Manager
 \begin{itemize}
-    \item Eine Oberfläche, wo die Inhalte eingepflegt werden können
-    \item Eine Media Library
+  \item Eine Oberfläche, wo die Inhalte eingepflegt werden können
+  \item Eine Media Library
 \end{itemize}
 
 Es aber noch anzumerken, dass diese Oberfläche nur im Dev Mode funktionieren kann. In der produktiven Umgebung sind werden die Struktur der Datenbank zwar angezeigt. Diese ist aber nicht editierbar.

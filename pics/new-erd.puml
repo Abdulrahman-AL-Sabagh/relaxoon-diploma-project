@@ -1,22 +1,80 @@
 @startuml
-entity User {}
-entity Favorite {}
-entity Media {}
-entity Tag {}
-entity Category {}
-entity ContentCategory {}
-entity Article {}
-entity BinaryMedia {}
-entity TutorialPage {}
-entity Info {}
-entity Help {}
-entity Tag  {}
-entity MediaTag {}
+
+entity User {
+
+Id: integer <<generated>>
+username: varchar(255)
+email: varchar(255)
+password: varchar(255)
+
+}
+
+
+entity Favorite {
+id: integer <<generated>>
+userId: integer <<FK>>
+}
+entity Media {
+id: integer <<generated>>
+}
+entity Category {
+
+Id: integer <<generated>>
+bg_color: varchar(255)
+name: varchar(255)
+bg_image: varchar(255)
+
+}
+
+
+entity ContentCategory {
+categoryId: integer <<FK>>
+mediaId: integer <<FK>>
+}
+entity Article {
+
+id: integer <<generated>> <<FK>>
+title: varchar(255)
+bg_media: varchar(255)
+content: rich_text
+
+}
+entity BinaryMedia {
+id: integer <<generated>> <<FK>>
+title: varchar(255)
+description: text
+favoriteId: integer <<FK>>
+}
+entity TutorialPage {
+Id: integer <<generated>>
+image: bytea
+title: varchar(255)
+}
+
+
+entity Info {
+id: integer <<generated>>
+infotext: text
+}
+entity Help {
+id: integer <<generated>>
+helptext: text
+}
+
+entity Tag {
+id: integer <<generated>>
+name: varchar(255)
+
+}
+entity MediaTag {
+tagId: integer <<FK>>
+mediaId: integer <<FK>>
+}
 
 User "1" -- "*" Favorite
 Favorite "*" --  "1" Media
-Media"0..*" -- "1" Article
-Media "0..*" -- "1" BinaryMedia
+Media"1" -- "0..1" Article
+Media "1" -- "0..1" BinaryMedia
 Media "1" -- "*" ContentCategory
 ContentCategory "*" --  "1" Category
 Tag "1" -- "*" MediaTag

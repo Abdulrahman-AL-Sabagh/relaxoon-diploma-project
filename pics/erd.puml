@@ -26,14 +26,13 @@ content: text
 
 entity TutorialPage {
 Id: integer <<generated>>
-image: bytea
+
 title: varchar(255)
 }
 
 entity Media {
 Id: integer <<generated>>
 title: varchar(255)
-file: bytea
 description: text
 favoriteId: integer <<FK>>
 }
@@ -41,8 +40,6 @@ favoriteId: integer <<FK>>
 entity Favorite {
 id: integer <<generated>>
 userId: integer <<FK>>
-
-
 }
 
 entity MediaTag {
@@ -70,8 +67,6 @@ entity Content_Category {
 categoryId: integer <<FK>>
 articleId: integer <<FK>>
 mediaId: integer <<FK>>
-
-
 }
 
 entity Help {
