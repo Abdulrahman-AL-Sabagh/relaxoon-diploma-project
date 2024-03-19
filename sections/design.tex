@@ -117,13 +117,36 @@ aufscheint.
 
 \section{Home-Screen}
 
+Auf dem Home-Screen ist links oben ein Bereich zu sehen, wo der zuvor eingegebene Username dargestellt wird. Bei drücken
+auf das Symbol rechts
+oben gelangt man zu den Einstellungen. (siehe Kapitel \ref{chapter:einstellungen})
+
+Unterhalb davon werden eingepflegte Medien vom Backend mit Thumbnail, Titel und einer gekürzten Beschreibung angezeigt.
+Auf der Oberfläche ganz unten befindet sich die Navigationsleiste, mit der man zwischen den unterschiedlichen Screens 
+navigieren kann.
+
+
 \begin{figure}[H]
-    \centering
-    \includegraphics[height=\textwidth]{./pics/Home.jpg}
-    \caption{Home-Screen}
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[height=2\textwidth]{./pics/pHome.png}
+        \caption{Home-Screen UI-Prototyp}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[height=2\textwidth]{./pics/Home.jpg}
+        \caption{Home-Screen in der App}
+    \end{minipage}
 \end{figure}
 
 \section{Kategorien}
+
+Wenn man in der Navigationsleiste unten auf ''Media'' tippt, wird man zu einer Übersicht von Kategorien weitergeleitet.
+Hier befindet sich am oberen Rand des Bildschirms die Suchleiste (siehe Kapitel \ref{chapter:suchleiste}) und darunter
+werden alle im Backend eingepflegten Kategorien angezeigt. Jede Kategorie hat eine Box, in der der Name der Kategorie
+und das Hintergrundbild zu sehen ist.
+
+Durch das Auswählen einer Kategorie kommt man auf die Unterseite, wo die dazugehörigen Medien aufgelistet werden. 
 
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
@@ -138,28 +161,38 @@ aufscheint.
     \end{minipage}
 \end{figure}
 
+\newpage
+
+Auf der Kategorie-Unterseite befindet sich links oben der ''Zurück-Button''. Dieser leitet den/die User:in wieder 
+zurück auf den vorher dargestellten Screen.
+
+Weiters ist der Titel der Kategorie und das Hintergrundbild zu sehen. Darunter werden, wie oben bereits erwähnt, die
+dazugehörigen Medien mit Thumbnail, Titel und einer gekürzten Beschreibung aufgelistet.
+
+Rechts daneben ist noch ein 
+Stern zu sehen, mit dem man ein Medium als Favorit markieren kann. (siehe Kapitel \ref{chapter:favoriten})
+
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[height=2\textwidth]{./pics/pKategorie.png}
-        \caption{Kategorien UI-Prototyp}
+        \caption{Unterseite UI-Prototyp}
     \end{minipage}
     \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[height=2\textwidth]{./pics/Kategorie.jpg}
-        \caption{Kategorie in der App}
+        \caption{Unterseite in der App}
     \end{minipage}
 \end{figure}
 
-\section{Suchleiste}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=\textwidth]{./pics/Suche.jpg}
-    \caption{Suchleiste}
-\end{figure}
-
 \section{Media Player}
+
+Wenn man ein Video auswählt, wird man zum Media Player weitergeleitet. Dieser bietet die
+Funktionen ein Video abzuspielen, zurückzuspulen und vorzuspulen. Man kann das Video auch vergrößern und sich auf dem
+Smartphone waagrecht anschauen.
+
+Unter dem Media Player ist der Titel, der Stern zum Markieren eines Favoriten und die Beschreibung abgebildet.
+Wenn man ein Video als Favorit markiert, wird der Stern ausgefüllt.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
@@ -174,13 +207,37 @@ aufscheint.
     \end{minipage}
 \end{figure}
 
-\section{Favoriten}
+\newpage
+
+\section{Suchleiste}\label{chapter:suchleiste}
+
+Mit der Suchleiste kann man direkt nach einem Video suchen. Wenn man auf das vorgeschlagene Ergebnis tippt, wird man
+direkt zum Media Player weitergeleitet.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=\textwidth]{./pics/Suche.jpg}
+    \caption{Suchleiste}
+\end{figure}
+
+\newpage
+
+\section{Favoriten}\label{chapter:favoriten}
+
+Die favorisierten Medien werden auf der ''Saved-Page'' aufgelistet, die man in der Navigationsleiste findet.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=\textwidth]{./pics/pFavoriten.png}
     \caption{Favoriten UI-Prototyp}
 \end{figure}
+
+\newpage
+
+Wenn man als User:in noch keinen Favoriten gesetzt hat, erscheint die Nachricht: ''You have no favorites yet''.
+
+Einen Favoriten kann man direkt auf der Favoritenseite durch das Antippen des Sterns wieder löschen, oder auch wenn
+man im Media Player auf den ausgefüllten Stern tippt. 
 
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
@@ -195,7 +252,14 @@ aufscheint.
     \end{minipage}
 \end{figure}
 
-\section{Einstellungen}
+\newpage
+
+\section{Einstellungen}\label{chapter:einstellungen}
+
+In den Einstellungen ist neben dem ''Zurück-Button'' auch ein Schalter zu finden, mit dem man das Aussehen von Relaxoon
+verändern kann. Es wird zwischen Light Mode und Dark Mode unterschieden. (siehe Kapitel \ref{chapter:modes})
+
+Eine Info- und Helpfunktion sind auch verfügbar.
 
 \begin{figure}[H]
     \centering
@@ -203,44 +267,55 @@ aufscheint.
     \caption{Einstellungen in der App}
 \end{figure}
 
-\section{Light/Dark Mode}
+\newpage
+
+\section{Light/Dark Mode}\label{chapter:modes}
+
+Der Light Mode und Dark Mode bieten dem Benutzer die Möglichkeit, das Erscheinungsbild der App entsprechend der eigenen
+Vorlieben oder den Umgebungsbedingungen anzupassen. Im Anschluss sind Screenshots von Relaxoon im Dark Mode abgebildet.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=1.4\textwidth]{./pics/dHome.jpg}
+        \includegraphics[height=2\textwidth]{./pics/dHome.jpg}
         \caption{Dark Home-Screen}
     \end{minipage}
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=1.4\textwidth]{./pics/dKategorie.jpg}
+        \includegraphics[height=2\textwidth]{./pics/dKategorie.jpg}
         \caption{Dark Kategorie-Screen}
     \end{minipage}
 \end{figure}
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=1.4\textwidth]{./pics/dMedia.jpg}
+        \includegraphics[height=1.9\textwidth]{./pics/dMedia.jpg}
         \caption{Dark Media-Screen}
     \end{minipage}
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=1.4\textwidth]{./pics/dSettings.jpg}
+        \includegraphics[height=1.9\textwidth]{./pics/dSettings.jpg}
         \caption{Dark Settings-Screen}
     \end{minipage}
 \end{figure}
 
+\newpage
+
 \section{Logo}
+
+Das Logo von Relaxoon besteht aus den beiden Buchstaben 'o', die stilisiert dargestellt sind. 
+Es wird sowohl als App-Icon verwendet als auch im Google Play Store und im App Store angezeigt werden. Es gibt zwei 
+Varianten des Logos: eine in Weiß und eine in Schwarz. Diese sind unten zu sehen.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=0.6\textwidth]{./pics/Relaxoon Logo White.jpg}
-        \caption{Logo white}
+        \includegraphics[height=0.8\textwidth]{./pics/Relaxoon Logo White.jpg}
+        \caption{Logo in Weiß}
     \end{minipage}
     \begin{minipage}{0.5\textwidth}
         \centering
-        \includegraphics[height=0.6\textwidth]{./pics/Relaxoon Logo Black.jpg}
-        \caption{Logo black}
+        \includegraphics[height=0.8\textwidth]{./pics/Relaxoon Logo Black.jpg}
+        \caption{Logo in Schwarz}
     \end{minipage}
 \end{figure}
