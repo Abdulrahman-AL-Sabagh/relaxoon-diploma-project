@@ -1,7 +1,7 @@
 @startuml
 left to right direction
 node IOS {
-  file native_ios_app
+  file native_IOS_app
 }
 
 node Android {

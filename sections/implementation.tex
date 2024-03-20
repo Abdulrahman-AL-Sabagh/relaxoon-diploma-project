@@ -1,37 +1,35 @@
 \setauthor{Abdulrahman Al Sabagh}
 \section{\textbf{E}ntity \textbf{R}elationship \textbf{D}iagram (ERD)}
-\begin{spacing}{1}
 
-  \begin{figure}[H]
-    \centering
-    \includegraphics[height=1\textwidth]{./pics/erd.png}
-    \caption{ERD}
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=1\textwidth]{./pics/erd.png}
+  \caption{ERD}
 
-  \end{figure}
-\end{spacing}
+\end{figure}
 
 \section{Wie werden Files gespeichert?}
 Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für die folgenden Informationen gefunden. Daher untersuchten die Entwickler das Datenmodell von  Strapi.
 Man sieht oben in dem ERD,
 dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen von den Files wie zum Beispiel Größe, Name und Auflösung in einer Tabelle namens ''files''.
-Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird der Name des Models gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das Id von dem Element, welches einen Zugriff auf die Datei benötigt wird auch in dieser Tabelle gespeichert. Das Id wird mit den dazugehörigen Elementen allerdings nciht referenziert.
+Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird der Name des Models gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das Id von dem Element, welches einen Zugriff auf die Datei benötigt wird auch in dieser Tabelle gespeichert.
 Der Client kann dann die Files erst erhalten, wenn er das Parameter ''populate=file'' bei dem REST-Request daran hängt. Strapi manipuliert dann die Ergebnisse, sodass die gefragten Daten z.B.: Medias und die zugehörige Dateien eines Mediaelements im Responsebody zurückgeschickt werden können.
 
 \section{Medias und Articles}
 
 Grundsätzlich wurde als Team entschieden,
-die Artikel und die Medien in zwei seperaten Tabellen zu speichern,
-da Artikel mehrere Bilder, Videos und Audios Inhalte enthalten können.
+die Artikel und die Medien in zwei separaten Tabellen zu speichern,
+da Artikel mehrere Bilder, Videos und AudIOS enthalten.
 Diesen können dann mittels einem ''Rich Text Editor'' hinzugefügt werden.
 Bei ''Media'' handelt es sich nur um ein Medienelement,
 nämlich ein Bild, Video oder Audio File. Es ist aber wichtig anzumerken,
-dass keine Benutzeroberfläche für die Artikel implementiert wurde, da der Kunde
+dass keine Benutzeroberfläche für die Artikel implementiert wurde, da der Auftraggeber
 diese nicht in dem \textbf{M}inimal \textbf{V}iable \textbf{P}roduct (MVP) haben wollte.
-Für die Realisierung des kompletten Datenmodels war aber das Einfügen der Artikel erforderlich.
+Für die Realisierung des kompletten Datenmodells war aber das Einfügen der Artikel erforderlich.
 
 \section{TutorialPage}
 \label{Tutorial-Page}
-Die Entität ''TutorialPage'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt des Tutorial-Slideshows,
+Die Entität ''TutorialPage'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt der Tutorial-Slideshow,
 die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
 
 \begin{figure}[H]
@@ -43,7 +41,7 @@ die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
 Das Team hat sich entschlossen, die Daten von dem Slideshow in einer Tabelle zu speichern.
 Eine alternative Lösungsmöglichkeit besteht darin, die Daten des Slideshows in der Applikation hard zu codieren.
 Das Team hat sich für die Persestierung der Daten entschieden, damit das Einpflegen der Inhalte nicht über die Applikation erfoglt.
-Wenn das Team sich für die alternative Lösungsvariante entschieden hätte, müsste bei jeder kleinen Änderung ein neuer Android- bzw. iOS-Build erstellt werden.
+Wenn das Team sich für die alternative Lösungsvariante entschieden hätte, müsste bei jeder kleinen Änderung ein neuer Android- bzw. IOS-Build erstellt werden.
 
 \section{Suche und Filterungen}
 
@@ -53,7 +51,7 @@ und diese dann bei den REST Abfragen anzuhängen (Siehe \ref{subsec:rest} für m
 Es gibt auch die Möglichkeit, die REST-Ressource im Backend mittels der
 ''Query Engine API'' oder mit dem Einstaz von der ''Entity Service API'' anzupassen.
 Allerdings wurden die Rückgabedaten von der Endpoint gar nicht umgestellt,
-da die Dokumentation bzw. Intellisense von der ''Query Engine API'' bzw. ''Entity Service API'' sehr ungenau waren.
+da die Dokumentation bzw. Intellisense  des ''Query Engine API'' bzw. ''Entity Service API'' sehr ungenau waren.
 
 
 \begin{lstlisting}[caption=Code von Interactive Query Builder]
@@ -100,13 +98,11 @@ werden sie im Responsebody zurückgegeben.
 Die Groß und Kleinschreibung wird dabei gar nicht beachtet.
 
 
-\begin{spacing}{1}
-  \textbf{API-Route mit den angehängten generierten Abfrageparametern}:
-  \newline
-  \textcolor{red}{/medias?\&populate[tags]=true
-  \&populate[file]=true
-  \&populate[favorite][populate]=\newline users\_permissions\_user}
-\end{spacing}
+\textbf{API-Route mit den angehängten generierten Abfrageparametern}:
+\newline
+\textcolor{red}{/medias?\&populate[tags]=true
+\&populate[file]=true
+\&populate[favorite][populate]=\newline users\_permissions\_user}
 
 Damit man sicherstellt, ob die generierten Parameter richtig sind, wurde folgende Ansicht von Postman verwendet:
 \begin{figure}[H]
@@ -118,43 +114,38 @@ Damit man sicherstellt, ob die generierten Parameter richtig sind, wurde folgend
 
 
 \section{State Management}
-\begin{quotation}
-  ``
-  Der Begriff State ist in React-Applikationen überall präsent. Generell
-  bezeichnet State den Zustand einer Komponente,
-  also die dynamischen Daten, die eine Komponente den Benutzer:nnen anzeigt.
-  Eine Änderung am State führt dazu, dass die Komponente neu gerendert wird
-  und so die Datenänderung für die Benutzer:in sichtbar wird.
-  Im einfachsten Fall verwaltet jede Komponente ihren eigenen State.
-  Es gibt Fälle, in denen es jedoch erforderlich wird,
-  den State zwischen mehreren Komponenten zu teilen.
-  ''
-  \cite{state-management}
+''Der Begriff State ist in React-Applikationen überall präsent. Generell
+bezeichnet State den Zustand einer Komponente,
+also die dynamischen Daten, die eine Komponente den Benutzer:innen anzeigt.
+Eine Änderung am State führt dazu, dass die Komponente neu gerendert wird
+und so die Datenänderung für die Benutzer:in sichtbar wird.
+Im einfachsten Fall verwaltet jede Komponente ihren eigenen State.
+Es gibt Fälle, in denen es jedoch erforderlich wird,
+den State zwischen mehreren Komponenten zu teilen.
+''
+\cite{state-management}
 
-  Um die Zustände der Applikation zu behandeln wurde meistens mit dem ''useState Hook'' von React gearbeitet.
-  Der Einsatz einer State Management Library wie zum Beispiel ''RXJS'' oder ''Redux'' war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
+Um die Zustände der Applikation zu behandeln wurde meistens mit dem ''useState Hook'' von React gearbeitet.
+Der Einsatz einer State Management Library wie zum Beispiel ''RXJS'' oder ''Redux'' war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
 
-  \subsection{useState Hook}
-  ``useState is a React Hook that lets you add a state variable to your component.'' \cite{useState}
+\subsection{useState Hook}
+``useState is a React Hook that lets you add a state variable to your component.'' \cite{useState}
 
 
-  \section{Dark/Light Mode}
-  Da das Team sich für die Verwendung von der UI-Library ''Native Base'' entschieden hat, war die Realisierung von diesem Feature sehr einfach.
-  Die Komponenten von Native Base haben die Properties \_light und \_dark, wo man die Farbe einer Komponente je nach Modus definieren kann.
-  Native Base verwendet im Hintergrund einen useContext Hook, wo die Modi der Applikation gespeichert werden.
-  \subsection{useContext Hook}
-  \begin{quotation}
-    ''useContext is a React hook that provides a way to share data (context)
-    across multiple components without explicitly passing it through props.
-    It is part of the React Context API, which is built into the React library.
-    '' \cite{useContext}
-
-  \end{quotation}
+\section{Dark/Light Mode}
+Da das Team sich für die Verwendung von der UI-Library ''Native Base'' entschieden hat, war die Realisierung dieses Features sehr einfach.
+Die Komponenten von Native Base haben die Properties \_light und \_dark, sodass man die Farbe einer Komponente je nach Modus definieren kann.
+Native Base verwendet im Hintergrund einen useContext Hook, in dem die Modi der Applikation gespeichert werden.
+\subsection{useContext Hook}
+''useContext is a React hook that provides a way to share data (context)
+across multiple components without explicitly passing it through props.
+It is part of the React Context API, which is built into the React library.
+'' \cite{useContext}
 
 
 
 
-\end{quotation}
+
 
 \section{Help und Info Screen}
 
@@ -162,10 +153,10 @@ Für die gleichen Gründe, welche in dem Unterkapitel \ref{Tutorial-Page} genann
 
 
 \section{Authentifizierung}
-Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der User die App erst verwenden kann, wenn er bereits authentifiziert ist.
-Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der User bereits authentifiziert ist.
-Umzu überprüfen, ob der Nutzer noch eingeloggt ist oder nicht wurde der Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob der Token valid und nicht abgelaufen ist.
-Damit der User auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
+Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der User:in die App erst verwenden kann, wenn er bereits authentifiziert ist.
+Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der User:in bereits authentifiziert ist.
+Um zu überprüfen, ob der Nutzer:in noch eingeloggt ist oder nicht, wurde der Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob der Token valid und nicht abgelaufen ist.
+Damit der User:in auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
 Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \begin{lstlisting}[caption=protected screens]
  
@@ -255,8 +246,8 @@ Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \end{lstlisting}
 
 \section{Validierung}
-Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine Client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
-Für die Client-seitige Validierung wurde eine Library namens ''Zod'' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
+Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
+Für die client-seitige Validierung wurde eine Library namens ''Zod'' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
 \begin{lstlisting}[caption=Validierungsschemen]
  import { z } from 'zod';
 
@@ -271,9 +262,9 @@ export const passwordValidator = z.string().min(6);
 
 \subsection{Allgemeins}
 
-Die Veröffentlichung der Applikation im Play Store und im App Store wurde von dem Team nicht verlangt.
+Die Veröffentlichung der Applikation im Play Store und im App Store wurde vom Team nicht verlangt.
 Das Hochladen der Android-Applikation auf Firebase App Distribution war jedoch eine essentielle Aufgabe.
-Das Backend wurde auf den Servern von den Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
+Das Backend wurde auf den Servern der Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
 % Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
 % Infrastruktur deployen und die Anwendungen
 % als Docker-Images in den Container-Registries von denen speichern.
@@ -305,7 +296,7 @@ Das Backend wurde auf den Servern von den Firmen Solvistas und Macolution deploy
 \end{center}
 \subsection{Deployment von dem Backend auf Minikube}
 
-Damit ein funktionsfähiges Deployment erstellt werden kann sind diese Komponenten zu deployen:
+Damit ein funktionsfähiges Deployment erstellt werden kann, sind diese Komponenten zu deployen:
 \begin{itemize}
   \item Strapi
   \item Datenbank
@@ -315,12 +306,12 @@ Für jede dieser genannten Bauteile des Backends sind Kubernetes (K8S) Deploymen
 
 \subsection{K8S-Konfigurationen für die Datenbank}
 Zusätzlich zu einer Deployment- und Service-Komponente ist für die Sicherung
-von den Credentials der Datenbank eine sogenannte
-Secret-Komponente gebraucht.
+der Credentials der Datenbank eine sogenannte
+Secret-Komponente nötig.
 Für die Vermeidung von Datenverlusten in Fällen
-wie Neustart eines Pods oder die Aktualisierung
-der Konfiguration von dem Pod ist
-das Anglegen einer PersistenceVolume-Komponente sehr dringend
+wie Neustart eines Pods oder für die Aktualisierung
+der Konfiguration des Pods ist
+das Anlegen einer PersistenceVolume-Komponente sehr notwendig.
 Damit das Deployment auf die PersistenceVolume-Komponente zugreifen kann, ist eine sogenannte PersistenceVolumeClaim-Komponente zu definieren.
 
 Für die Konfiguration der Secret-, Service- und Deployment-Komponente wurde die kubectl \textbf{C}ommand \textbf{L}ine \textbf{I}nterface verwendet
@@ -375,7 +366,7 @@ und für die PersistenceVolume-Komponente bzw. die PersistenceVolumeClaim-Kompoe
 
 \subsection{K8S-Konfigurationen für Strapi}
 Für Strapi wird auch eine Secret-Komponente benötigt, da der Server geheime Umgebungsvariablen benötigt.
-Es gibt auch einige.
+
 Damit das Deployment von Strapi erstellt werden kann, muss die Anwendung zuerst in ein Docker Image umgewandelt werden. Dies kann mit der Verwendung des folgenden Dockerfiles erfolgen.
 \begin{lstlisting}[caption=Strapi Dockerfile]
   # Creating multi-stage build for production
@@ -439,7 +430,7 @@ damit die K8S-Deployment-Komponente dieses Image in Einsatz nimmt.
 
 
 \subsection{K8S-Secrets}
-Damit man Umgebungsvariablen in einem K8S-Cluster definieren kann gibt es zwei Möglichkeiten.
+Damit man Umgebungsvariablen in einem K8S-Cluster definieren kann, gibt es zwei Möglichkeiten.
 Man kann entweder eine ConfigMap-Komponente verwenden oder eine Secret-Komponente. Es gibt auch die Möglichkeit, diese Umgebungsvariablen direkt in den Konfigurationen von der Deployment-Komponente händisch einzutragen.
 Für geheime bzw. sensible Daten werden K8S-Secrets verwendet.
 Das Anlegen der benötigten Secrets für unsere Anwendung erfolgte durch die Verwendung folgender Befehle:
@@ -476,7 +467,7 @@ kubectl create secret generic  strapi-secret \
 
 \subsection{Was ist eine Deployment-Komponente}
 
-Eine Deployment-Komponente dient dazu, dass ein Pod erstellt wird und die benötigten Resourcen bzw. Volumes und Zugriffsrechten
+Eine Deployment-Komponente dient dazu, dass ein Pod erstellt wird und die benötigten Ressourcen bzw. Volumes und Zugriffsrechte
 dafür definiert werden.\cite{k8s-deployment}
 
 Für das Anlegen einer Deployment-Komponente muss man zuerst die Anwendung containerisieren.
@@ -492,19 +483,15 @@ kubectl create deployment relaxoon-strapi --image=ghcr.io/Abdulrahman-AL-Sabagh/
 
 
 \subsubsection{Was ist ein Pod}
-
-\begin{quotation}
-  ``
-  Ein Pod (übersetzt Gruppe/Schote, wie z. B. eine Gruppe von Walen oder eine Erbsenschote)
-  ist eine Gruppe von einem oder mehreren Containern mit gemeinsam genutzten Speicher- und
-  Netzwerkressourcen und einer Spezifikation für die Ausführung der Container.
-  Die Ressourcen eines Pods befinden sich immer auf dem gleichen (virtuellen) Server,
-  werden gemeinsam geplant und in einem gemeinsamen Kontext ausgeführt.
-  Ein Pod modelliert einen anwendungsspezifischen ''logischen Server'': Er enthält eine oder mehrere
-  containerisierte Anwendungen, die relativ stark voneinander abhängen.
-  ''
-  \cite{pod}
-\end{quotation}
+''Ein Pod (übersetzt Gruppe/Schote, wie z. B. eine Gruppe von Walen oder eine Erbsenschote)
+ist eine Gruppe von einem oder mehreren Containern mit gemeinsam genutzten Speicher- und
+Netzwerkressourcen und einer Spezifikation für die Ausführung der Container.
+Die Ressourcen eines Pods befinden sich immer auf dem gleichen (virtuellen) Server,
+werden gemeinsam geplant und in einem gemeinsamen Kontext ausgeführt.
+Ein Pod modelliert einen anwendungsspezifischen ''logischen Server'': Er enthält eine oder mehrere
+containerisierte Anwendungen, die relativ stark voneinander abhängen.
+''
+\cite{pod}
 
 
 
@@ -575,7 +562,7 @@ it to Pods running inside the platform.
 Damit man das Frontend deployt, muss man zuerst den nativen Android und IOS Code generieren.
 Danach sollen die Android bzw. IOS Anwendungen mit einer IDE oder mit der Kommando-Zeile gebaut werden.
 Um den nativen Code zu generieren ist Folgendes einzugeben:
-\begin{lstlisting}[language=Bash,caption=generate android and ios]
+\begin{lstlisting}[language=Bash,caption=generate android and IOS]
 npx expo prebuild
 \end{lstlisting}
 
@@ -585,7 +572,7 @@ npx expo prebuild
 
 \subsection{Erstellung einer .apk Datei}
 Für Android wurde die .\textbf{A}ndroid \textbf{P}ac\textbf{K}age (apk)  mit dem Einsatz von gradle Wrapper generiert.
-Folendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
+Folgendes muss installiert und richtig konfiguriert werden, damit  eine .apk Datei generierbar ist:
 
 
 
@@ -598,7 +585,7 @@ Folendes muss installiert und richtig konfiguriert werden, damit  eine .apk Date
   \item Installation einer CLI namens ''ninja''
 \end{itemize}
 
-Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
+Der Generierungsbefehl für die Build-Datei schaut dann wie folgt aus:
 
 \begin{lstlisting}[language=bash,caption=generate apk]
  ./gradlew assembleRelease
@@ -610,7 +597,7 @@ Der Generierungsbefehl für die Build-Datei schaut dann wie folgendes aus:
 
 \section{Hochladen einer Mobileapp auf Firebase App Distribution}
 
-Nachdem Anlegen eines Accuonts bei Firebase sind folgende und die Erstellung eines Projektes Schritte zu machen:
+Nach dem Anlegen eines Accuonts bei Firebase sind folgende Schritte zu machen:
 
 Damit die benötigten Firebase Services für die Applikationen aktiviert werden, muss man zuerst die benötigten Konfigurationen eingeben.
 \begin{figure}[H]
@@ -628,10 +615,10 @@ Folgende Daten müssen eingegeben werden, damit die Firebase Services für die A
 \end{figure}
 
 Die restlichen Punkte sind für das Projekt Relaxoon irrelevant,
-da die Firebase-SDK in der vorleigende Arbeit nicht eingesetzt wird.
+da die Firebase-SDK in der vorligenden Arbeit nicht eingesetzt wird.
 
 
-Danach soll man  auf die App Distribution gehen und dann auf ''Get Started'' klicken
+Danach soll man auf die App Distribution gehen und dann auf ''Get Started'' klicken.
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase3.png}
   \caption{App Distribution}
@@ -645,8 +632,8 @@ Die App kann mit diesem ''Browser Fenster'' oder mit ''Drag and Drop'' hochgelad
 \end{figure}
 
 
-Das Produkt kann dann an andere Testuser verteilt werden, indem man die Email-Adressen dieser
-Tester beim Release eingibt.
+Das Produkt kann dann an andere Testuser:innen verteilt werden, indem man die Email-Adressen dieser
+Tester:innen beim Release eingibt.
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase5.png}
   \caption{Releases}

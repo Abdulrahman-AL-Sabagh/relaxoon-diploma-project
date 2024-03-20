@@ -2406,7 +2406,7 @@ FUNCTION {default.type}{misc}
 
 
 %%%%%%%%%%%%%%%%%%
-%% MAIN PROGRAM %%
+%% MAIN Programm %%
 %%%%%%%%%%%%%%%%%%
 
 READ

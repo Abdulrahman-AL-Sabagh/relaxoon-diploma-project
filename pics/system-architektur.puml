@@ -6,7 +6,7 @@ node Android {
     file native_android_app
 }
 node IOS {
-    file native_ios_app
+    file native_IOS_app
 }
 
 component ReactNative
