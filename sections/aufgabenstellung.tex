@@ -74,21 +74,13 @@ dargestellt. Um die Übersichtlichkeit zu verbessern, wurde das UCD in zwei Teil
 % actor "Content Manager:in" as ContentManager
 
 %     package "Relaxoon" {
-%         usecase "schaut Medien an" as UC1
-%         usecase "favorisiert Medien" as UC2
+%         usecase "kann Medien abspielen" as UC1
+%         usecase "fügt Medien zu den Favoriten hinzu" as UC2
 %         usecase "sucht nach Medien" as UC3
 %         usecase "sucht nach Tags" as UC31
-%         usecase "erstellt neue Medien" as UC4
-%         usecase "erstellt neue Kategorien" as UC5
-%         usecase "erstellt neue Tags" as UC51
-%         usecase "bearbeitet Medien" as UC6
-%         usecase "bearbeitet Kategorien" as UC7
-%         usecase "bearbeitet Tags" as UC71
-%         usecase "ordnet Medien Kategorien zu" as UC8
-%         usecase "ordnet Tags Medien zu" as UC81
-%         usecase "löscht Medien" as UC9
-%         usecase "löscht Kategorien" as UC10
-%         usecase "löscht Tags" as UC11
+%         usecase "verwaltet Medien" as UC4
+%         usecase "verwaltet Kategorien" as UC5
+%         usecase "verwaltet Tags" as UC51
 %     }
 
 %     Benutzer -- UC1
@@ -98,14 +90,6 @@ dargestellt. Um die Übersichtlichkeit zu verbessern, wurde das UCD in zwei Teil
 %     ContentManager -- UC4
 %     ContentManager -- UC5
 %     ContentManager -- UC51
-%     ContentManager -- UC6
-%     ContentManager -- UC7
-%     ContentManager -- UC71
-%     ContentManager -- UC8
-%     ContentManager -- UC81
-%     ContentManager -- UC9
-%     ContentManager -- UC10
-%     ContentManager -- UC11
 
 % @enduml
 
@@ -132,6 +116,29 @@ Die Verwaltung der einzelnen Elemente wird im nächsten Diagramm genauer beschri
     \includegraphics[height=0.84\textwidth]{./pics/ucd2.png}
     \caption{Use-Case-Diagramm 2}
 \end{figure}
+
+% @startuml
+
+% left to right direction
+% skinparam packageStyle rectangle
+
+% actor "Content Manager:in" as ContentManager
+
+%     package "Relaxoon" {
+%         usecase "erstellt/bearbeitet/löscht Medien" as UC4
+%         usecase "erstellt/bearbeitet/löscht Kategorien" as UC5
+%         usecase "erstellt/bearbeitet/löscht Tags" as UC51
+%         usecase "ordnet Tags Medien zu" as UC81
+%         usecase "ordnet Medien Kategorien zu" as UC8
+%     }
+
+%     ContentManager -- UC4
+%     ContentManager -- UC5
+%     ContentManager -- UC51
+%     ContentManager -- UC8
+%     ContentManager -- UC81
+
+% @enduml
 
 \newpage
 
