@@ -56,13 +56,13 @@ Wichtig dabei ist:
 \section{Use-Case-Diagramm (UCD)}
 
 Für das Relaxoon gibt es im Wesentlichen zwei Hauptakteure: der/die Content-Manager:in und die Benutzer:innen der 
-App. Diese Rollen interagieren mit verschiedenen Funktionen innerhalb der Anwendung, wie in der folgenden Grafik 
-dargestellt.
+App. Diese Rollen interagieren mit verschiedenen Funktionen innerhalb der Anwendung, wie folgendermaßen 
+dargestellt. Um die Übersichtlichkeit zu verbessern, wurde das UCD in zwei Teile aufgeteilt.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=1.3\textwidth]{./pics/ucd.png}
-    \caption{Use-Case-Diagramm}
+    \includegraphics[height=\textwidth]{./pics/ucd1.png}
+    \caption{Use-Case-Diagramm 1}
 \end{figure}
 
 % @startuml
@@ -111,22 +111,35 @@ dargestellt.
 
 \textbf{Benutzer:in}
 \begin{itemize}
-    \item schaut Medien an: kann vorhandene Medien in der Anwendung anzeigen, um sie anzusehen oder zu konsumieren.
-    \item favorisiert Medien: hat die Möglichkeit, bestimmte Medien als Favoriten zu markieren, um schnell auf sie zugreifen zu können.
+    \item kann Medien abspielen: kann vorhandene Medien in der Anwendung anzeigen, um sie anzusehen oder zu konsumieren.
+    \item fügt Medien zu den Favoriten hinzu: hat die Möglichkeit, bestimmte Medien als Favoriten zu markieren, um schnell auf sie zugreifen zu können.
     \item sucht nach Medien: kann in der Anwendung nach bestimmten Medien suchen, indem Suchkriterien eingegeben werden.
     \item sucht nach Tags: kann nach Medien suchen, indem nach bestimmten Tags oder Kategorien gefiltert wird, um gezielt Inhalte zu finden.
 \end{itemize}
 \textbf{Content Manager:in}
 \begin{itemize}
-    \item erstellt neue Medien: kann neue Medien in die Anwendung hochladen und relevante Informationen wie Titel, Beschreibung und Tags eingeben.
-    \item erstellt neue Kategorien: kann neue Kategorien erstellen, um die Medien in der Anwendung besser zu organisieren und zu strukturieren.
-    \item erstellt neue Tags: kann neue Tags erstellen, um die Medien in der Anwendung zu verschlagworten und sie leichter auffindbar zu machen.
-    \item bearbeitet Medien: kann die Informationen zu vorhandenen Medien bearbeiten
-    \item bearbeitet Kategorien: kann bestehende Kategorien bearbeiten, indem ihr Name oder ihre Beschreibung geändert wird.
-    \item bearbeitet Tags: kann vorhandene Tags bearbeiten, um sie zu aktualisieren oder zu korrigieren.
-    \item ordnet Medien Kategorien zu: kann Medien bestimmten Kategorien zuordnen, um ihre Einordnung und Auffindbarkeit in der Anwendung zu verbessern.
+    \item verwaltet Medien: kann Medien verwalten
+    \item verwaltet Kategorien: kann Kategorien verwalten
+    \item verwaltet Tags: kann Tags verwalten
+\end{itemize}
+
+\rule{\linewidth}{0.3pt}
+
+Die Verwaltung der einzelnen Elemente wird im nächsten Diagramm genauer beschrieben.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.84\textwidth]{./pics/ucd2.png}
+    \caption{Use-Case-Diagramm 2}
+\end{figure}
+
+\newpage
+
+\textbf{Content Manager:in}
+\begin{itemize}
+    \item erstellt/bearbeitet/löscht Medien: kann neue Medien in die Anwendung hochladen, vorhandene Medien bearbeiten und nicht mehr benötigte Medien entfernen.
+    \item erstellt/bearbeitet/löscht Kategorien: kann neue Kategorien erstellen, bestehende Kategorien bearbeiten und überflüssige Kategorien löschen.
+    \item erstellt/bearbeitet/löscht Tags: kann neue Tags erstellen, vorhandene Tags bearbeiten und ungenutzte Tags entfernen.
     \item ordnet Tags Medien zu: kann Tags bestimmten Medien zuweisen, um ihre Verschlagwortung und Klassifizierung zu optimieren.
-    \item löscht Medien: kann nicht mehr benötigte Medien aus der Anwendung entfernen, um die Datenbank zu bereinigen und Platz zu schaffen.
-    \item löscht Kategorien: kann überflüssige oder nicht mehr benötigte Kategorien aus der Anwendung löschen, um die Struktur zu vereinfachen.
-    \item löscht Tags: kann ungenutzte oder fehlerhafte Tags aus der Anwendung entfernen, um die Verschlagwortung zu optimieren.
+    \item ordnet Medien Kategorien zu: kann Medien bestimmten Kategorien zuordnen, um ihre Einordnung und Auffindbarkeit in der Anwendung zu verbessern.
 \end{itemize}
