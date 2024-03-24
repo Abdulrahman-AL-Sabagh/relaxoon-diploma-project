@@ -1,10 +1,10 @@
 \section{Prompt-Verlauf}
 
-\textbf{Eingabe:} 
+\textbf{Eingabe:}
 
 Erkläre mir den Unterschied zwischen funktionalen und nicht funktionalen Anforderungen.
 
-\textbf{KI-Modell:} 
+\textbf{KI-Modell:}
 
 Funktionale und nicht-funktionale Anforderungen sind zwei Hauptkategorien von Anforderungen in der Softwareentwicklung und anderen Bereichen des Projektmanagements. Hier sind die grundlegenden Unterschiede zwischen ihnen:
 
@@ -45,3 +45,155 @@ In einem Softwareprojekt sind funktionale Anforderungen eher auf die eigentliche
           \end{enumerate}
     \item Resümee [ME]
 \end{enumerate}
+
+\section{Besprechungsprotokolle}
+
+\subsection{Sprint 2}
+\textbf{Ziel von Sprint \#2 ist: "Erstes Front-End mit Home-Screen gemäß Design. Entwurf der Intro (3 Steps)"}
+Wir haben wegen Ostern etwas weniger Kapazität aber wir bleiben bei den 2 Wochen Sprintdauer.
+
+Werde mich sonst kurz fassen weil die Tasks in YouTrack eh für sich sprechen sollten.
+Zum Rest von Sprint\#1: folgende Stories werden in Sprint \#2 übernommen
+\begin{itemize}
+    \item CMS-Setup Test: das Docker-Image bedarf noch Korrekturen
+    \item App-Setup: die Liste von Videos/Medien fehlt im Gerüst.
+\end{itemize}
+
+
+Diese Stories sollten zuerst abgeschlossen werden bevor man an den neuen Sachen entwickelt (Design-Tasks ausgenommen)
+Ich stell das Protokoll dann versuchsweise auch in die Wissensdatenbank, dann kann man auch diese Sachen gut dort nachlesen.
+
+Wir verwenden ab diesem Sprint auch das Time-Tracking.
+Einfach auch damit wir ein Gefühl dafür bekommen welche Sachen wie lange dauern.
+
+Wenn es Fragen gibt oder Euch etwas auffällt - einfach melden.
+
+Viel Erfolg und auf gute Kommunikation!
+
+\subsection*{Sprint 3}
+
+super Arbeit bis hier - diesesmal war das Ziel wegen den Feiertagen nicht ganz zu erreichen, beim nächsten Mal gibt's sicher schon etwas in der App zu sehen!!
+Gute Besserung Alex - melde Dich kurz bei uns wenn Du wieder fit bist.
+
+Kleiner Nachtrag: bitte wenn möglich ab diesem Sprint auch das YouTrack-Time-Tracking verwenden - hatten wir uns schon zuletzt vorgenommen.
+
+Hier wieder wie gehabt die kurze Zusammenfassung unseres heutigen Meetings zu Review und Planung...
+Ziel von Sprint \#3 ist: "Erstes Front-End mit Home-Screen gemäß Design. Test-System des CMS ist aktiv."
+
+Review Sprint \#2
+
+\begin{itemize}
+    \item das Strapi - CMS als BackEnd ist für die Entwickler in einem Docker-Container mit postgreSQL verfügbar
+    \item der Upload eines Videos in dieses Developer-CMS funktioniert.
+    \item dabei gibt es 2 Stati: "Hochgeladen" (File liegt in der media-library) und "Publiziert" (veröffentlicht, File ist für User sichtbar)
+    \item Hochgeladene Videos können auch publiziert werden.
+    \item Am FrontEnd zeigt im Entwickler-Modus noch keine Liste der verfügbaren Videos, sondern nur eine vereinfachte Darstellung angezeigt. (die Story App-Setup wird daher in Sprint 3 mitgenommen)
+    \item UI-Entwürfe: Michi hat Entwürfe für die Intro und die User-Registrierung gemacht.
+
+\end{itemize}
+
+
+\textbf{Infos und Fragen:}
+
+\begin{itemize}
+    \item über die Kopplung von GitLab und YouTrack wird nochmal nachgedacht
+    \item Termin Abudi und Gerald zum Vergleich der CMS: Gerald macht Terminvorschläge
+    \item YouTrack: wir versuchen zu konfigurieren, dass man mehr als einen Bearbeiter eintragen kann
+    \item Frage: wie soll die Umsetzung des Designs am FrontEnd erfolgen (CSS-Framework j/n?) @Alexander Gratzl ?
+
+
+
+\end{itemize}
+
+\textbf{Planung Sprint \#3:}
+
+\begin{itemize}
+    \item Moritz ist nächste Woche nicht da.
+    \item Beim Design ist aktuell weniger Bedarf weil Michi schon vorgearbeitet hat ("Registrierung")
+    \item Wir planen die restliche Stories von Sprint \#2 + weniger neue Stories für Sprint \#3
+
+
+
+\end{itemize}
+
+Ich stell dann noch den Sprint 3 in YouTrack zusammen und dann kann es losgehen.
+Wenn ihr etwas braucht bitte einfach melden.
+
+\subsection{Sprint 5}
+10. Mai 2023 | Sprint Planung \#5 (online)
+Teilnehmer: Abdulrahman Al Sabagh (Abudi), Alexander Gratzl, andreas weissenboeck, Gerald Holzbauer, Raemo (Moritz Eder), Michael Stenz
+
+Notizen
+
+
+
+Aufgaben
+
+
+
+
+Review Sprint 4
+
+RELAX-25 Datenmodell gesichtet - closed
+RELAX-26 Design Ändern User gesichtet - closed
+
+
+Planung Sprint \#5
+
+Telefonat mit Max -> Schule muss natürlich sein, wir bauen nicht zu viel Backlog auf und bauen auf Euren Willen die Diplomarbeit gut hinzubekommen.
+
+wir übernehmen die beiden Stories RELAX-22 und RELAX-27
+
+Ziel ist es diese Stories bis nächsten Mittwoch zu schaffen.
+
+Weiters kommt in den Backlog:
+\begin{itemize}
+    \item "Story: Config Strapi: ThumbNails für Videos erzeugen"
+    \item "Story: Implementierung Desing-02\_Category-Breathing"
+    \item "Story: Implementierung Design-02\_Favorites-2"
+
+\end{itemize}
+
+Gerald kümmert sich um das Thema “Backlog-Sichtbarkeit für das Entwickler-Team
+
+Next Planning: 23.05. um 16:00 offline (im Büro Graben)
+
+\subsection{Sprint 6 und 7}
+
+Liebes Relaxoon-Team,
+
+wir hatten ja letzten Mittwoch die Sprint-Planung.
+Leider war das noch ohne unser Testsystem aber ich bin optimistisch, dass wir da bald hinkommen.
+
+Ich habe mir heute auch das YouTrack-Time-Tracking angeschaut. Es wäre mir wichtig wenn ihr da auch das Zeit-Tracking nutzt, damit wir auch im Hinblick auf die Diplomarbeit einen Hinweis darauf bekommen wieviele Stories wir in welcher Zeit schaffen (Team-Speed) und auch besser planen können.
+Ihr könnt Euch das beispielhaft bei der Story anschauen - da ist es mMn perfekt...
+https://relaxoon.youtrack.cloud/issue/RELAX-27/Implementierung-Design-Media-Page
+
+Hier wieder wie gehabt die kurze Zusammenfassung unseres letzten Meetings zu Review und Planung...
+\textbf{Ziel von Sprint \#6 ist:} "Wir haben ein Testsystem mit dem man im Sprint-Review die neuen Features sehr gut testen kann und nutzen dabei alle Anwendungsschichten vom FrontEnd bis zur Datenbank."
+
+
+\textbf{Review Sprint \#5}
+\newline
+
+\begin{itemize}
+    \item das Strapi - CMS als BackEnd ist für die Entwickler in einem Docker-Container mit postgreSQL zwar verfügbar, die Nutzung ist aber noch unklar und es ist nicht von aussen erreichbar (wird zeitnah vom Infra-Team nachgebessert)
+    \item mit dem angeglichenen Datenmodell können in Zukunft die Kategorien vom Admin angelegt werden
+    \item die Übersicht der Videos zu einer Kategorie ist am Front-End umgesetzt, es wird jedoch noch kein von Strapi generierter Thumbnail angezeigt (dazu brauchen wir einen kleinen Workshop mit Alex - passiert morgen)
+
+\end{itemize}
+
+\textbf{Planung Sprint \#6+\#7:}
+\newline
+
+\begin{itemize}
+    \item Michael ist von 06.06. abends bis 11.06. nicht verfügbar. Wenn jmd etwas direkt von ihm braucht bitte vorher abklären
+    \item  Aufgrund der Intensität in der Schule und Michis Abwesenheit haben wir uns entschieden die nächsten beiden Sprints zusammenzufassen und erst am 21.06. wieder ein Meeting zu machen. Bitte nutzt den Chat und YouTrack um die Kommunikation aufrecht zu halten.
+
+\end{itemize}
+
+Der Sprint 6 in YouTrack läuft noch bis 07.06.
+Im Backlog sind einige Stories vorbereitet - wenn ihr dort welche in den Sprint ziehen wollt, bitte kurz melden - auch wenn ihr sonst etwas braucht.
+
+Gutes Gelingen!!
+
