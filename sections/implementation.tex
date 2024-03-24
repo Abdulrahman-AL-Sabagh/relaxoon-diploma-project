@@ -9,17 +9,23 @@
 \end{figure}
 
 \section{Wie werden Files gespeichert?}
-Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für die folgenden Informationen gefunden. Daher untersuchten die Entwickler das Datenmodell von  Strapi.
+Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für 
+die folgenden Informationen gefunden. Daher untersuchten die Entwickler das Datenmodell von  Strapi.
 Man sieht oben in dem ERD,
-dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen von den Files wie zum Beispiel Größe, Name und Auflösung in einer Tabelle namens ''files''.
-Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird der Name des Models gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das Id von dem Element, welches einen Zugriff auf die Datei benötigt wird auch in dieser Tabelle gespeichert.
-Der Client kann dann die Files erst erhalten, wenn er das Parameter ''populate=file'' bei dem REST-Request daran hängt. Strapi manipuliert dann die Ergebnisse, sodass die gefragten Daten z.B.: Medias und die zugehörige Dateien eines Mediaelements im Responsebody zurückgeschickt werden können.
+dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen der Files wie zum 
+Beispiel Größe, Name und Auflösung in einer Tabelle namens ''files''.
+Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird 
+der Name des Modells gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das 
+Id des Element, welches einen Zugriff auf die Datei benötigt, wird auch in dieser Tabelle gespeichert.
+Der Client kann dann die Files erst erhalten, wenn er den Parameter ''populate=file'' bei dem REST-Request daran hängt. 
+Strapi manipuliert dann die Ergebnisse, sodass die gefragten Daten, zum Beispiel Medias und die zugehörige Dateien eines 
+Mediaelements im Responsebody, zurückgeschickt werden können.
 
 \section{Medias und Articles}
 
 Grundsätzlich wurde als Team entschieden,
 die Artikel und die Medien in zwei separaten Tabellen zu speichern,
-da Artikel mehrere Bilder, Videos und AudIOS enthalten.
+da Artikel mehrere Bilder, Videos und Audios enthalten.
 Diesen können dann mittels einem ''Rich Text Editor'' hinzugefügt werden.
 Bei ''Media'' handelt es sich nur um ein Medienelement,
 nämlich ein Bild, Video oder Audio File. Es ist aber wichtig anzumerken,
@@ -27,9 +33,9 @@ dass keine Benutzeroberfläche für die Artikel implementiert wurde, da der Auft
 diese nicht in dem \textbf{M}inimal \textbf{V}iable \textbf{P}roduct (MVP) haben wollte.
 Für die Realisierung des kompletten Datenmodells war aber das Einfügen der Artikel erforderlich.
 
-\section{TutorialPage}
+\section{Tutorial-Page}
 \label{Tutorial-Page}
-Die Entität ''TutorialPage'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt der Tutorial-Slideshow,
+Die Entität ''Tutorial-Page'' hat keine Beziehungen zu anderen Entitäten, da sie nur für den Inhalt der Tutorial-Slideshow,
 die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
 
 \begin{figure}[H]
@@ -38,9 +44,9 @@ die nach der erfolgreichen Installation der App angezeigt wird, gedacht ist.
   \caption{Screenshot aus dem UI Prototyp von Relaxoon}
 \end{figure}
 
-Das Team hat sich entschlossen, die Daten von dem Slideshow in einer Tabelle zu speichern.
-Eine alternative Lösungsmöglichkeit besteht darin, die Daten des Slideshows in der Applikation hard zu codieren.
-Das Team hat sich für die Persestierung der Daten entschieden, damit das Einpflegen der Inhalte nicht über die Applikation erfoglt.
+Das Team hat sich entschlossen, die Daten der Slideshow in einer Tabelle zu speichern.
+Eine alternative Lösungsmöglichkeit besteht darin, die Daten der Slideshow in der Applikation hart zu codieren.
+Das Team hat sich für die Persistierung der Daten entschieden, damit das Einpflegen der Inhalte nicht über die Applikation erfolgt.
 Wenn das Team sich für die alternative Lösungsvariante entschieden hätte, müsste bei jeder kleinen Änderung ein neuer Android- bzw. IOS-Build erstellt werden.
 
 \section{Suche und Filterungen}
@@ -49,9 +55,9 @@ Bei den Filterungen wurde der ''Interactive Query Builder'' verwendet,
 um die Filterparameter der Abfragen zu generieren
 und diese dann bei den REST Abfragen anzuhängen (Siehe \ref{subsec:rest} für mehrere Details).
 Es gibt auch die Möglichkeit, die REST-Ressource im Backend mittels der
-''Query Engine API'' oder mit dem Einstaz von der ''Entity Service API'' anzupassen.
-Allerdings wurden die Rückgabedaten von der Endpoint gar nicht umgestellt,
-da die Dokumentation bzw. Intellisense  des ''Query Engine API'' bzw. ''Entity Service API'' sehr ungenau waren.
+''Query Engine API'' oder mit dem Einsatz der ''Entity Service API'' anzupassen.
+Allerdings wurden die Rückgabedaten des Endpoints gar nicht umgestellt,
+da die Dokumentation bzw. IntelliSense des ''Query Engine API'' bzw. ''Entity Service API'' sehr ungenau waren.
 
 
 \begin{lstlisting}[caption=Code von Interactive Query Builder]
@@ -95,7 +101,7 @@ Es wird am Anfang entweder nach der Kategorie, nach dem Tag,
 nach der Beschreibung oder nach dem Titel eines Videos gefiltert.
 Wenn ein oder mehrere Treffer für diese Parameter gefunden werden,
 werden sie im Responsebody zurückgegeben.
-Die Groß und Kleinschreibung wird dabei gar nicht beachtet.
+Die Groß- und Kleinschreibung wird dabei gar nicht beachtet.
 
 
 \textbf{API-Route mit den angehängten generierten Abfrageparametern}:
@@ -118,7 +124,7 @@ Damit man sicherstellt, ob die generierten Parameter richtig sind, wurde folgend
 bezeichnet State den Zustand einer Komponente,
 also die dynamischen Daten, die eine Komponente den Benutzer:innen anzeigt.
 Eine Änderung am State führt dazu, dass die Komponente neu gerendert wird
-und so die Datenänderung für die Benutzer:in sichtbar wird.
+und so die Datenänderung für die Benutzer:innen sichtbar wird.
 Im einfachsten Fall verwaltet jede Komponente ihren eigenen State.
 Es gibt Fälle, in denen es jedoch erforderlich wird,
 den State zwischen mehreren Komponenten zu teilen.
@@ -126,7 +132,7 @@ den State zwischen mehreren Komponenten zu teilen.
 \cite{state-management}
 
 Um die Zustände der Applikation zu behandeln wurde meistens mit dem ''useState Hook'' von React gearbeitet.
-Der Einsatz einer State Management Library wie zum Beispiel ''RXJS'' oder ''Redux'' war gar nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß ist.
+Der Einsatz einer State Management Library wie zum Beispiel ''RXJS'' oder ''Redux'' war nicht nötig, da die Anzahl der verwendeten UI-Komponenten nicht so groß war.
 
 \subsection{useState Hook}
 ``useState is a React Hook that lets you add a state variable to your component.'' \cite{useState}
@@ -149,14 +155,14 @@ It is part of the React Context API, which is built into the React library.
 
 \section{Help und Info Screen}
 
-Für die gleichen Gründe, welche in dem Unterkapitel \ref{Tutorial-Page} genannt wurden, wurden die Daten dieser zwei Ansichten in einem Single Type (Siehe  \ref{single-types}) gespeichert.
+Für die gleichen Gründe, welche im Unterkapitel \ref{Tutorial-Page} genannt wurden, wurden die Daten dieser zwei Ansichten in einem Single Type (Siehe  \ref{single-types}) gespeichert.
 
 
 \section{Authentifizierung}
-Für die Authentifizierung wurde mit Json Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der User:in die App erst verwenden kann, wenn er bereits authentifiziert ist.
-Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der User:in bereits authentifiziert ist.
-Um zu überprüfen, ob der Nutzer:in noch eingeloggt ist oder nicht, wurde der Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob der Token valid und nicht abgelaufen ist.
-Damit der User:in auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolische Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
+Für die Authentifizierung wurde mit JSON Web Token (JWT) gearbeitet. Die Authentifizierungslogik im Server ist im Strapi eingebaut. Für den Client wurde die Logik so umgesetzt, dass der/die User:in die App erst verwenden kann, wenn er bereits authentifiziert ist.
+Die Ansicht fürs Login soll aber nicht angezeigt werden, wenn der/die User:in bereits authentifiziert ist.
+Um zu überprüfen, ob der/die Nutzer:in noch eingeloggt ist oder nicht, wurde der Token im AsyncStorage gespeichert. Dieser ist ähnlich zu dem localStorage in der Webentwicklung. Somit wurde bei der Öffnung der App geprüft, ob der Token valid und nicht abgelaufen ist.
+Damit der/die User:in auf die anderen Screens nicht zugreifen kann, wenn er nicht eingeloggt ist, wurde eine boolsche Zustandsvariable verwendet, welche das LoginScreen als die zweite Ebene unserer Stack-Navigation rendert, wenn der Token invalid oder abgelaufen ist. Die erste Ebene ist für den TutorialScreen reserviert.
 Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \begin{lstlisting}[caption=protected screens]
  
@@ -246,8 +252,8 @@ Im folgenden Codestück ist die ganze Logik der Authentifizierung zu finden:
 \end{lstlisting}
 
 \section{Validierung}
-Strapi an sich hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
-Für die client-seitige Validierung wurde eine Library namens ''Zod'' verwendet. Diese verwendet Builder Pattern um ein Validierungsschema zu bauen.
+Strapi hat eine eingebaute Validierung für Emails und Passwörter. Das Team hat aber eine client-seitige Validierung implementiert, um die Anzahl der Requests zu minimieren und eine bessere UX zu schaffen.
+Für die client-seitige Validierung wurde eine Library namens ''Zod'' verwendet. Diese verwendet Builder Pattern, um ein Validierungsschema zu bauen.
 \begin{lstlisting}[caption=Validierungsschemen]
  import { z } from 'zod';
 
@@ -260,34 +266,11 @@ export const passwordValidator = z.string().min(6);
 
 \section{Deployment}
 
-\subsection{Allgemeins}
+\subsection{Allgemeines}
 
 Die Veröffentlichung der Applikation im Play Store und im App Store wurde vom Team nicht verlangt.
 Das Hochladen der Android-Applikation auf Firebase App Distribution war jedoch eine essentielle Aufgabe.
-Das Backend wurde auf den Servern der Firmen Solvistas und Macolution deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
-% Die Firmen Solivstas und Macolution wollten das Endpordukt auf ihrer eigenen
-% Infrastruktur deployen und die Anwendungen
-% als Docker-Images in den Container-Registries von denen speichern.
-% Da die genannten Firmen keine Zugriffsrechte für das Team organisiert haben,
-% war es für das Team schwierig, beim finalen Deployment mitzumachen. Das Team hat aber die Möglichkeit gehabt,
-% beim Deployment auf dem Stagingsystem mitzuhelfen, da die Software auf einem externen Service, nämlich
-% Firebase App Distribution, hochgeladen wurde.
-% Der Betreuer wurde ebenfalls informiert und er verlangte ein lokales Deployment für das Backend mittels ''Minikube'' sowie ein Live-Demo für die Applikation auf einem Emulator
-
-
-% \subsubsection{Container Registry}
-
-% \begin{quotation}
-%   ``
-%   A container registry is a repository—or collection of repositories—used to store and access container
-%   images. Container registries can support container-based application development,
-%   often as part of DevOps processes.
-%   Container registries can connect directly to container orchestration platforms like Docker and Kubernetes.
-%   ''
-%   \cite{container-registry}
-% \end{quotation}
-
-
+Das Backend wurde auf den Servern der Firmen solvistas und MACOLUTION deployt. Für Demonstrationszwecke wurde ein lokales Deployment auf Minikube erstellt.
 
 
 \subsection{Deployment Diagram}
@@ -305,6 +288,19 @@ Damit ein funktionsfähiges Deployment erstellt werden kann, sind diese Komponen
 Für jede dieser genannten Bauteile des Backends sind Kubernetes (K8S) Deployments und Kubernetes Services zu erstellen.
 
 \subsection{K8S-Konfigurationen für die Datenbank}
+
+Für das Verständnis dieses Kapitels ist es wichtig zu wissen, was ein Pod ist:
+
+''Ein Pod (übersetzt Gruppe/Schote, wie z. B. eine Gruppe von Walen oder eine Erbsenschote)
+ist eine Gruppe von einem oder mehreren Containern mit gemeinsam genutzten Speicher- und
+Netzwerkressourcen und einer Spezifikation für die Ausführung der Container.
+Die Ressourcen eines Pods befinden sich immer auf dem gleichen (virtuellen) Server,
+werden gemeinsam geplant und in einem gemeinsamen Kontext ausgeführt.
+Ein Pod modelliert einen anwendungsspezifischen ''logischen Server'': Er enthält eine oder mehrere
+containerisierte Anwendungen, die relativ stark voneinander abhängen.
+''
+\cite{pod}
+
 Zusätzlich zu einer Deployment- und Service-Komponente ist für die Sicherung
 der Credentials der Datenbank eine sogenannte
 Secret-Komponente nötig.
@@ -431,7 +427,7 @@ damit die K8S-Deployment-Komponente dieses Image in Einsatz nimmt.
 
 \subsection{K8S-Secrets}
 Damit man Umgebungsvariablen in einem K8S-Cluster definieren kann, gibt es zwei Möglichkeiten.
-Man kann entweder eine ConfigMap-Komponente verwenden oder eine Secret-Komponente. Es gibt auch die Möglichkeit, diese Umgebungsvariablen direkt in den Konfigurationen von der Deployment-Komponente händisch einzutragen.
+Man kann entweder eine ConfigMap-Komponente verwenden oder eine Secret-Komponente. Es gibt auch die Möglichkeit, diese Umgebungsvariablen direkt in den Konfigurationen der Deployment-Komponente händisch einzutragen.
 Für geheime bzw. sensible Daten werden K8S-Secrets verwendet.
 Das Anlegen der benötigten Secrets für unsere Anwendung erfolgte durch die Verwendung folgender Befehle:
 \begin{lstlisting}[caption=Secrets für Strapi]
@@ -471,7 +467,7 @@ Eine Deployment-Komponente dient dazu, dass ein Pod erstellt wird und die benöt
 dafür definiert werden.\cite{k8s-deployment}
 
 Für das Anlegen einer Deployment-Komponente muss man zuerst die Anwendung containerisieren.
-Für weit verbreitete Software wie z.B.: PostgreSQL gibt es bereits viele vorhandene Images auf unterschiedliche Container-Registries.
+Für weit verbreitete Software, wie zum Beispiel PostgreSQL, gibt es bereits viele vorhandene Images auf unterschiedliche Container-Registries.
 
 Folgende Befehle wurden verwendet, um die Deployment-Komponenten für Strapi und PostgreSQL zu erstellen:
 
@@ -480,20 +476,6 @@ kubectl create deployment relaxoon-db --image=postgres:12.16-bullseye --port=543
 kubectl create deployment relaxoon-strapi --image=ghcr.io/Abdulrahman-AL-Sabagh/relaxoon-strapi:latest --port=8080
     
 \end{lstlisting}
-
-
-\subsubsection{Was ist ein Pod}
-''Ein Pod (übersetzt Gruppe/Schote, wie z. B. eine Gruppe von Walen oder eine Erbsenschote)
-ist eine Gruppe von einem oder mehreren Containern mit gemeinsam genutzten Speicher- und
-Netzwerkressourcen und einer Spezifikation für die Ausführung der Container.
-Die Ressourcen eines Pods befinden sich immer auf dem gleichen (virtuellen) Server,
-werden gemeinsam geplant und in einem gemeinsamen Kontext ausgeführt.
-Ein Pod modelliert einen anwendungsspezifischen ''logischen Server'': Er enthält eine oder mehrere
-containerisierte Anwendungen, die relativ stark voneinander abhängen.
-''
-\cite{pod}
-
-
 
 
 
@@ -515,6 +497,14 @@ kubectl expose deployments/<Name des Pods> --port=5432
 
 
 \subsection{Erstellung einer Ingress-Komponente}
+
+\subsubsection{Was ist eine Ingress-Komponente}
+``An ingress controller acts as a reverse proxy and load balancer.
+It implements a Kubernetes Ingress.
+The ingress controller adds a layer of abstraction to traffic routing,
+accepting traffic from outside the Kubernetes platform and load balancing
+it to Pods running inside the platform.''
+\cite{ingress}
 
 Damit der Emulator, der sich außerhalb des lokalen Clusters von Minikube befindet,
 mit dem deployten Backend kommunizieren kann,
@@ -545,23 +535,11 @@ spec:
 
 
 
-
-\subsubsection{Was ist eine Ingress-Komponente}
-``
-An ingress controller acts as a reverse proxy and load balancer.
-It implements a Kubernetes Ingress.
-The ingress controller adds a layer of abstraction to traffic routing,
-accepting traffic from outside the Kubernetes platform and load balancing
-it to Pods running inside the platform.
-
-''
-\cite{ingress}
-
 \subsection{Buildprozess für das Frontend}
 
 Damit man das Frontend deployt, muss man zuerst den nativen Android und IOS Code generieren.
 Danach sollen die Android bzw. IOS Anwendungen mit einer IDE oder mit der Kommando-Zeile gebaut werden.
-Um den nativen Code zu generieren ist Folgendes einzugeben:
+Um den nativen Code zu generieren, ist Folgendes einzugeben:
 \begin{lstlisting}[language=Bash,caption=generate android and IOS]
 npx expo prebuild
 \end{lstlisting}
@@ -597,7 +575,7 @@ Der Generierungsbefehl für die Build-Datei schaut dann wie folgt aus:
 
 \section{Hochladen einer Mobileapp auf Firebase App Distribution}
 
-Nach dem Anlegen eines Accuonts bei Firebase sind folgende Schritte zu machen:
+Nach dem Anlegen eines Accounts bei Firebase sind folgende Schritte durchzuführen:
 
 Damit die benötigten Firebase Services für die Applikationen aktiviert werden, muss man zuerst die benötigten Konfigurationen eingeben.
 \begin{figure}[H]
@@ -615,10 +593,10 @@ Folgende Daten müssen eingegeben werden, damit die Firebase Services für die A
 \end{figure}
 
 Die restlichen Punkte sind für das Projekt Relaxoon irrelevant,
-da die Firebase-SDK in der vorligenden Arbeit nicht eingesetzt wird.
+da die Firebase-SDK in der vorligenden Arbeit nicht eingesetzt wurde.
 
 
-Danach soll man auf die App Distribution gehen und dann auf ''Get Started'' klicken.
+Danach geht man auf die App Distribution und klickt auf ''Get Started''.
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase3.png}
   \caption{App Distribution}
@@ -632,7 +610,7 @@ Die App kann mit diesem ''Browser Fenster'' oder mit ''Drag and Drop'' hochgelad
 \end{figure}
 
 
-Das Produkt kann dann an andere Testuser:innen verteilt werden, indem man die Email-Adressen dieser
+Das Produkt kann danach an andere Testuser:innen verteilt werden, indem man die Email-Adressen dieser
 Tester:innen beim Release eingibt.
 \begin{figure}[H]
   \includegraphics[width=\textwidth]{./pics/firebase5.png}

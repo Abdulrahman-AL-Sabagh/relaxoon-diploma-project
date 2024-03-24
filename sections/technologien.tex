@@ -4,35 +4,35 @@ Strapi ist ein Headless \textbf{C}ontent \textbf{M}anagment \textbf{S}ystem (CMS
 welches eine vorgefertigte Benutzeroberfläche für Content-Creator
 und auch für die Entwickler bereitstellt.
 
-Mit der Verwendung davon sind Inhalte und dafür notwendige technische Funktionalitäten
+Durch den Einsatz von Strapi sind Inhalte und dafür notwendige technische Funktionalitäten
 sehr einfach erstellbar.
 \cite{strapi-vs-wordpress}
 
 
-\subsection*{Welche eingebauten Funktionalitäten bietet Strapi für Entwickler und Content-Manager}
+\subsection*{Welche eingebauten Funktionalitäten bietet Strapi für Entwickler und Content-Manager?}
 
 
 Für die Entwickler werden folgende Funktionalitäten zur Verfügung gestellt:
 
 \begin{itemize}
-  \item Fertige REST-Schnittstellen
-  \item Qraphql Schnittstellen
-  \item Eine Benutzeroberfläche, wo die Struktur der Datenbank editiert werden kann
-  \item Eine eingebaute JWT Authentifizierung
+  \item fertige REST-Schnittstellen
+  \item GraphQL Schnittstellen
+  \item eine Benutzeroberfläche, wo die Struktur der Datenbank editiert werden kann
+  \item eine eingebaute JWT Authentifizierung
   \item File Upload
   \item Query Engine API
   \item Entity Service API
   \item Plugin für Internationalisierung
-  \item Plugin Store, wo man sehr viele hilfreiche Plugins wie zum Beispiel OpenAPI installieren kann
-  \item Authorisierung und Rollenmanagement
+  \item Plugin Store, mit dem sehr viele hilfreiche Plugins wie zum Beispiel OpenAPI installieren werden können
+  \item Autorisierung und Rollenmanagement
 \end{itemize}
 
 \subsection{REST-Schnittstellen}
 \label{subsec:rest}
-Für jedes Model werden die benötigten GET, POST, PUT und DELETE REST-Schnittstellen standardmäßig erstellt.
-Jede Endpoint unterstützt auch eine Menge von unterschiedlichen Parametern, welche den Aufbau von dem Responsebody steuern können wie zum Beispiel.: filters, populate  und fields.
+Für jedes Modell werden die benötigten GET, POST, PUT und DELETE REST-Schnittstellen standardmäßig erstellt.
+Jeder Endpoint unterstützt auch eine Menge von unterschiedlichen Parametern, welche den Aufbau des Responsebodys steuern können wie zum Beispiel.: filters, populate  und fields.
 \cite{rest-query-parameters}
-\subsection{Definierung von Datenstruktur und Datenmodell}
+\subsection{Definition von Datenstruktur und Datenmodell}
 
 Mit der Verwendung dieser Oberfläche kann man folgende Elemente erstellen:
 \begin{itemize}
@@ -46,10 +46,10 @@ Mit der Verwendung dieser Oberfläche kann man folgende Elemente erstellen:
 ''Collection types are content-types that can manage several entries.''
 \cite{collection-types}
 
-Man kann also sagen, dass man mit der Verwendung von diesen Collection Types die Struktur einer Tabelle bzw. einer Collection definieren kann.
-Allerdings schaut die Struktur der definierten SQL-Tabelle oder NoSQL-Collection nicht eins zu eins zu dem Collection Type aus.
+Mit der Verwendung von dieser Collection Types kann man die Struktur einer Tabelle bzw. einer Collection definieren.
+Allerdings entspricht die Struktur der definierten SQL-Tabelle oder NoSQL-Collection nicht eins zu eins dem Collection Type.
 Die speziellen Datentypen wie Files oder Custom Components werden nicht in der Datenbank als eine Tabellenspalte gespeichert.
-Stattdessen werden die spezielle Typen in einer anderen Tabelle gespeichert.
+Stattdessen werden die speziellen Typen in einer anderen Tabelle gespeichert.
 
 Folgende Datentypen  werden von Strapi zur Verfügung gestellt:
 
@@ -61,8 +61,8 @@ Folgende Datentypen  werden von Strapi zur Verfügung gestellt:
 \end{figure}
 
 Die Relationen zu anderen ''Collection Types'' werden von Strapi als ein Datentyp interpretiert.
-Dieser unterstützt die Standardbeziehungen einer Relationen Datenkbank zusätzlich zu bidirektionalen Beziehungen.
-Bei den ''Many to Many'' Beziehungen ist die Erstellung von einem zusätzlichen Collection Type, welcher als eine Assoziationstabelle dient, gar nicht nötig.
+Dieser unterstützt die Standardbeziehungen einer relationalen Datenbank zusätzlich zu bidirektionalen Beziehungen.
+Bei den ''Many to Many'' Beziehungen ist die Erstellung eines zusätzlichen Collection Types, welcher als eine Assoziationstabelle dient, gar nicht nötig.
 Die Assoziationstabellen werden von Strapi im Hintergrund generiert.
 
 \begin{figure}[H]
@@ -72,7 +72,7 @@ Die Assoziationstabellen werden von Strapi im Hintergrund generiert.
   \label{relations}
 \end{figure}
 
-Zusätzlich zu der Erstellung von Spalten, haben Collection Types auch eine eingebaute Validierung, die man aktivieren kann.
+Zusätzlich zur Erstellung von Spalten haben Collection Types auch eine eingebaute Validierung, die man aktivieren kann.
 
 \begin{figure}[H]
 
@@ -93,7 +93,7 @@ Zusätzlich zu der Erstellung von Spalten, haben Collection Types auch eine eing
 \cite{collection-types}
 
 
-Es ist aber noch anzumerken, dass die Änderung der Struktur von der Datenbank nur im ''Dev Mode'' funktionieren kann. In der produktiven Umgebung ist die Änderung der Tabellenstruktur nicht möglich.
+Es ist anzumerken, dass die Änderung der Struktur der Datenbank nur im ''Dev Mode'' funktionieren kann. In der produktiven Umgebung ist die Änderung der Tabellenstruktur nicht möglich.
 
 
 \subsection{Query Engine API}
@@ -102,20 +102,23 @@ The Query Engine API should mostly be used by plugin developers and developers a
 to their applications.''
 \cite{query-engine-api}
 
-Diese ist mehr oder weniger wie ein \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) oder ein Query Builder, wo man SQL oder NoSQL Queries aus einem JS Code generieren kann. Die selektierte Spalten werden dann in JS-Objekten serialisiert.
+Diese agiert als \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) bzw. Query Builder, 
+in der man SQL oder NoSQL Queries aus einem JS Code generieren kann. Die selektierte Spalten werden dann in JS-Objekten 
+serialisiert.
 
 \subsection{Entity Service API}
 ''The Strapi backend provides an Entity Service API, built on top of the Query Engine API.
 The Entity Service is the layer that handles Strapi's complex data
 structures like components and dynamic zones, and uses the Query Engine API
 under the hood to execute database queries.''
+
 Der Unterschied zwischen diesem Service und der Query Engine API liegt darin,
 dass die Entity Service API nicht nur die SQL oder NoSQL Struktur einer
-Tabelle bzw. einer Collection abfragt. Diese API kann  die besondneren Datentypen eines Strapi-Models wie zum Beispiel Files und Custom Components abfragen.
+Tabelle bzw. einer Collection, sondern auch die besonderen Datentypen eines Strapi-Models wie zum Beispiel Files und Custom Components abfragen kann.
 \cite{service-engine-api}
 \subsection{File Upload}
 
-Dabei ist das Wichtige, dass man Strapi so konfigurieren kann, dass er die Uploads für mehrere Bildschirme anpassen kann.
+Dabei ist das Wichtige, dass man Strapi so konfigurieren kann, dass es die Uploads für mehrere Bildschirme anpassen kann.
 \begin{lstlisting}[caption=file upload config in strapi]
     export default ({ env }) => ({
         upload: {
@@ -132,25 +135,29 @@ Dabei ist das Wichtige, dass man Strapi so konfigurieren kann, dass er die Uploa
       });
     
 \end{lstlisting}
-Es gibt auch andere Standardeinstellungen für File Uplaod wie zum Beispiel die Bestimmung von der Größe eines Uploads
+Es gibt auch andere Standardeinstellungen für File Upload wie zum Beispiel die Bestimmung von der Uploadgröße.
 \cite{upload}
 
 
 \textbf{Für den Content-Manager werden folgende Funktionalitäten zur Verfügung gestellt}:
 \begin{itemize}
-  \item Eine Oberfläche, wo die Inhalte eingepflegt werden können
-  \item Eine Media Library
+  \item eine Oberfläche, bei der die Inhalte eingepflegt werden können
+  \item eine Media Library
 \end{itemize}
 
 
-\subsection{Eingabe von den Inhalten}
-Strapi untersucht dabei die Typen eines Collection Types und stellt dann dem Content-Manager die passenden Eingabefelder zur Verfügung. Der Content-Manager hat nicht nur die Möglichkeit Inhalte zu verwalten, sondern auch vorgefertigte Inhalte in dem System einzugeben. Diese kann er dann später veröffentlichen. Falls ein Eintrag nicht veröffentlich ist, wird dieser in der API nicht zurückgeschickt.
+\subsection{Eingabe von Inhalten}
+Strapi untersucht die Typen eines Collection Types und stellt dann dem Content-Manager die passenden 
+Eingabefelder zur Verfügung. Der Content-Manager hat nicht nur die Möglichkeit Inhalte zu verwalten, sondern 
+auch vorgefertigte Inhalte in das System einzugeben. Diese kann er dann später veröffentlichen. Falls ein Eintrag 
+nicht veröffentlich ist, wird dieser in der API nicht zurückgeschickt.
 
 \subsection{Media Library}
 
-Diese ist mehr oder weniger eine UI, wo der Content-Manager den Verzeichness, wo alle Files und Assets gespeichert sind, steuern kann.
-Es gibt bei dieser die Möglichkeit neue Assets hochzuladen, Unterordnern zu erstellen, die Assets in Unterverzeichnissen zu speichern zusätzlich zu dem Löschen und auch die Umbennung bzw. das Zuschneiden von Assets.
-Man kann die Files in der Media Library auch beliebig sortieren und nach diesen auch suchen.
+Die Media Library ermöglicht die Verwaltung von Files und Assets.
+Es gibt dabei die Möglichkeit neue Assets hochzuladen, Unterordner zu erstellen und die Assets in Unterverzeichnissen zu speichern. 
+Zusätzlich kann man Assets löschen, umbenennen oder zuschneiden.
+Man kann die Files in der Media Library auch beliebig sortieren und danach suchen.
 \cite{media-library}
 
 \begin{figure}[H]
@@ -160,7 +167,10 @@ Man kann die Files in der Media Library auch beliebig sortieren und nach diesen 
 
 \end{figure}
 
-Es gibt auch die Möglichkeit den Link einer Datei wie zum Beispiel ein Video aus Youtube in der Media Library einzubetten. Allerdings ist diese Funktion nur bei der aktuellsten Version leicht anwendbar. Bei älteren Versionen ist die Umkonfigurierung von dem Reverse Proxy des Systems notwendig. Sonstige Probleme mit lizenzfreien Inhalten sind dann nicht von dem System zu lösen, sondern von dem Content-Manager
+Es gibt auch die Möglichkeit, den Link einer Datei, wie zum Beispiel ein Video aus YouTube, in der Media Library 
+einzubetten. Allerdings ist diese Funktion nur bei der aktuellsten Version leicht anwendbar. Bei älteren Versionen 
+ist die Umkonfigurierung des Reverse Proxys des Systems notwendig. Sonstige Probleme mit lizenzfreien Inhalten 
+sind dann nicht vom System zu lösen, sondern vom Content-Manager.
 \cite{url-upload-problem}
 
 
@@ -176,7 +186,7 @@ Es gibt auch die Möglichkeit den Link einer Datei wie zum Beispiel ein Video au
 
 \section{Firebase App Distribution}
 
-''Firebase App Distribution macht die Verteilung
+''Firebase App Distribution'' macht die Verteilung
 Ihrer Apps an vertrauenswürdige Tester problemlos. Indem Sie Ihre Apps schnell
 auf die Geräte der Tester übertragen, können Sie frühzeitig und häufig
 Feedback einholen.

@@ -7,7 +7,7 @@ Im Projekt wurde  die \textbf{U}niform \textbf{R}esource
 \textbf{L}ocater (URL) für den (API)-Server in einem ''.env-File'' gespeichert.
 Für die lokale Entwicklung wurde Strapi auf dem lokalen Host verwendet.
 Bei IOS und Android ist das Holen der Daten von nicht sicheren Quellen
-beziehungsweise nur von HTTP gar nicht möglich. Auf Android gibt aber einige
+beziehungsweise nur von HTTP gar nicht möglich. Auf Android gibt es aber einige
 Ausnahmen für das Holen der Daten von einem lokalen Host.
 Bei Android kann man bei den generierten Build und Project Files einige Konfigurationen ändern.
 Das ist jedoch keine gute Lösung, da diese Files bei jedem Build geändert werden können.
@@ -16,7 +16,7 @@ eingecheckt werden.
 Bei Android muss man die Adresse 10.0.2.2 statt localhost verwenden.\cite{androidFetch}
 Bei IOS gibt es keine einzige Möglichkeit,
 um Daten aus HTTP-Quellen oder aus dem localhost zu holen.
-Als Lösung wurde in der lokalen Entwicklung eine \textbf{C}ommand \textbf{L}ine \textbf{I}nterface (CLI) namens "ngrok" verwendet.
+Als Lösung wurde in der lokalen Entwicklung eine \textbf{C}ommand \textbf{L}ine \textbf{I}nterface (CLI) namens ''ngrok'' verwendet.
 Dieses Tool kann dann den lokalen Port des Servers in das Internet mittels eines Tunnels weiterleiten
 und eine HTTPS-Adresse für den weitergeleiteten Server generieren. Somit schaut die Verbindung zwischen Client und Server wie folgt aus:
 \begin{figure}[H]
@@ -25,7 +25,7 @@ und eine HTTPS-Adresse für den weitergeleiteten Server generieren. Somit schaut
     \caption{ngrok}
 \end{figure}
 
-Das Problem tauchte wiederholt in der Testphase auf. Als Lösung hat sich das Team dieses mal ein Zertifkat besorgt. Nach dem Einbauen dieses Zertifkates hat sich die Verbindung zwischen Client und Server um einiges verändert. Diese schaut in dem produktiven System so aus:
+Das Problem tauchte wiederholt in der Testphase auf. Als Lösung hat sich das Team ein Zertifikat besorgt. Nach dem Einbauen dieses Zertifikates hat sich die Verbindung zwischen Client und Server um einiges verändert. Diese schaut in dem produktiven System so aus:
 \begin{figure}[H]
     \centering
     \includegraphics*[width=\textwidth]{./pics/https.png}
@@ -33,9 +33,9 @@ Das Problem tauchte wiederholt in der Testphase auf. Als Lösung hat sich das Te
 \end{figure}
 
 Dieses Problem war relativ schwierig zum Debuggen,
-als man die Appliaktion mit dem Staging Server verbunden hat.
-Es gab keine eindeutige Fehlermeldung, wo erklärt wird, dass die Zertifkate nicht mehr gültig sind oder gar nicht existieren.
-Die Applikation beschwerte sich, dass sie keine Verbindung zum Server aufgebaut werden kann, obwohl der Server schon lauffähig war.
+als man die Applikation mit dem Staging Server verbunden hat.
+Es gab keine eindeutige Fehlermeldung, in der erklärt wird, dass die Zertifikate nicht mehr gültig sind oder gar nicht existieren.
+Die Applikation meldete, dass keine Verbindung zum Server aufgebaut werden kann, obwohl der Server schon lauffähig war.
 
 
 
@@ -44,7 +44,7 @@ Die Applikation beschwerte sich, dass sie keine Verbindung zum Server aufgebaut 
 \section{Inkompatible Libraries beim Build-Prozess}\label{sec:inkompatible-libraries-beim-build-prozess}
 In der Entwicklungsphase wurden einige Libraries mittels \textbf{N}ode  \textbf{P}ackage \textbf{M}anager (npm) installiert.
 Einige Libraries waren mit der Node Version oder mit anderen Libraries nicht kompatibel.
-Eine Lösung wäre, das Label ''--legacy-peer-deps'' oder ''--force'' beim Befehl ''npm install'' anzuhängen.
+Eine Lösung war, das Label ''--legacy-peer-deps'' oder ''--force'' beim Befehl ''npm install'' anzuhängen.
 Während der Entwicklung wurde das Label ''--legacy-peer-deps'' immer beim ''npm install'' integriert
 und danach hat alles problemlos funktioniert.
 Später beim Deployment von Android ist das Problem
@@ -54,6 +54,7 @@ Die Apk bzw.
 Aab wurde erfolgreich generiert, aber die App war nicht funktionsfähig.
 Es wurde für das Finden des Problems auf Android ein Tool namens ''logcat'' verwendet,
 um die Fehlermeldung zu finden.
+
 Dieses Problem an sich ist in der Community sehr stark verbreitet und es gibt dafür mehrere Gründe und mehrere Lösungen.
 Unter diesem Githublink \cite{libjsexecutor} werden unterschiedliche Gründe und mehrere
 Lösungsmöglichkeiten für das Problem beschrieben.
@@ -104,7 +105,7 @@ Relaxoon zeigt mehrere Videos für Antistress-Meditationen an. Damit diese schö
 muss jedes Video unbedingt ein Thumbnail haben.
 Der Content-Manager könnte aber beim Erstellen des Videos vergessen,
 ein Thumbnail für das Video zu erstellen.
-Auf der Adminoberfläche können keine Thumbnails zu dem Video hinzugefügt werden,
+Auf der Adminoberfläche können keine Thumbnails zum Video hinzugefügt werden,
 da diese Aktion sehr schlechte User Experience verursacht.
 Man kann zwar eine Funktion implementieren,
 die nach dem Hochladen eines Videos ein Thumbnail mittels \textbf{F}ast \textbf{F}orward \textbf{M}oving
@@ -112,12 +113,12 @@ die nach dem Hochladen eines Videos ein Thumbnail mittels \textbf{F}ast \textbf{
 Diese Möglichkeit ist aber sehr aufwendig und nicht empfehlenswert, da die damalige Dokumentation von
 Strapi nicht sehr genau war.
 Außerdem könnte diese Alternative bei den Updates von Dependencies nicht mehr funktionsfähig sein.
-Darauf wurde eine Expo-Library gefunden, die im Frontend Thumbnails für die Videos erstellt.
-Die Verwendung davon war aber nicht sehr vorteilhaft, da der Generierungsprozess sehr langsam war.
+Es wurde eine Expo-Library gefunden, die im Frontend Thumbnails für die Videos erstellt.
+Die Verwendung dieser war aber nicht sehr vorteilhaft, da der Generierungsprozess sehr langsam war.
 Als Lösung wurde im Code ein nicht abspielbares Videoelement deklariert,
 dass für den Zuschauer als Thumbnail dient.
 Das Video ist erst abspielbar, wenn man darauf klickt.
-Diese Lösung wurde mit den Konzepten ''Lazy Loading'' und ''Suspenses'' zusammen kombiniert,
+Diese Lösung wurde mit den Konzepten ''Lazy Loading'' und ''Suspenses'' kombiniert,
 damit Loading-Spinners statt leere Flächen für den User angezeigt werden,
 wenn das Laden des Videos etwas länger dauert.
 
@@ -138,9 +139,9 @@ wird die Dauer des Videos nur auf der Oberfläche angezeigt.
 Diese Information ist aber in den REST-Schnittstellen der Meta-Daten von den Files nicht inkludiert.
 Bei diesem Problem ist die Verwendung von ffmpeg auch eine Lösungsmöglichkeit.
 Es wurde aber nicht mit ffmpeg gearbeitet (siehe obiges Problem).
-Für die Berechnung der Dauer wurde im Frontend das "onLoad" Event,
+Für die Berechnung der Dauer wurde im Frontend das ''onLoad'' Event,
 welches in den Properties (props) des Videoelements ist, verwendet,
-um die Dauer zu lesen und diese in das Format "mm:ss" umwandeln zu können.
+um die Dauer zu lesen und diese in das Format ''mm:ss'' umwandeln zu können.
 
 
 
@@ -196,17 +197,17 @@ is focused.'' \cite{useFocusEffect}
 \section{Probleme mit Dependency Updates}
 
 Im Laufe der Implementierungsphase wurden einige Dependencies wie React Native oder Strapi ein oder zweimal upgedatet. Bei einigen Libraries haben die Updates problemlos funktioniert. Bei anderen wie zum Beispiel ''Expo Cli'' war es so, dass das Programm nach dem Update nicht mehr lauffähig war. Daher hat man sehr viele Einstellungen in dem Programm ändern müssen, um die Kompilierfehler zu beseitigen.
-Bei der Library ''JWT-Decode'', welche  für die Dekodierung von dem JWT eingesetzt wurde, hat der Code am Beginn problemlos funktioniert. Nach einem Update kam es dazu, dass die Library den Token gar nicht deocdieren konnte.
-Nach einer langen Recherche kam man darauf, dass man ab der vierten Version eine Library namens ''base-64'' installieren soll.
-Danach soll diese importiert werden und als ein Singleton in dem Projekt definiert werden.
+Bei der Library ''JWT-Decode'', welche  für die Dekodierung von dem JWT eingesetzt wurde, hat der Code am Beginn problemlos funktioniert. Nach einem Update kam es dazu, dass die Library den Token nicht decodieren konnte.
+Nach einer langen Recherche kam man darauf, dass man ab der vierten Version eine Library namens ''base-64'' installieren muss.
+Danach kann diese importiert werden und als ein Singleton in dem Projekt definiert werden.
 \begin{lstlisting}[caption=base-64 als Singleton]
     import { decode } from 'base-64';
     global.atob = decode;
     \end{lstlisting}
 \cite{jwt-decode-bug}
 
-Ein anderes Beispiel, wo das gleiche Problem wieder auftauchte, war bei der Aktualisierung von der Library ''Native base''. Es wurde herausgestellt,
-dass die vor dem Update verwendete Version von Native Base ist die letzte, die vom Hersteller unterstützt wird.
+Ein anderes Beispiel, bei dem das gleiche Problem wieder auftauchte, war bei der Aktualisierung von der Library ''Native base''. Es stellte sich heraus,
+dass die vor dem Update verwendete Version von Native Base die letzte ist, die vom Hersteller unterstützt wird.
 
 \section{Probleme mit dem Datenmodell}
 Nach der Realisierung stellte sich heraus, dass das ERD um einiges verbessert werden kann. In dem folgenden Bild ist das neue Design des verbesserten ERDs zu finden.
@@ -216,7 +217,7 @@ Nach der Realisierung stellte sich heraus, dass das ERD um einiges verbessert we
     \caption{Neues ERD}
 \end{figure}
 
-Die Vorteile dieser Verbesserungen liegen dabei, dass man alle Arten von Medien nur mit einer einzigen SQL-Query abfragen kann. Außerdem ist die Komplexität um einiges reduziert, da nicht jede Medienart eine Beziehung zu den Tags und Kategorien hat.
+Die Vorteile dieser Verbesserungen liegen darin, dass man alle Arten von Medien nur mit einer einzigen SQL-Query abfragen kann. Außerdem ist die Komplexität um einiges reduziert, da nicht jede Medienart eine Beziehung zu den Tags und Kategorien hat.
 Vorher waren zwei Queries nötig, um alle Arten der Medien abzufragen.
 
 \section{Relaxoon Plakat}\label{sec:plakat}
@@ -228,10 +229,10 @@ entwickelt.
 
 \begin{enumerate}
     \item Ein Farbverlauf wurde bestimmt, der sich von der hellblauen Farbe \#64C5DF (Hexadezimalschreibweise)
-          bis zu einem dunkleren Blau \#3A62AC streckt. Der Farbverlauf dient als eine Grundlage des Plakates.
+          bis zu einem dunkleren Blau \#3A62AC streckt. Der Farbverlauf dient als Grundlage des Plakates.
     \item Abgerundete Dreiecke sowie die abstrakte Form, welche am Rand des Plakats entlang geht,
           wurden in Kombination mit dem Farbverlauf erzeugt und platziert.
-    \item Die Logos von Relaxoon, der HTL Leonding, den Firmen Solvistas und Macolution, dem CMS Strapi und der Programmiersprache React Native wurden hinzugefügt.
+    \item Die Logos von Relaxoon, der HTL Leonding, den Firmen solvistas und MACOLUTION, dem CMS Strapi und der Programmiersprache React Native wurden hinzugefügt.
     \item Der Diplomarbeitsbetreuer und die Projektpartner wurden namentlich erwähnt.
     \item Das Grundlayout eines Smartphones wurde erstellt und mit einem Entwurf des Tutorials der App versehen.
     \item Fotos und Namen der App-Entwickler wurden eingefügt.
@@ -241,7 +242,7 @@ entwickelt.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[height=1.2\textwidth]{./pics/Relaxoon-Plakat.jpg}
+    \includegraphics[height=1.4\textwidth]{./pics/Relaxoon-Plakat.jpg}
     \caption{Plakat}
 \end{figure}
 
