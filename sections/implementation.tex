@@ -9,17 +9,16 @@
 \end{figure}
 
 \section{Wie werden Files gespeichert?}
-Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für 
+Im diesem Kapitel wird genau erklärt, wie Strapi mit der Verwaltung von Files umgeht. Es wurde keine Dokumentation für
 die folgenden Informationen gefunden. Daher untersuchten die Entwickler das Datenmodell von  Strapi.
 Man sieht oben in dem ERD,
-dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen der Files wie zum 
+dass die Bilder nicht in einer Spalte gespeichert werden. Strapi speichert die Informationen der Files wie zum
 Beispiel Größe, Name und Auflösung in einer Tabelle namens ''files''.
-Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird 
-der Name des Modells gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das 
+Diese ist auch mit einer anderen Tabelle namens ''files\_realted\_morphs'' verbunden. In ''files\_related\_morphs'' wird
+der Name des Modells gespeichert, welcher von Strapi verwendet wird, um die Daten in der Datenbank zu manipulieren. Das
 Id des Element, welches einen Zugriff auf die Datei benötigt, wird auch in dieser Tabelle gespeichert.
-Der Client kann dann die Files erst erhalten, wenn er den Parameter ''populate=file'' bei dem REST-Request daran hängt. 
-Strapi manipuliert dann die Ergebnisse, sodass die gefragten Daten, zum Beispiel Medias und die zugehörige Dateien eines 
-Mediaelements im Responsebody, zurückgeschickt werden können.
+Der Client kann dann die Metadaten der Dateien, wie den Dateipfad oder die Dateigröße, erst erhalten, wenn er den Parameter ''populate=file'' bei dem REST-Request daran hängt.
+Strapi manipuliert die Ergebnisse so, dass die angefragten Daten, wie z. B. Medien und die zugehörigen Informationen zu den Dateien eines Medienelements, im Responsebody zurückgeschickt werden können.
 
 \section{Medias und Articles}
 

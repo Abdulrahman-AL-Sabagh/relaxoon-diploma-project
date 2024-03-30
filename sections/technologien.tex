@@ -17,14 +17,13 @@ Für die Entwickler werden folgende Funktionalitäten zur Verfügung gestellt:
 \begin{itemize}
   \item fertige REST-Schnittstellen
   \item GraphQL Schnittstellen
-  \item eine Benutzeroberfläche, wo die Struktur der Datenbank editiert werden kann
+  \item eine Benutzeroberfläche, in der die Struktur der Datenbank editiert werden kann
   \item eine eingebaute JWT Authentifizierung
   \item File Upload
   \item Query Engine API
   \item Entity Service API
   \item Plugin für Internationalisierung
   \item Plugin Store, mit dem sehr viele hilfreiche Plugins wie zum Beispiel OpenAPI installieren werden können
-  \item Autorisierung und Rollenmanagement
 \end{itemize}
 
 \subsection{REST-Schnittstellen}
@@ -102,8 +101,8 @@ The Query Engine API should mostly be used by plugin developers and developers a
 to their applications.''
 \cite{query-engine-api}
 
-Diese agiert als \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) bzw. Query Builder, 
-in der man SQL oder NoSQL Queries aus einem JS Code generieren kann. Die selektierte Spalten werden dann in JS-Objekten 
+Diese agiert als \textbf{O}bject \textbf{R}elational \textbf{M}apper (ORM) bzw. Query Builder,
+in der man SQL oder NoSQL Queries aus einem JS Code generieren kann. Die selektierte Spalten werden dann in JS-Objekten
 serialisiert.
 
 \subsection{Entity Service API}
@@ -119,6 +118,8 @@ Tabelle bzw. einer Collection, sondern auch die besonderen Datentypen eines Stra
 \subsection{File Upload}
 
 Dabei ist das Wichtige, dass man Strapi so konfigurieren kann, dass es die Uploads für mehrere Bildschirme anpassen kann.
+
+Der Server sendet dann die Größen für jeden Breakpoint im Responsebody. Darin sind die Dimensionen sowie andere Informationen des Bildes definiert.
 \begin{lstlisting}[caption=file upload config in strapi]
     export default ({ env }) => ({
         upload: {
@@ -135,6 +136,11 @@ Dabei ist das Wichtige, dass man Strapi so konfigurieren kann, dass es die Uploa
       });
     
 \end{lstlisting}
+\begin{figure} [H]
+  \centering
+  \includegraphics[width=\textwidth]{./pics/formats-breakpoints.png}
+  \caption{resized images}
+\end{figure}
 Es gibt auch andere Standardeinstellungen für File Upload wie zum Beispiel die Bestimmung von der Uploadgröße.
 \cite{upload}
 
@@ -147,15 +153,15 @@ Es gibt auch andere Standardeinstellungen für File Upload wie zum Beispiel die 
 
 
 \subsection{Eingabe von Inhalten}
-Strapi untersucht die Typen eines Collection Types und stellt dann dem Content-Manager die passenden 
-Eingabefelder zur Verfügung. Der Content-Manager hat nicht nur die Möglichkeit Inhalte zu verwalten, sondern 
-auch vorgefertigte Inhalte in das System einzugeben. Diese kann er dann später veröffentlichen. Falls ein Eintrag 
+Strapi untersucht die Typen eines Collection Types und stellt dann dem Content-Manager die passenden
+Eingabefelder zur Verfügung. Der Content-Manager hat nicht nur die Möglichkeit Inhalte zu verwalten, sondern
+auch vorgefertigte Inhalte in das System einzugeben. Diese kann er dann später veröffentlichen. Falls ein Eintrag
 nicht veröffentlich ist, wird dieser in der API nicht zurückgeschickt.
 
 \subsection{Media Library}
 
 Die Media Library ermöglicht die Verwaltung von Files und Assets.
-Es gibt dabei die Möglichkeit neue Assets hochzuladen, Unterordner zu erstellen und die Assets in Unterverzeichnissen zu speichern. 
+Es gibt dabei die Möglichkeit neue Assets hochzuladen, Unterordner zu erstellen und die Assets in Unterverzeichnissen zu speichern.
 Zusätzlich kann man Assets löschen, umbenennen oder zuschneiden.
 Man kann die Files in der Media Library auch beliebig sortieren und danach suchen.
 \cite{media-library}
@@ -167,9 +173,9 @@ Man kann die Files in der Media Library auch beliebig sortieren und danach suche
 
 \end{figure}
 
-Es gibt auch die Möglichkeit, den Link einer Datei, wie zum Beispiel ein Video aus YouTube, in der Media Library 
-einzubetten. Allerdings ist diese Funktion nur bei der aktuellsten Version leicht anwendbar. Bei älteren Versionen 
-ist die Umkonfigurierung des Reverse Proxys des Systems notwendig. Sonstige Probleme mit lizenzfreien Inhalten 
+Es gibt auch die Möglichkeit, den Link einer Datei, wie zum Beispiel ein Video aus YouTube, in der Media Library
+einzubetten. Allerdings ist diese Funktion nur bei der aktuellsten Version leicht anwendbar. Bei älteren Versionen
+ist die Umkonfigurierung des Reverse Proxys des Systems notwendig. Sonstige Probleme mit lizenzfreien Inhalten
 sind dann nicht vom System zu lösen, sondern vom Content-Manager.
 \cite{url-upload-problem}
 

@@ -25,7 +25,7 @@ anfühlt.''
 
 
 
-\subsection{Warum  eine Cross-Plattform-Lösung angefordert wurde}
+\subsection{Warum  eine Cross-Plattform-Lösung gefordert wurde}
 Der Client von Relaxoon besteht aus einer einfachen Applikation, die keine Business Logik
 und auch keine performancekritischen Funktionalitäten hat.
 Daher ist die Verwendung einer Cross-Plattform-Lösung sehr vorteilhaft,
@@ -95,25 +95,6 @@ Programmm bei jeder kleinen Änderung neugestartet werden.\cite{xamarin-vs-react
 
 
 
-\subsection{Nutzwertanalyse für das Frontend-Framework}
-\begin{tabular}{|p{5cm} | p{2cm} | p{2cm} | p{2cm} | p{2cm} | }
-    \hline
-    Kriterien                       & React Native & Xamarin & Flutter & KMP  \\
-    \hline
-    Vorhandene Kenntnisse max. 50\% & 50\%         & 0\%     & 0\%     & 10\% \\
-    \hline
-    Barrierfreiheit max. 30\%       & 15\%         & 5\%     & 30\%    & 20\% \\
-    \hline
-    Performance max. 20\%           & 5\%          & 20\%    & 15\%    & 10\% \\
-    \hline
-    Summe                           & 70\%         & 25\%    & 45\%    & 40\% \\
-    \hline
-\end{tabular}
-
-
-
-
-
 \section{Strapi}
 
 \subsection{Was ist ein CMS}
@@ -128,8 +109,8 @@ Content Management (ECM) und Web Content Management (WCM) eingesetzt.''
 
 \subsection{Warum wurde ein CMS verwendet}
 Der Auftraggeber wollte die Applikation so schnell wie möglich veröffentlichen,
-da die Anzahl der Apps, welche die gleichen Anwendungsfälle wie Relaxoon haben,
-nicht so groß ist.
+da die Anzahl der Apps, welche die gleichen Anwendungsfälle wie Relaxoon implementieren,
+nicht so groß ist. Durch die Verwendung eines bestehenden CMS-Framework kann die Time-to-Market signifikant verkürzt werden.
 Daher ist die Verwendung eines fertigen CMS viel schneller als
 die Implementierung eines Backends.
 
@@ -145,7 +126,7 @@ wieso derartige CMS-Systeme als
 „kopflos“ (englisch: „headless“) bezeichnet werden.
 '' \cite{headles-cms}
 
-Ein Beispiel für ein seit weitverbreitetes Headless-CMS ist Storyblok. Dieses bietet nicht nur eine REST-API, sondern 
+Ein Beispiel für ein seit weitverbreitetes Headless-CMS ist Storyblok. Dieses bietet nicht nur eine REST-API, sondern
 auch ein Plugin, bei dem man die Ansicht des Benutzers editieren kann. \cite[]{storyblok-bad}
 
 \subsection{Warum wurde ein Headless-CMS verwendet}
@@ -216,24 +197,6 @@ Außerdem ist Strapi viel schneller als Wordpress,
 da Strapi in Node.js geschrieben ist und Wordpress in PHP.
 \cite{strapi-vs-wordpress}
 
-\subsection{Nutzwertanalyse für das Headless-CMS}
-
-\begin{tabular}{ |p{3cm}|p{3cm}|p{3cm}| }
-    \hline
-    Kriterien                   & Strapi & Wordpress API \\
-    \hline
-    Security max.30\%           & 30\%   & 15\%          \\
-    \hline
-    Flexibilität max. 30\%      & 30\%   & 15\%          \\
-    \hline
-    Community Support max. 30\% & 10\%   & 25\%          \\
-    \hline
-    Performance max. 10\%       & 10\%   & 5\%           \\
-    \hline
-    Summe                       & 80\%   & 65\%          \\
-    \hline
-\end{tabular}
-
 
 
 \section{Headless-CMS vs. selbst geschriebener Server}
@@ -259,23 +222,23 @@ Es ist auch meistens nicht zu leicht, das System zu erweitern und man kann nicht
 Außerdem sind die Communities von vielen Headless-CMS sehr klein, da diese Art von CMS sehr modern ist.
 
 \subsection{Vorteile eines selbst geschriebenen Servers}
-Man kann das System beliebig erweitern und die Wartung von diesem ist viel leichter, wenn man die richtige Technologie 
-verwendet. Ein selbst geschriebener Server kann auch sehr performant sein im Vergleich zu einem Headless-CMS, wenn 
+Man kann das System beliebig erweitern und die Wartung von diesem ist viel leichter, wenn man die richtige Technologie
+verwendet. Ein selbst geschriebener Server kann auch sehr performant sein im Vergleich zu einem Headless-CMS, wenn
 man die richtige Technologie für das Entwickeln verwendet.
 
 \subsection{Nachteile eines selbst geschriebenen Servers}
 Man muss sich in mindestens einer Programmiersprache und einer Datenbank gut auskennen,
 um eine vernünftige API zu schreiben.
 Außerdem ist Erfahrung in der Strukturierung einer API bzw. eines großen Codebases notwendig.
-Daher sind gute Kenntnisse bei den Themen Design Patterns, unterschiedliche Programmierparadigmen und unterschiedliche 
-Guidelines wie z.B.: The Clean Architecture oder The Solid Principles sehr wichtig. Man muss sich auch an gewisse 
+Daher sind gute Kenntnisse bei den Themen Design Patterns, unterschiedliche Programmierparadigmen und unterschiedliche
+Guidelines wie z.B.: The Clean Architecture oder The Solid Principles sehr wichtig. Man muss sich auch an gewisse
 Scrum und Projektmanagement Regeln sowie REST-Guidelines oder Guidelines der verwendeten Programmiersprache halten.
 
 
-Man kann nach diesem Vergleich sagen, dass man sich für einen REST-Server entscheiden soll, wenn es um ein wichtiges 
+Man kann nach diesem Vergleich sagen, dass man sich für einen REST-Server entscheiden soll, wenn es um ein wichtiges
 Projekt geht, das nicht ständig geändert, sondern nur erweitert werden soll.
-Man soll sich auch für diesen entscheiden, wenn die ''Business Logic'' bei einem höheren Komplexitätslevel liegt. Ein 
-selbst geschriebenes System ist bei Usecases, wo Performance eine große Rolle spielt und auch bei Cloud basierten 
+Man soll sich auch für diesen entscheiden, wenn die ''Business Logic'' bei einem höheren Komplexitätslevel liegt. Ein
+selbst geschriebenes System ist bei Usecases, wo Performance eine große Rolle spielt und auch bei Cloud basierten
 Anwendungen sehr empfehlenswert.
 
 \section{Component Library}
@@ -296,9 +259,9 @@ Die Verwendung von Typescript wird auch  in der Dokumentation von React Native e
 \subsection{Was ist Expo}
 ''Simplified Development Experience Expo is a framework and platform for building React Native applications. It aims to provide a simplified development experience by abstracting away some of the complexities involved in setting up and configuring a React Native project.''\cite{expo}
 
-Das Team hat sich in erster Linie für Expo entschieden, da diese CLI den Project Setup erleichtert.
-Der Grund dafür ist, dass man sich nicht über spezifische plattformabhängige Module kümmern soll.
+Das Team hat sich in erster Linie für Expo entschieden, da diese CLI das Project Setup erleichtert.
+Der Grund dafür ist, dass man sich nicht um spezifische plattformabhängige Module kümmern muss.
 Expo bietet einige Komponenten und Libraries, welche von Mobilgeräten und manchmal von unterschiedlichen Browsern unterstützt werden.
 Außerdem ist es bei Expo auch möglich,
 dass die Applikation auf einem physikalischen Android und auch auf einem IOS Gerät gestartet werden kann.
-Ein Macos-Gerät ist für das Starten der Anwendung auf IOS-Geräte gar nicht nötig. \cite{expo}
+Ein Macos-Gerät ist für das Starten der Anwendung auf IOS-Geräten gar nicht nötig. \cite{expo}
